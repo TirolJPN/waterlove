@@ -66,15 +66,19 @@ public class PlayerMovement : MonoBehaviour
 		// horizontal movement, left or right, set animation type and speed 
 		if (horizontal > 0)
 		{
-			GetComponent<Rigidbody2D>().velocity = new Vector2(movementSpeed * Time.deltaTime, 0);
-			animator.SetInteger("Direction", 1);
-			animator.speed = 0.5f;
+            //GetComponent<Rigidbody2D>().velocity = new Vector2(movementSpeed * Time.deltaTime, 0);
+            //GetComponent<Rigidbody2D>().velocity = new Vector2(movementSpeed * Time.deltaTime, 0);
+            transform.Translate(movementSpeed * 0.015f * Time.deltaTime,0, 0);
+            animator.SetInteger("Direction", 1);
+			animator.speed = 1.5f;
 		}
 		else if (horizontal < 0)
 		{
-			GetComponent<Rigidbody2D>().velocity =	new Vector2(-movementSpeed * Time.deltaTime, 0);
-			animator.SetInteger("Direction", 3);
-			animator.speed = 0.5f;
+            //GetComponent<Rigidbody2D>().velocity =	new Vector2(-movementSpeed * Time.deltaTime, 0);
+            //GetComponent<Rigidbody2D>().velocity = new Vector2(-movementSpeed * Time.deltaTime, 0);
+            transform.Translate(-movementSpeed * 0.015f * Time.deltaTime, 0, 0);
+            animator.SetInteger("Direction", 3);
+			animator.speed = 1.5f;
 		}
 
 		// vertical movement, up or down, set animation type and speed 
@@ -83,14 +87,14 @@ public class PlayerMovement : MonoBehaviour
 			//transform.Translate(0, movementSpeed * 0.9f * Time.deltaTime, 0);
 			GetComponent<Rigidbody2D>().velocity =	new Vector2(GetComponent<Rigidbody2D>().velocity.x, movementSpeed * Time.deltaTime);
 			animator.SetInteger("Direction", 0);
-			animator.speed = 0.35f;
+			animator.speed = 1.35f;
 		}
 		else if (vertical < 0)
 		{
 			//transform.Translate(0, -movementSpeed *  0.9f * Time.deltaTime, 0);
 			GetComponent<Rigidbody2D>().velocity =	new Vector2(GetComponent<Rigidbody2D>().velocity.x, -movementSpeed * Time.deltaTime);
 			animator.SetInteger("Direction", 2);
-			animator.speed = 0.35f;
+			animator.speed = 1.35f;
 		}
 
 		//compare this position to the last known one, are we moving?

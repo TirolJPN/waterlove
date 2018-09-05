@@ -28,7 +28,12 @@ public class PlayerMovement : MonoBehaviour
 	/// Is the player dead?
 	/// </summary>
 	private bool isDead = false;
-	#endregion
+    #endregion
+
+    bool isUp = false;
+    bool isDown = false;
+    bool isRight = false;
+    bool isLeft = false;
 
 	// Use this for initialization
 	void Start ()
@@ -50,12 +55,29 @@ public class PlayerMovement : MonoBehaviour
 			Application.Quit();
 		}
 
-		// get the input this frame
-		float vertical = Input.GetAxis("Vertical");
-		float horizontal = Input.GetAxis("Horizontal");
-
-		// if there is no input then stop the animation
-		if((vertical == 0.0f)&&(horizontal == 0.0f))
+        // get the input this frame
+        //float vertical = Input.GetAxis("Vertical");
+        //float horizontal = Input.GetAxis("Horizontal");
+        float vertical = 0;
+        float horizontal = 0;
+        if (isUp == true)
+        {
+           vertical = 1;
+        }
+        else if(isDown == true)
+        {
+            vertical = -1;
+        }
+        else if (isRight == true)
+        {
+            horizontal = 1;
+        }
+        else if (isLeft == true)
+        {
+            horizontal = -1;
+        }
+        // if there is no input then stop the animation
+        if ((vertical == 0.0f)&&(horizontal == 0.0f))
 		{
 			animator.speed = 0.0f;
 		}
@@ -115,8 +137,48 @@ public class PlayerMovement : MonoBehaviour
 		}
 
 	}
-	
-	void OnTriggerEnter2D(Collider2D collider)
+
+    public void OnUpDown()
+    {
+        isUp = true;
+    }
+
+    public void OnUpUp()
+    {
+        isUp = false;
+    }
+
+    public void OnDownDown()
+    {
+        isDown = true;
+    }
+
+    public void OnDownUp()
+    {
+        isDown = false;
+    }
+
+    public void OnRightDown()
+    {
+        isRight = true;
+    }
+
+    public void OnRightUp()
+    {
+        isRight = false;
+    }
+
+    public void OnLeftDown()
+    {
+        isLeft = true;
+    }
+
+    public void OnLeftUp()
+    {
+        isLeft = false;
+    }
+
+    void OnTriggerEnter2D(Collider2D collider)
 	{
 		if(collider.gameObject.tag == "DangerousTile")
 		{

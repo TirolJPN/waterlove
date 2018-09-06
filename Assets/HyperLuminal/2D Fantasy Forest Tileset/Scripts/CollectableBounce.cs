@@ -64,7 +64,10 @@ public class CollectableBounce : MonoBehaviour
 	{
 		if(collider.gameObject.name == "PlayerCharacter")
 		{
-			Destroy(gameObject);
+            //スコア処理を追加
+            FindObjectOfType<Score>().AddPoint(100);
+
+            Destroy(gameObject);
 		}
 	}
 }

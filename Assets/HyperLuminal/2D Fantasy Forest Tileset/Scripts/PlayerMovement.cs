@@ -194,6 +194,7 @@ public class PlayerMovement : MonoBehaviour
 
 	/// <summary>
 	/// Respawns the player at checkpoint.
+    /// 復活
 	/// </summary>
 	public void RespawnPlayerAtCheckpoint()
 	{

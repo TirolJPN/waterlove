@@ -56,10 +56,10 @@ public class PlayerMovement : MonoBehaviour
 		}
 
         // get the input this frame
-        //float vertical = Input.GetAxis("Vertical");
-        //float horizontal = Input.GetAxis("Horizontal");
-        float vertical = 0;
-        float horizontal = 0;
+        float vertical = Input.GetAxis("Vertical");
+        float horizontal = Input.GetAxis("Horizontal");
+        //float vertical = 0;
+        //float horizontal = 0;
         if (isUp == true)
         {
            vertical = 1;

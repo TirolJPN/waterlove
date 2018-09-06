@@ -88,17 +88,15 @@ public class PlayerMovement : MonoBehaviour
 		// horizontal movement, left or right, set animation type and speed 
 		if (horizontal > 0)
 		{
-            //GetComponent<Rigidbody2D>().velocity = new Vector2(movementSpeed * Time.deltaTime, 0);
-            //GetComponent<Rigidbody2D>().velocity = new Vector2(movementSpeed * Time.deltaTime, 0);
-            transform.Translate(movementSpeed * 0.015f * Time.deltaTime,0, 0);
+            GetComponent<Rigidbody2D>().velocity = new Vector2(movementSpeed * Time.deltaTime, 0);
+            //transform.Translate(movementSpeed * 0.015f * Time.deltaTime,0, 0);
             animator.SetInteger("Direction", 1);
 			animator.speed = 1.5f;
 		}
 		else if (horizontal < 0)
 		{
-            //GetComponent<Rigidbody2D>().velocity =	new Vector2(-movementSpeed * Time.deltaTime, 0);
-            //GetComponent<Rigidbody2D>().velocity = new Vector2(-movementSpeed * Time.deltaTime, 0);
-            transform.Translate(-movementSpeed * 0.015f * Time.deltaTime, 0, 0);
+            GetComponent<Rigidbody2D>().velocity = new Vector2(-movementSpeed * Time.deltaTime, 0);
+            //transform.Translate(-movementSpeed * 0.015f * Time.deltaTime, 0, 0);
             animator.SetInteger("Direction", 3);
 			animator.speed = 1.5f;
 		}

@@ -9,7 +9,7 @@ public class HP : MonoBehaviour {
     // HPを表示する
     public Text HPText;
 
-    private int hpMAX = 10;
+    private int hpMAX = 1000;
 
     private int hp;
 

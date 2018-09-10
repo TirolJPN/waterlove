@@ -9,6 +9,10 @@ public class Opening : MonoBehaviour {
     //public AudioClip audioClip; //セリフ用
     //AudioSource audioSource;
     private int enterCount = 0;
+    //public static int score = 0;
+    //public static int HP = 100;
+
+
 
     // Use this for initialization
     void Start () {

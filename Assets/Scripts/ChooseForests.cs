@@ -16,6 +16,7 @@ public class ChooseForests : MonoBehaviour {
 
     void LateUpdate()
     {
+
         if (Input.GetKeyUp(KeyCode.Return) && enterCount < talks.Length)
         {
             NameLabel.text = names[enterCount];
@@ -23,9 +24,19 @@ public class ChooseForests : MonoBehaviour {
             enterCount++;
         }
 
-        else if (Input.GetKeyUp(KeyCode.Return) && enterCount == talks.Length)
+        //else if (Input.GetKeyUp(KeyCode.Return) && enterCount == talks.Length)
+        //{
+        //    SceneManager.LoadScene("Game");
+        //}
+
+
+        else if (Input.GetKeyUp(KeyCode.N))
         {
-            SceneManager.LoadScene("Game");
+            SceneManager.LoadScene("NorthForest");
+        }
+        else if (Input.GetKeyUp(KeyCode.S))
+        {
+            SceneManager.LoadScene("SouthForest");
         }
     }
 }

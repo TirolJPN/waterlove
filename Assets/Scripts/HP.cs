@@ -9,9 +9,9 @@ public class HP : MonoBehaviour {
     // HPを表示する
     public Text HPText;
 
-    private int hpMAX = 10;
+    private int hpMAX = 100;
 
-    private int hp;
+    static int hp;
 
     private float damage = 0;
     // Use this for initialization
@@ -31,7 +31,12 @@ public class HP : MonoBehaviour {
         // HPが0になったらBAD END
         if (hp == 0)
         {
-            SceneManager.LoadScene("BitterEnd");
+            SceneManager.LoadScene("BadEnd");
         }
+    }
+
+    // 体力を返す
+    public static int getHp(){
+        return hp;
     }
 }

@@ -27,6 +27,12 @@ EditorBuildSettings:
     path: Assets/Scenes/ChooseForests.unity
     guid: 9490b03edb1bcac46b004e708b3a67bd
   - enabled: 1
+    path: Assets/Scenes/ToSecondForest.unity
+    guid: db84c30870e983047b7f0bf77f3f6fea
+  - enabled: 1
+    path: Assets/Scenes/NorthForest.unity
+    guid: 4de0604b2ab0949bca973a6b86e5181e
+  - enabled: 1
     path: Assets/Scenes/SouthForest.unity
     guid: 6e8da089658004541ad88f723873e714
   - enabled: 0
@@ -47,7 +53,4 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/HyperLuminal/2D Fantasy Forest Tileset/Scenes/NightTime_DemoScene.unity
     guid: b11f1b86e5764ed4c8b5b75da3a8c00e
-  - enabled: 1
-    path: Assets/Scenes/NorthForest.unity
-    guid: 4de0604b2ab0949bca973a6b86e5181e
   m_configObjects: {}

@@ -134,7 +134,7 @@ public class FadeScript : MonoBehaviour
             }
             else
             {
-                SceneManager.LoadScene("ChooseForests");
+                SceneManager.LoadScene("ToSecondForest");
             }
         }
         //2回目のゲーム

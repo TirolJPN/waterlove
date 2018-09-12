@@ -47,10 +47,17 @@ public class Opening : MonoBehaviour {
             else
             {
                 enterCount--;
-                enterCount--;
-                NameLabel.text = names[enterCount];
-                TextLabel.text = talks[enterCount];
-                enterCount++;
+                if (enterCount == 0)
+                {
+                    SceneManager.LoadScene("BeforeOnBoard");
+                }
+                else
+                {
+                    enterCount--;
+                    NameLabel.text = names[enterCount];
+                    TextLabel.text = talks[enterCount];
+                    enterCount++;
+                }
             }
         }
     }

@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 
 public class Score : MonoBehaviour
 {
-
     // スコアを表示する
     public Text scoreText;
     // ハイスコアを表示する
@@ -16,15 +15,14 @@ public class Score : MonoBehaviour
     
 
     // スコア
-    private int score;
+    private int score = 0;
 
     // ハイスコア
-    private int highScore;
+    static int highScore;
 
     // PlayerPrefsで保存するためのキー
     private string highScoreKey = "highScore";
 
-    
 
     void Start()
     {
@@ -74,5 +72,9 @@ public class Score : MonoBehaviour
 
         // ゲーム開始前の状態に戻す
         Initialize();
+    }
+
+    public static int getHighScore(){
+        return highScore;
     }
 }

@@ -4,11 +4,29 @@ using UnityEngine.SceneManagement;
 
 public class FadeScript : MonoBehaviour
 {
-	#region Member Variables
-	/// <summary>
-	/// The sprite that represents the fade on screen
-	/// </summary>
-	private SpriteRenderer spriteRenderer;
+    // 分岐に用いる閾値
+    const int branchThreshold = 100;
+
+    // 取得してくるそのゲーム終了時のHP
+    //private int hp;
+
+    //ゲームのプレイ回数
+    static int playTimes = 0;
+
+    //ハイスコアの合計
+    static int amount = 0;
+
+    // 今回のゲームのスコアを表す
+    //private int highScore;
+
+    // PlayerPrefsで保存するためのキー
+    private string highScoreKey = "highScore";
+
+    #region Member Variables
+    /// <summary>
+    /// The sprite that represents the fade on screen
+    /// </summary>
+    private SpriteRenderer spriteRenderer;
 
 	/// <summary>
 	/// The alpha value of the fade
@@ -103,6 +121,35 @@ public class FadeScript : MonoBehaviour
         /*int levelID = Application.loadedLevel + 1;
 		if(levelID > Application.levelCount - 1){ levelID = 0; }
 		Application.LoadLevel(levelID);*/
-        SceneManager.LoadScene("HappyEnd");
+
+
+        //1回めのゲーム
+        if (playTimes == 0)
+        {
+            playTimes++;
+            amount += Score.getHighScore();
+            if (HP.getHp() < 50)
+            {
+                SceneManager.LoadScene("BitterEnd");
+            }
+            else
+            {
+                SceneManager.LoadScene("ChooseForests");
+            }
+        }
+        //2回目のゲーム
+        else
+        {
+            amount += Score.getHighScore();
+            //閾値を超えていればhappy end
+            if (amount >= branchThreshold)
+            {
+                SceneManager.LoadScene("HappyEnd");
+            }
+            else
+            {
+                SceneManager.LoadScene("BitterEnd");
+            }
+        }
     }
 }

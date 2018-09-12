@@ -30,29 +30,34 @@ public class OnBoard : MonoBehaviour {
 
     void LateUpdate()
     {
+        // エンターキーなら先に進み, バックスペースなら前に戻る
         if (Input.GetKeyUp(KeyCode.Return) && enterCount < talks.Length)
         {
-            NameLabel.text = names[enterCount];
-            TextLabel.text = talks[enterCount];
-            enterCount++;
+            if (enterCount == talks.Length)
+            {
+                SceneManager.LoadScene("LeaveTheShip");
+            }
+            else
+            {
+                NameLabel.text = names[enterCount];
+                TextLabel.text = talks[enterCount];
+                enterCount++;
+            }
         }
         else if (Input.GetKeyUp(KeyCode.Backspace) && enterCount < talks.Length)
         {
-            enterCount--;
-            enterCount--;
-            NameLabel.text = names[enterCount];
-            TextLabel.text = talks[enterCount];
-            enterCount++;
+            if (enterCount == 0)
+            {
+                SceneManager.LoadScene("BeforeOnBoard");
+            }
+            else
+            {
+                enterCount--;
+                enterCount--;
+                NameLabel.text = names[enterCount];
+                TextLabel.text = talks[enterCount];
+                enterCount++;
+            }
         }
-        else if (Input.GetKeyUp(KeyCode.Return) && enterCount == talks.Length)
-        {
-            SceneManager.LoadScene("LeaveTheShip");
-        }
-        /*else if (Input.GetKeyUp(KeyCode.Return) && enterCount == 0)
-        {  // エンターキーが押されている間
-            NameLabel.text = "友鷹\n";
-            TextLabel.text = "";
-            enterCount++;
-        }*/
     }
 }

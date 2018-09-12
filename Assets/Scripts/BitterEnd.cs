@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class HappyEnd : MonoBehaviour {
 
+public class BitterEnd : MonoBehaviour {
     public UnityEngine.UI.Text NameLabel; // 名前テキスト
     public UnityEngine.UI.Text TextLabel; // セリフテキスト
     string[] names = { "友鷹", "梨子", "友鷹","友鷹", "梨子", "友鷹", ""

@@ -34,23 +34,33 @@ public class OntheIsland : MonoBehaviour {
 
     void LateUpdate()
     {
-        if (Input.GetKeyUp(KeyCode.Return) && enterCount < talks.Length)
+        if (Input.GetKeyUp(KeyCode.Return))
         {
-            NameLabel.text = names[enterCount];
-            TextLabel.text = talks[enterCount];
-            enterCount++;
+            if (enterCount == talks.Length)
+            {
+                SceneManager.LoadScene("ChooseForests");
+            }
+            else
+            {
+                NameLabel.text = names[enterCount];
+                TextLabel.text = talks[enterCount];
+                enterCount++;
+            }
         }
-        else if (Input.GetKeyUp(KeyCode.Backspace) && enterCount < talks.Length)
+        else if (Input.GetKeyUp(KeyCode.Backspace))
         {
-            enterCount--;
-            enterCount--;
-            NameLabel.text = names[enterCount];
-            TextLabel.text = talks[enterCount];
-            enterCount++;
-        }
-        else if (Input.GetKeyUp(KeyCode.Return) && enterCount == talks.Length)
-        {
-            SceneManager.LoadScene("ChooseForests");
+            if (enterCount == 0)
+            {
+                SceneManager.LoadScene("LeaveTheShip");
+            }
+            else
+            {
+                enterCount--;
+                enterCount--;
+                NameLabel.text = names[enterCount];
+                TextLabel.text = talks[enterCount];
+                enterCount++;
+            }
         }
     }
 }

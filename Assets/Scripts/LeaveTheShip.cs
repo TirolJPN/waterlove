@@ -20,16 +20,33 @@ public class LeaveTheShip : MonoBehaviour
 
     void LateUpdate()
     {
-        if (Input.GetKeyUp(KeyCode.Return) && enterCount < talks.Length)
+        if (Input.GetKeyUp(KeyCode.Return))
         {
-            NameLabel.text = names[enterCount];
-            TextLabel.text = talks[enterCount];
-            enterCount++;
+            if (enterCount == talks.Length)
+            {
+                SceneManager.LoadScene("OnTheIsland");
+            }
+            else
+            {
+                NameLabel.text = names[enterCount];
+                TextLabel.text = talks[enterCount];
+                enterCount++;
+            }
         }
-
-        else if (Input.GetKeyUp(KeyCode.Return) && enterCount == talks.Length)
+        else if (Input.GetKeyUp(KeyCode.Backspace))
         {
-            SceneManager.LoadScene("OnTheIsland");
+            if (enterCount == 0)
+            {
+                SceneManager.LoadScene("OnBoard");
+            }
+            else
+            {
+                enterCount--;
+                enterCount--;
+                NameLabel.text = names[enterCount];
+                TextLabel.text = talks[enterCount];
+                enterCount++;
+            }
         }
     }
 }

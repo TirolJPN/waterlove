@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class HappyEnd : MonoBehaviour {
+public class BadEnd : MonoBehaviour {
 
     public UnityEngine.UI.Text NameLabel; // 名前テキスト
     public UnityEngine.UI.Text TextLabel; // セリフテキスト

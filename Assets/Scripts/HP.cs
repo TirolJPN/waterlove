@@ -9,15 +9,23 @@ public class HP : MonoBehaviour {
     // HPを表示する
     public Text HPText;
 
-    private int hpMAX = 100;
+    static int hpMAX = 100;
 
-    static int hp;
+    static int hp = hpMAX - 10;
+
+    private int start_hp;
 
     private float damage = 0;
     // Use this for initialization
     void Start () {
         // HPを初期値に戻す
-        hp = hpMAX;
+        hp += 10;
+
+        if(hp > hpMAX){
+            hp = hpMAX;
+        }
+
+        start_hp = hp;
     }
 	
 	// Update is called once per frame
@@ -25,7 +33,7 @@ public class HP : MonoBehaviour {
 
         // HPを表示する
         damage = damage + 1 * Time.deltaTime;
-        hp = hpMAX - (int)damage;
+        hp = start_hp - (int)damage;
         HPText.text = hp.ToString();
 
         // HPが0になったらBAD END

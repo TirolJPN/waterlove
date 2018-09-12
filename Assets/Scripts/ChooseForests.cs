@@ -14,6 +14,9 @@ public class ChooseForests : MonoBehaviour {
     //AudioSource audioSource;
     private int enterCount = 0;
 
+    static bool isNorthSelected = false;
+    static bool isSouthSelected = false;
+
     void LateUpdate()
     {
 
@@ -32,7 +35,19 @@ public class ChooseForests : MonoBehaviour {
 
         else if (Input.GetKeyUp(KeyCode.N))
         {
-            SceneManager.LoadScene("NorthForest");
+            if (isNorthSelected == false)
+            {
+                if(isSouthSelected == true) // 2回目のときはリセット
+                {
+                    isSouthSelected = false;
+                }
+                isNorthSelected = true;
+                SceneManager.LoadScene("NorthForest");
+            }
+            else
+            {
+                TextLabel.text = "既に行ってます。\n";
+            }
         }
         else if (Input.GetKeyUp(KeyCode.S))
         {

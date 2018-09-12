@@ -40,11 +40,5 @@ public class BeforeOnBoard : MonoBehaviour {
         {
             SceneManager.LoadScene("OnBoard");
         }
-        /*else if (Input.GetKeyUp(KeyCode.Return) && enterCount == 0)
-        {  // エンターキーが押されている間
-            NameLabel.text = "友鷹\n";
-            TextLabel.text = "";
-            enterCount++;
-        }*/
     }
 }

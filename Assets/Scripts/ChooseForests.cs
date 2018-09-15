@@ -13,7 +13,7 @@ public class ChooseForests : MonoBehaviour {
     string[] names = { "" };
     string[] talks = { "森を選んでね"
     };
-    string[] Forests = { "N", "S" };
+    string Forest;
     //public AudioClip audioClip; //セリフ用
     //AudioSource audioSource;
     private int enterCount = 0;
@@ -83,12 +83,13 @@ public class ChooseForests : MonoBehaviour {
         if (isNorthSelected == false)
         {
             SelectableForestLabel.text = "北の森に行きますか。";
-            scenes[2].SetActive(true); // 確認パネルを表示
+            Forest = "北の森";
+            scenes[0].SetActive(true); // 確認パネルを表示
         }
         else
         {
             UnselectableForestLabel.text = "北の森には既に行ってます。\n";
-            scenes[3].SetActive(true); // 確認パネルを表示
+            scenes[1].SetActive(true); // 確認パネルを表示
         }
     }
 
@@ -97,12 +98,13 @@ public class ChooseForests : MonoBehaviour {
         if (isSouthSelected == false)
         {
             SelectableForestLabel.text = "南の森に行きますか。";
-            scenes[2].SetActive(true); // 確認パネルを表示
+            Forest = "南の森";
+            scenes[0].SetActive(true); // 確認パネルを表示
         }
         else
         {
             UnselectableForestLabel.text = "南の森には既に行ってます。\n";
-            scenes[3].SetActive(true); // 確認パネルを表示
+            scenes[1].SetActive(true); // 確認パネルを表示
         }
     }
 
@@ -113,20 +115,34 @@ public class ChooseForests : MonoBehaviour {
             g.SetActive(false);
         }
 
-        scenes[0].SetActive(true); // 北の森を押した時に反応させるようにする
-        scenes[1].SetActive(true); // 南の森を押した時に反応させるようにする
+        scenes[2].SetActive(true); // 北の森を押した時に反応させるようにする
+        scenes[3].SetActive(true); // 南の森を押した時に反応させるようにする
     }
 
-    public void GoForest(int i)
+    public void GoForest()
     {
-        if(i == 0)
+        if(Forest.Equals("北の森"))
         {
-            FlagManagement(isNorthSelected, isSouthSelected);
+            if (isSouthSelected == true) // 2回目の森のときはフラグをリセット
+            {
+                isSouthSelected = false;
+            }
+            else
+            {
+                isNorthSelected = true;
+            }
             SceneManager.LoadScene("NorthForest");
         }
         else
         {
-            FlagManagement(isSouthSelected, isNorthSelected);
+            if (isNorthSelected == true) // 2回目の森のときはフラグをリセット
+            {
+                isNorthSelected = false;
+            }
+            else
+            {
+                isSouthSelected = true;
+            }
             SceneManager.LoadScene("SouthForest");
         }
     }

@@ -14,7 +14,7 @@ public class BitterEnd : MonoBehaviour {
                      , "「うん…。」\n"
                      , "体はもうボロボロで動かないし、言葉もうまくかけられない。悲惨だな…。\n"
                      , "――大学2年の夏。それは、予想外の波乱に満ちた夏だった。\n俺の中で忘れられない思い出が、そこにはあった。\n"
-                     , "BITTER END3\n 詰め切れない距離\n"
+                     , "BITTER END3\n詰め切れない距離\n"
     };
     //public AudioClip audioClip; //セリフ用
     //AudioSource audioSource;

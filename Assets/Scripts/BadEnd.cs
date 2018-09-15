@@ -11,7 +11,7 @@ public class BadEnd : MonoBehaviour {
                        };
     string[] talks = { "はあはあ。もうだめだ。からだが、うごかない。西園寺さん、ごめん。がんばってくれ。\n"
                      , "――大学2年の夏。それは、予想外の波乱に満ちた夏だった。\n"
-                     , "BAD END\n 果てない暗闇の中で\n"
+                     , "BAD END\n果てない暗闇の中で\n"
     };
     //public AudioClip audioClip; //セリフ用
     //AudioSource audioSource;

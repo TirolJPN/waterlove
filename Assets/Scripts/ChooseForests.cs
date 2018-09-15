@@ -7,9 +7,13 @@ public class ChooseForests : MonoBehaviour {
 
     public UnityEngine.UI.Text NameLabel; // 名前テキスト
     public UnityEngine.UI.Text TextLabel; // セリフテキスト
+    public UnityEngine.UI.Text SelectableForestLabel; // 森の確認時用テキスト
+    public UnityEngine.UI.Text UnselectableForestLabel; // 森の確認時用テキスト
+    public GameObject[] scenes;
     string[] names = { "" };
     string[] talks = { "森を選んでね"
     };
+    string[] Forests = { "N", "S" };
     //public AudioClip audioClip; //セリフ用
     //AudioSource audioSource;
     private int enterCount = 0;
@@ -37,11 +41,14 @@ public class ChooseForests : MonoBehaviour {
         {
             if (isNorthSelected == false)
             {
-                if(isSouthSelected == true) // 2回目のときはリセット
+                if (isSouthSelected == true) // 2回目のときはリセット
                 {
                     isSouthSelected = false;
                 }
-                isNorthSelected = true;
+                else
+                {
+                    isNorthSelected = true;
+                }
                 SceneManager.LoadScene("NorthForest");
             }
             else
@@ -51,7 +58,88 @@ public class ChooseForests : MonoBehaviour {
         }
         else if (Input.GetKeyUp(KeyCode.S))
         {
+
+            if (isSouthSelected == false)
+            {
+                if (isNorthSelected == true) // 2回目のときはリセット
+                {
+                    isNorthSelected = false;
+                }
+                else
+                {
+                    isSouthSelected = true;
+                }
+                SceneManager.LoadScene("NorthForest");
+            }
+            else
+            {
+                TextLabel.text = "既に行ってます。\n";
+            }
+        }
+    }
+
+    public void NorthButton() // 北の森を選んだ時にパネルを出す
+    {
+        if (isNorthSelected == false)
+        {
+            SelectableForestLabel.text = "北の森に行きますか。";
+            scenes[2].SetActive(true); // 確認パネルを表示
+        }
+        else
+        {
+            UnselectableForestLabel.text = "北の森には既に行ってます。\n";
+            scenes[3].SetActive(true); // 確認パネルを表示
+        }
+    }
+
+    public void SouthButton() // 南の森を選んだ時にパネルを出す
+    {
+        if (isSouthSelected == false)
+        {
+            SelectableForestLabel.text = "南の森に行きますか。";
+            scenes[2].SetActive(true); // 確認パネルを表示
+        }
+        else
+        {
+            UnselectableForestLabel.text = "南の森には既に行ってます。\n";
+            scenes[3].SetActive(true); // 確認パネルを表示
+        }
+    }
+
+    public void ReturnButton() // 戻るボタンを押したとき
+    {
+        foreach (GameObject g in scenes)
+        {
+            g.SetActive(false);
+        }
+
+        scenes[0].SetActive(true); // 北の森を押した時に反応させるようにする
+        scenes[1].SetActive(true); // 南の森を押した時に反応させるようにする
+    }
+
+    public void GoForest(int i)
+    {
+        if(i == 0)
+        {
+            FlagManagement(isNorthSelected, isSouthSelected);
+            SceneManager.LoadScene("NorthForest");
+        }
+        else
+        {
+            FlagManagement(isSouthSelected, isNorthSelected);
             SceneManager.LoadScene("SouthForest");
+        }
+    }
+
+    public void FlagManagement(bool flag1, bool flag2)
+    {
+        if (flag2 == true) // 2回目の森のときはフラグをリセット
+        {
+            flag2 = false;
+        }
+        else
+        {
+            flag1 = true;
         }
     }
 }

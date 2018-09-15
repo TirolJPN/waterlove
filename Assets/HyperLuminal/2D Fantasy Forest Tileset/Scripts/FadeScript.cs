@@ -128,14 +128,15 @@ public class FadeScript : MonoBehaviour
         {
             playTimes++;
             amount += Score.getHighScore();
-            if (HP.getHp() < 50)
+            /*if (HP.getHp() < 50)
             {
                 SceneManager.LoadScene("BitterEnd");
             }
             else
             {
                 SceneManager.LoadScene("ToSecondForest");
-            }
+            }*/
+            SceneManager.LoadScene("ToSecondForest");
         }
         //2回目のゲーム
         else

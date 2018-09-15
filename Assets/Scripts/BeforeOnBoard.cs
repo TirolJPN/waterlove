@@ -17,7 +17,7 @@ public class BeforeOnBoard : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        //TextLabel.text = "こんにちは。Unityちゃん監督です。ここでは高得点をとるヒントを紹介するよ。\n";
+        
     }
 
     void LateUpdate()

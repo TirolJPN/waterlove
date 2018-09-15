@@ -15,7 +15,7 @@ public class HappyEnd : MonoBehaviour {
                      , "「…梨子さん、『小紋島』に着いたら、俺と一緒に行動してもらえませんか？」\n"
                      , "「…はい。」\n"
                      , "――大学2年の夏。それは、予想外の波乱に満ちた夏だった。\n俺の中で忘れられない思い出が、そこにはあった。\n"
-                     , "HAPPY END\n"
+                     , "HAPPY END\n 希望の「小紋島」\n"
     };
     //public AudioClip audioClip; //セリフ用
     //AudioSource audioSource;

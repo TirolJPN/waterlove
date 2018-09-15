@@ -126,7 +126,7 @@ public class FadeScript : MonoBehaviour
         if (playTimes == 0)
         {
             playTimes++;
-            SceneManager.LoadScene("ChooseForests");
+            SceneManager.LoadScene("GiveWater");
         }
         //2回目のゲーム
         else

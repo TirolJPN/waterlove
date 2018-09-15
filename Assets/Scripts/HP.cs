@@ -9,23 +9,18 @@ public class HP : MonoBehaviour {
     // HPを表示する
     public Text HPText;
 
-    static int hpMAX = 100;
+    private int hp;
 
-    static int hp = hpMAX - 10;
-
-    private int start_hp;
+    private string HPKey = "HP";
 
     private float damage = 0;
+
+    private int start_hp;
     // Use this for initialization
     void Start () {
         // HPを初期値に戻す
-        hp += 10;
-
-        if(hp > hpMAX){
-            hp = hpMAX;
-        }
-
-        start_hp = hp;
+        start_hp = PlayerPrefs.GetInt(HPKey, 0);
+        hp = PlayerPrefs.GetInt(HPKey, 0);
     }
 	
 	// Update is called once per frame
@@ -35,16 +30,11 @@ public class HP : MonoBehaviour {
         damage = damage + 1 * Time.deltaTime;
         hp = start_hp - (int)damage;
         HPText.text = hp.ToString();
-
+        PlayerPrefs.SetInt(HPKey, hp);
         // HPが0になったらBAD END
         if (hp == 0)
         {
             SceneManager.LoadScene("BadEnd");
         }
-    }
-
-    // 体力を返す
-    public static int getHp(){
-        return hp;
     }
 }

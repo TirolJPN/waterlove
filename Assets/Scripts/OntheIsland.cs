@@ -50,7 +50,7 @@ public class OntheIsland : MonoBehaviour {
         }
         else if (Input.GetKeyUp(KeyCode.Return) && enterCount == talks.Length)
         {
-            SceneManager.LoadScene("ChooseForests");
+            SceneManager.LoadScene("Get100mlwater");
         }
     }
 }

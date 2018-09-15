@@ -18,7 +18,7 @@ public class Score : MonoBehaviour
     private int score;
 
     // ハイスコア
-    static int highScore;
+    //static int highScore;
 
     // PlayerPrefsで保存するためのキー
     //private string highScoreKey = "highScore";
@@ -60,8 +60,8 @@ public class Score : MonoBehaviour
         // ハイスコアを取得する。保存されてなければ0を取得する。
         //highScore = PlayerPrefs.GetInt(highScoreKey, 0);
 
-        // 合計量を取得する。保存されていなければ0を取得する。
-        amountScore = PlayerPrefs.GetInt(amountScoreKey, 0);
+        // 合計量を取得する。保存されていなければ-1を取得する。
+        amountScore = PlayerPrefs.GetInt(amountScoreKey, -1);
 
         score = amountScore;
     }

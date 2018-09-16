@@ -10,8 +10,7 @@ public class OntheIsland : MonoBehaviour {
     public GameObject[] Back; // 背景用
     string[] names = { "友鷹", "", "友鷹", "友鷹", "女の子", "友鷹"
                      , "女の子", "友鷹", "友鷹", "女の子", "友鷹", "梨子"
-                     , "友鷹", "友鷹", "友鷹", "梨子", "友鷹", ""
-                     , "友鷹", "", "友鷹", "友鷹" };
+                     , "友鷹", "友鷹", "友鷹", "梨子", "友鷹", ""};
     string[] talks = { "うーむ。案内所どころか、人気もない。\n一旦船の方に戻ってみよう。\n"
                      , "…"
                      , "ああ。もう船は出てしまっている。\nでも同じ船から降りたと思われる女の子が一人いるからあの子に聞いてみよう。\n"
@@ -30,10 +29,6 @@ public class OntheIsland : MonoBehaviour {
                      , "「ありがとうございます。回復したら、私も手伝いますね。」\n"
                      , "「ありがとう。島の奥の方に行ってみるよ。」\n"
                      , "…"
-                     , "ん？何か光ってるものがあるぞ。これは…水？\n"
-                     , "水100mlを入手した。\n"
-                     , "なるほど。こういうのを集めればいいのか。\n"
-                     , "さて、どこに向かおうかな。\n"
     };
     //public AudioClip audioClip; //セリフ用
     //AudioSource audioSource;
@@ -45,7 +40,7 @@ public class OntheIsland : MonoBehaviour {
         {
             if (enterCount == talks.Length)
             {
-                SceneManager.LoadScene("ChooseForests");
+                SceneManager.LoadScene("Get100mlwater");
             }
             else
             {

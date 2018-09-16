@@ -128,28 +128,30 @@ public class FadeScript : MonoBehaviour
         {
             playTimes++;
             amount += Score.getHighScore();
-            if (HP.getHp() < 50)
+            /*if (HP.getHp() < 50)
             {
                 SceneManager.LoadScene("BitterEnd");
             }
             else
             {
-                SceneManager.LoadScene("ChooseForests");
-            }
+                SceneManager.LoadScene("ToSecondForest");
+            }*/
+            SceneManager.LoadScene("ToSecondForest");
         }
         //2回目のゲーム
         else
         {
             amount += Score.getHighScore();
             //閾値を超えていればhappy end
-            if (amount >= branchThreshold)
+            /*if (amount >= branchThreshold)
             {
                 SceneManager.LoadScene("HappyEnd");
             }
             else
             {
                 SceneManager.LoadScene("BitterEnd");
-            }
+            }*/
+            SceneManager.LoadScene("LoadToTheEnding");
         }
     }
 }

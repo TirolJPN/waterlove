@@ -11,5 +11,9 @@ public class Title : MonoBehaviour {
         {
             SceneManager.LoadScene("Opening");
         }
+        if (Input.GetKeyUp(KeyCode.Backspace))
+        {
+            SceneManager.LoadScene("LoadToTheEnding"); // デバッグ用
+        }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class FadeScript : MonoBehaviour
 {
     // 分岐に用いる閾値
-    const int branchThreshold = 100;
+    const int branchThreshold = 300;
 
     // 取得してくるそのゲーム終了時のHP
     //private int hp;
@@ -13,14 +13,11 @@ public class FadeScript : MonoBehaviour
     //ゲームのプレイ回数
     static int playTimes = 0;
 
-    //ハイスコアの合計
-    static int amount = 0;
+    // PlayerPrefsで保存するためのキー
+    private string amountScoreKey = "amountScore";
 
     // 今回のゲームのスコアを表す
     //private int highScore;
-
-    // PlayerPrefsで保存するためのキー
-    private string highScoreKey = "highScore";
 
     #region Member Variables
     /// <summary>
@@ -44,7 +41,9 @@ public class FadeScript : MonoBehaviour
 		RESPAWN = 3,
 	}
 	public FADETYPE FadeType;
-	#endregion
+    #endregion
+
+    private int amountScore;
 
 	// Use this for initialization
 	void Start () 
@@ -127,6 +126,9 @@ public class FadeScript : MonoBehaviour
         if (playTimes == 0)
         {
             playTimes++;
+// <<<<<<< feature/manage
+//             SceneManager.LoadScene("GiveWater");
+// =======
             amount += Score.getHighScore();
             /*if (HP.getHp() < 50)
             {
@@ -137,13 +139,18 @@ public class FadeScript : MonoBehaviour
                 SceneManager.LoadScene("ToSecondForest");
             }*/
             SceneManager.LoadScene("ToSecondForest");
+// >>>>>>> develop
         }
         //2回目のゲーム
         else
         {
-            amount += Score.getHighScore();
+            amountScore = PlayerPrefs.GetInt(amountScoreKey, 1);
             //閾値を超えていればhappy end
-            /*if (amount >= branchThreshold)
+// <<<<<<< feature/manage
+//             if (amountScore >= branchThreshold)
+// =======
+             /*if (amount >= branchThreshold)
+// >>>>>>> develop
             {
                 SceneManager.LoadScene("HappyEnd");
             }

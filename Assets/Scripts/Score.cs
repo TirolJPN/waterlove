@@ -15,13 +15,21 @@ public class Score : MonoBehaviour
     
 
     // スコア
-    private int score = 0;
+    private int score;
 
     // ハイスコア
-    static int highScore;
+    //static int highScore;
 
     // PlayerPrefsで保存するためのキー
-    private string highScoreKey = "highScore";
+    //private string highScoreKey = "highScore";
+
+    // 持っている水の合計
+    private int amountScore;
+
+    // PlayerPrefsで保存するためのキー
+    private string amountScoreKey = "amountScore";
+
+
 
 
     void Start()
@@ -32,9 +40,11 @@ public class Score : MonoBehaviour
     void Update()
     {
         // スコアがハイスコアより大きければ
-        if (highScore < score)
+        if (amountScore < score)
         {
-            highScore = score;
+            amountScore = score;
+            PlayerPrefs.SetInt(amountScoreKey, amountScore);
+            PlayerPrefs.Save();
         }
 
         // スコア・ハイスコアを表示する
@@ -47,13 +57,13 @@ public class Score : MonoBehaviour
     // ゲーム開始前の状態に戻す
     private void Initialize()
     {
-        // スコアを0に戻す
-        score = 0;
-
         // ハイスコアを取得する。保存されてなければ0を取得する。
-        highScore = PlayerPrefs.GetInt(highScoreKey, 0);
+        //highScore = PlayerPrefs.GetInt(highScoreKey, 0);
 
-        
+        // 合計量を取得する。保存されていなければ-1を取得する。
+        amountScore = PlayerPrefs.GetInt(amountScoreKey, -1);
+
+        score = amountScore;
     }
 
     // ポイントの追加
@@ -66,15 +76,17 @@ public class Score : MonoBehaviour
     // ハイスコアの保存
     public void Save()
     {
-        // ハイスコアを保存する
-        PlayerPrefs.SetInt(highScoreKey, highScore);
-        PlayerPrefs.Save();
+        // ハイスコアをセットする
+        //PlayerPrefs.SetInt(highScoreKey, highScore);
+
+        // 合計スコアをセットする
+        //amountScore += highScore;
+        //PlayerPrefs.SetInt(amountScoreKey, amountScore);
+        //PlayerPrefs.Save();
+
+        // なぜかamountが保存されないため。上記処理をUpdate()に配置
 
         // ゲーム開始前の状態に戻す
         Initialize();
-    }
-
-    public static int getHighScore(){
-        return highScore;
     }
 }

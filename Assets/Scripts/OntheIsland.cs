@@ -89,8 +89,12 @@ public class OntheIsland : MonoBehaviour {
         }
         else
         {
+// <<<<<<< feature/manage
+//             SceneManager.LoadScene("Get100mlwater");
+// =======
             Back[0].SetActive(true); // 暗転解除
             Back[1].SetActive(false);
+// >>>>>>> develop
         }
     }
 }

@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/Scenes/LeaveTheShip.unity
     guid: 076a4317b2f2f4c41802b7cf7eb0dc1d
   - enabled: 1
+    path: Assets/Scenes/Get100mlwater.unity
+    guid: 7f5ca4295e7b748459b8ad54dcafa8ae
+  - enabled: 1
     path: Assets/Scenes/OnTheIsland.unity
     guid: b5565a7e5e554044fb7ce05e722ed05a
   - enabled: 1

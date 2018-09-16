@@ -129,7 +129,7 @@ public class FadeScript : MonoBehaviour
 // <<<<<<< feature/manage
 //             SceneManager.LoadScene("GiveWater");
 // =======
-            amount += Score.getHighScore();
+            //amount += Score.getHighScore();
             /*if (HP.getHp() < 50)
             {
                 SceneManager.LoadScene("BitterEnd");

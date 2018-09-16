@@ -66,11 +66,10 @@ public class LoadToTheEnding : MonoBehaviour {
                 }
             }
         }
-
-        if (enterCount == talks.Length)
-        {
+        //else if (enterCount == talks.Length)
+        //{
             //SceneManager.LoadScene("BitterEnd2");
-            if (Input.GetKeyUp(KeyCode.A))
+            else if (Input.GetKeyUp(KeyCode.A))
             {
                 SceneManager.LoadScene("HappyEnd");
             }
@@ -90,7 +89,7 @@ public class LoadToTheEnding : MonoBehaviour {
             {
                 SceneManager.LoadScene("BadEnd");
             }
-        }
+        //}
     }
 
     public void DarkChange() // 暗転

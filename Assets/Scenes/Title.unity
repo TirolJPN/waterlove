@@ -454,7 +454,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: df6d1b28abd85b34bb83841bcce8633a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5f40a87f0ede763458c951ad9de4805f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -472,7 +472,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1099068179}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.08, y: 0, z: 0}
+  m_LocalPosition: {x: -0.08, y: 2.16, z: 0}
   m_LocalScale: {x: 1.4918, y: 1.4918, z: 1.4918}
   m_Children: []
   m_Father: {fileID: 0}
@@ -647,7 +647,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 18, y: -20}
+  m_AnchoredPosition: {x: 0, y: -20}
   m_SizeDelta: {x: 1024, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2065790595
@@ -676,13 +676,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 72
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: PRESS ENTER
+  m_Text: "\u753B\u9762\u3092\u30BF\u30C3\u30C1\u3057\u3066\u30B9\u30BF\u30FC\u30C8"
 --- !u!222 &2065790596
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -143,14 +143,15 @@ public class FadeScript : MonoBehaviour
         {
             amount += Score.getHighScore();
             //閾値を超えていればhappy end
-            if (amount >= branchThreshold)
+            /*if (amount >= branchThreshold)
             {
                 SceneManager.LoadScene("HappyEnd");
             }
             else
             {
                 SceneManager.LoadScene("BitterEnd");
-            }
+            }*/
+            SceneManager.LoadScene("LoadToTheEnding");
         }
     }
 }

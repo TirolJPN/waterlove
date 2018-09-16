@@ -7,12 +7,15 @@ public class LoadToTheEnding : MonoBehaviour {
 
     public UnityEngine.UI.Text NameLabel; // 名前テキスト
     public UnityEngine.UI.Text TextLabel; // セリフテキスト
-    string[] names = { "友鷹", "", "友鷹",""
+    public GameObject[] Back; // 背景用
+    string[] names = { "友鷹", "", "友鷹", "", "" , ""
                        };
     string[] talks = { "よし、西園寺さんのところに戻ろう。どれくらい渡してあげようかな。\n"
                      , "渡す量を選んでください。\n"
-                     , "残りは俺が飲もう\n"
+                     , "残りは俺が飲もう。\n"
                      , "HPが〇〇回復した！\n"
+                     , "…"
+                     , "……"
     };
     //public AudioClip audioClip; //セリフ用
     //AudioSource audioSource;
@@ -30,6 +33,12 @@ public class LoadToTheEnding : MonoBehaviour {
             {
                 NameLabel.text = names[enterCount];
                 TextLabel.text = talks[enterCount];
+                //DarkChange();
+                if (talks[enterCount].Equals("…"))
+                {
+                    Back[0].SetActive(false);
+                    Back[1].SetActive(true); // 暗転
+                }
                 enterCount++;
             }
         }
@@ -47,6 +56,12 @@ public class LoadToTheEnding : MonoBehaviour {
                     enterCount--;
                     NameLabel.text = names[enterCount];
                     TextLabel.text = talks[enterCount];
+                    //DarkChange();
+                    if (talks[enterCount].Equals("…"))
+                    {
+                        Back[0].SetActive(false);
+                        Back[1].SetActive(true); // 暗転
+                    }
                     enterCount++;
                 }
             }
@@ -75,6 +90,20 @@ public class LoadToTheEnding : MonoBehaviour {
             {
                 SceneManager.LoadScene("BadEnd");
             }
+        }
+    }
+
+    public void DarkChange() // 暗転
+    {
+        if (talks[enterCount].Equals("…"))
+        {
+            Back[0].SetActive(false);
+            Back[1].SetActive(true); // 暗転
+        }
+        else
+        {
+            Back[0].SetActive(true); // 暗転解除
+            Back[1].SetActive(false);
         }
     }
 }

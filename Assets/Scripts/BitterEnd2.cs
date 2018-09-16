@@ -4,17 +4,19 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class BitterEnd : MonoBehaviour {
+public class BitterEnd2 : MonoBehaviour {
     public UnityEngine.UI.Text NameLabel; // 名前テキスト
     public UnityEngine.UI.Text TextLabel; // セリフテキスト
-    string[] names = { "友鷹", "梨子", "友鷹","友鷹", "梨子", "友鷹", ""
+    string[] names = { "友鷹", "梨子", "友鷹", "友鷹", "梨子", "友鷹", "", ""
                        };
-    string[] talks = { "「西園寺さん！…ごめん。水全然確保できなかった。」\n"
-                     , "「そうだったんですね。いえいえ、島袋さんは頑張ってたので謝ることはありませんよ。ありがとうございます。」\n"
-                     , "「うん…。」\n"
-                     , "体はもうボロボロで動かないし、言葉もうまくかけられない。悲惨だな…。\n"
-                     , "――大学2年の夏。それは、予想外の波乱に満ちた夏だった。\n俺の中で忘れられない思い出が、そこにはあった。\n"
-                     , "BITTER END3\n詰め切れない距離\n"
+    string[] talks = { "「西園寺さん！水持ってきたよ。これ飲んで。」\n"
+                     , "「ありがとうございます。こんな状況でも前向きに一生懸命考えて行動ができて、本当にすごいです。私一人だったら何もできませんでした。」\n"
+                     , "「うん…ありがとう。」\n"
+                     , "体はもうボロボロで動かないし、言葉もうまくかけられない。早く迎えにきてくれないかな…。\n"
+                     , "「あの…友鷹さん。もしよかったら私と…ってあれ。眠っちゃってる。」\n"
+                     , "「すーすー。」\n"
+                     , "――大学2年の夏。それは、予想外の波乱に満ちた夏だった。\n俺の中で忘れられない苦い思い出が、そこにはあった。\n"
+                     , "BITTER END2\n優しさ故の過ち\n"
     };
     //public AudioClip audioClip; //セリフ用
     //AudioSource audioSource;
@@ -42,7 +44,7 @@ public class BitterEnd : MonoBehaviour {
                 enterCount--;
                 if (enterCount == 0)
                 {
-                    SceneManager.LoadScene("BeforeOnBoard");
+                    //SceneManager.LoadScene("BeforeOnBoard");
                 }
                 else
                 {

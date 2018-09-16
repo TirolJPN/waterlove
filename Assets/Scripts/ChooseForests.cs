@@ -37,7 +37,7 @@ public class ChooseForests : MonoBehaviour {
         //}
 
 
-        else if (Input.GetKeyUp(KeyCode.N))
+        /*else if (Input.GetKeyUp(KeyCode.N))
         {
             if (isNorthSelected == false)
             {
@@ -75,7 +75,7 @@ public class ChooseForests : MonoBehaviour {
             {
                 TextLabel.text = "既に行ってます。\n";
             }
-        }
+        }*/
     }
 
     public void NorthButton() // 北の森を選んだ時にパネルを出す

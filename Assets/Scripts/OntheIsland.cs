@@ -7,12 +7,13 @@ public class OntheIsland : MonoBehaviour {
 
     public UnityEngine.UI.Text NameLabel; // 名前テキスト
     public UnityEngine.UI.Text TextLabel; // セリフテキスト
+    public GameObject[] Back; // 背景用
     string[] names = { "友鷹", "", "友鷹", "友鷹", "女の子", "友鷹"
                      , "女の子", "友鷹", "友鷹", "女の子", "友鷹", "梨子"
                      , "友鷹", "友鷹", "友鷹", "梨子", "友鷹", ""
-                     , "友鷹", "友鷹", "友鷹", "友鷹" };
+                     , "友鷹", "", "友鷹", "友鷹" };
     string[] talks = { "うーむ。案内所どころか、人気もない。\n一旦船の方に戻ってみよう。\n"
-                     , "歩行音\n"
+                     , "…"
                      , "ああ。もう船は出てしまっている。\nでも同じ船から降りたと思われる女の子が一人いるからあの子に聞いてみよう。\n"
                      , "「すみません。案内所ってどこか分かりますか？」\n"
                      , "「あっ、えーっと、私も分からなくて…。どうしようって思ってました。」\n"
@@ -28,7 +29,7 @@ public class OntheIsland : MonoBehaviour {
                      , "「長旅で疲れてるだろうから、俺が調達してくるよ。西園寺さんは陰で休んでて。」\n"
                      , "「ありがとうございます。回復したら、私も手伝いますね。」\n"
                      , "「ありがとう。島の奥の方に行ってみるよ。」\n"
-                     , "…\n"
+                     , "…"
                      , "ん？何か光ってるものがあるぞ。これは…水？\n"
                      , "水100mlを入手した。\n"
                      , "なるほど。こういうのを集めればいいのか。\n"
@@ -50,6 +51,7 @@ public class OntheIsland : MonoBehaviour {
             {
                 NameLabel.text = names[enterCount];
                 TextLabel.text = talks[enterCount];
+                DarkChange();
                 enterCount++;
             }
         }
@@ -71,9 +73,24 @@ public class OntheIsland : MonoBehaviour {
                     enterCount--;
                     NameLabel.text = names[enterCount];
                     TextLabel.text = talks[enterCount];
+                    DarkChange();
                     enterCount++;
                 }
             }
+        }
+    }
+
+    public void DarkChange() // 暗転
+    {
+        if (talks[enterCount].Equals("…"))
+        {
+            Back[0].SetActive(false);
+            Back[1].SetActive(true); // 暗転
+        }
+        else
+        {
+            Back[0].SetActive(true); // 暗転解除
+            Back[1].SetActive(false);
         }
     }
 }

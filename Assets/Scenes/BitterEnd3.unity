@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 125542365}
   - component: {fileID: 125542366}
   m_Layer: 0
-  m_Name: BitterEndController
+  m_Name: BitterEnd3Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

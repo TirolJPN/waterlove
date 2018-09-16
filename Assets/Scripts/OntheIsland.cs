@@ -8,13 +8,20 @@ public class OntheIsland : MonoBehaviour {
     public UnityEngine.UI.Text NameLabel; // 名前テキスト
     public UnityEngine.UI.Text TextLabel; // セリフテキスト
     public GameObject[] Back; // 背景用
-    string[] names = { "友鷹", "", "友鷹", "友鷹", "女の子", "友鷹"
+    string[] names = { "友鷹", "友鷹", "友鷹", "", "友鷹"
+                     ,"友鷹", "", "友鷹", "友鷹", "友鷹", "女の子", "友鷹"
                      , "女の子", "友鷹", "友鷹", "女の子", "友鷹", "梨子"
                      , "友鷹", "友鷹", "友鷹", "梨子", "友鷹", ""
                      , "友鷹", "", "友鷹", "友鷹" };
-    string[] talks = { "うーむ。案内所どころか、人気もない。\n一旦船の方に戻ってみよう。\n"
+    string[] talks = { "外は真上から照り付ける太陽がきついな。\n"
+                     , "船を降りた場所のすぐ近くに案内所があるってパンフレットには書いてあるけど、見つからないな。\nどこだろう。\n"
+                     , "とりあえず歩いてみよう。\n"
                      , "…"
-                     , "ああ。もう船は出てしまっている。\nでも同じ船から降りたと思われる女の子が一人いるからあの子に聞いてみよう。\n"
+                     , "うーむ。案内所どころか、人気もない。\n"
+                     , "一旦船の方に戻ってみよう。\n"
+                     , "…"
+                     , "ああ。もう船は出てしまっている。\n"
+                     , "でも同じ船から降りたと思われる女の子が一人いるからあの子に聞いてみよう。\n"
                      , "「すみません。案内所ってどこか分かりますか？」\n"
                      , "「あっ、えーっと、私も分からなくて…。どうしようって思ってました。」\n"
                      , "「そうですよねー。事前に見ていた島の景色と違うような気がしますし。」\n"
@@ -52,6 +59,10 @@ public class OntheIsland : MonoBehaviour {
                 NameLabel.text = names[enterCount];
                 TextLabel.text = talks[enterCount];
                 DarkChange();
+                if (enterCount == 4 || enterCount == 5)
+                {
+                    BackChange(2);
+                }
                 enterCount++;
             }
         }
@@ -84,17 +95,33 @@ public class OntheIsland : MonoBehaviour {
     {
         if (talks[enterCount].Equals("…"))
         {
-            Back[0].SetActive(false);
+            foreach (GameObject g in Back)
+            {
+                g.SetActive(false);
+            }
             Back[1].SetActive(true); // 暗転
         }
         else
         {
-// <<<<<<< feature/manage
-//             SceneManager.LoadScene("Get100mlwater");
-// =======
+            // <<<<<<< feature/manage
+            //             SceneManager.LoadScene("Get100mlwater");
+            // =======
+            foreach (GameObject g in Back)
+            {
+                g.SetActive(false);
+            }
             Back[0].SetActive(true); // 暗転解除
-            Back[1].SetActive(false);
+            //Back[1].SetActive(false);
 // >>>>>>> develop
         }
+    }
+
+    public void BackChange(int i)
+    {
+        foreach (GameObject g in Back)
+        {
+            g.SetActive(false);
+        }
+        Back[i].SetActive(true);
     }
 }

@@ -7,9 +7,10 @@ public class BadEnd : MonoBehaviour {
 
     public UnityEngine.UI.Text NameLabel; // 名前テキスト
     public UnityEngine.UI.Text TextLabel; // セリフテキスト
-    string[] names = { "友鷹","友鷹", ""
+    string[] names = { "友鷹", "友鷹", "", ""
                        };
-    string[] talks = { "はあはあ。もうだめだ。からだが、うごかない。西園寺さん、ごめん。がんばってくれ。\n"
+    string[] talks = { "はあはあ。もうだめだ。からだが、うごかない。\n"
+                     , "西園寺さん、ごめん。がんばってくれ。\n"
                      , "――大学2年の夏。それは、予想外の波乱に満ちた夏だった。\n"
                      , "BAD END\n果てない暗闇の中で\n"
     };

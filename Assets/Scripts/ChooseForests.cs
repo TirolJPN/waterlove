@@ -38,7 +38,7 @@ public class ChooseForests : MonoBehaviour
         //}
 
 
-        else if (Input.GetKeyUp(KeyCode.N))
+        /*else if (Input.GetKeyUp(KeyCode.N))
         {
             if (isNorthSelected == false)
             {
@@ -76,7 +76,11 @@ public class ChooseForests : MonoBehaviour
             {
                 TextLabel.text = "既に行ってます。\n";
             }
-        }
+// <<<<<<< feature/manage
+//         }
+// =======
+        }*/
+// >>>>>>> develop
     }
 
     public void NorthButton() // 北の森を選んだ時にパネルを出す
@@ -122,7 +126,11 @@ public class ChooseForests : MonoBehaviour
 
     public void GoForest()
     {
-        if (Forest.Equals("北の森"))
+// <<<<<<< feature/manage
+//         if (Forest.Equals("北の森"))
+// =======
+        if(Forest.Equals("北の森"))
+// >>>>>>> develop
         {
             if (isSouthSelected == true) // 2回目の森のときはフラグをリセット
             {
@@ -159,4 +167,8 @@ public class ChooseForests : MonoBehaviour
             flag1 = true;
         }
     }
+// <<<<<<< feature/manage
+// }
+// =======
 }
+// >>>>>>> develop

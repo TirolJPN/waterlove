@@ -7,11 +7,13 @@ public class OntheIsland : MonoBehaviour {
 
     public UnityEngine.UI.Text NameLabel; // 名前テキスト
     public UnityEngine.UI.Text TextLabel; // セリフテキスト
+    public GameObject[] Back; // 背景用
     string[] names = { "友鷹", "", "友鷹", "友鷹", "女の子", "友鷹"
-                      ,"女の子", "友鷹", "友鷹", "女の子", "友鷹", "梨子"
-                      , "友鷹", "友鷹", "友鷹", "梨子", "友鷹" };
+                     , "女の子", "友鷹", "友鷹", "女の子", "友鷹", "梨子"
+                     , "友鷹", "友鷹", "友鷹", "梨子", "友鷹", ""
+                     , "友鷹", "", "友鷹", "友鷹" };
     string[] talks = { "うーむ。案内所どころか、人気もない。\n一旦船の方に戻ってみよう。\n"
-                     , "歩行音\n"
+                     , "…"
                      , "ああ。もう船は出てしまっている。\nでも同じ船から降りたと思われる女の子が一人いるからあの子に聞いてみよう。\n"
                      , "「すみません。案内所ってどこか分かりますか？」\n"
                      , "「あっ、えーっと、私も分からなくて…。どうしようって思ってました。」\n"
@@ -26,7 +28,12 @@ public class OntheIsland : MonoBehaviour {
                      , "「助けが来るまでどれぐらいかかるか分からないから、まずは飲み水を確保することを考えよう。」\n"
                      , "「長旅で疲れてるだろうから、俺が調達してくるよ。西園寺さんは陰で休んでて。」\n"
                      , "「ありがとうございます。回復したら、私も手伝いますね。」\n"
-                     , "「ありがとう。さて、どこに向かおうかな。」\n"
+                     , "「ありがとう。島の奥の方に行ってみるよ。」\n"
+                     , "…"
+                     , "ん？何か光ってるものがあるぞ。これは…水？\n"
+                     , "水100mlを入手した。\n"
+                     , "なるほど。こういうのを集めればいいのか。\n"
+                     , "さて、どこに向かおうかな。\n"
     };
     //public AudioClip audioClip; //セリフ用
     //AudioSource audioSource;
@@ -34,23 +41,60 @@ public class OntheIsland : MonoBehaviour {
 
     void LateUpdate()
     {
-        if (Input.GetKeyUp(KeyCode.Return) && enterCount < talks.Length)
+        if (Input.GetKeyUp(KeyCode.Return))
         {
-            NameLabel.text = names[enterCount];
-            TextLabel.text = talks[enterCount];
-            enterCount++;
+            if (enterCount == talks.Length)
+            {
+                SceneManager.LoadScene("ChooseForests");
+            }
+            else
+            {
+                NameLabel.text = names[enterCount];
+                TextLabel.text = talks[enterCount];
+                DarkChange();
+                enterCount++;
+            }
         }
-        else if (Input.GetKeyUp(KeyCode.Backspace) && enterCount < talks.Length)
+        else if (Input.GetKeyUp(KeyCode.Backspace))
         {
-            enterCount--;
-            enterCount--;
-            NameLabel.text = names[enterCount];
-            TextLabel.text = talks[enterCount];
-            enterCount++;
+            if (enterCount == 0)
+            {
+                SceneManager.LoadScene("LeaveTheShip");
+            }
+            else
+            {
+                enterCount--;
+                if (enterCount == 0)
+                {
+                    SceneManager.LoadScene("BeforeOnBoard");
+                }
+                else
+                {
+                    enterCount--;
+                    NameLabel.text = names[enterCount];
+                    TextLabel.text = talks[enterCount];
+                    DarkChange();
+                    enterCount++;
+                }
+            }
         }
-        else if (Input.GetKeyUp(KeyCode.Return) && enterCount == talks.Length)
+    }
+
+    public void DarkChange() // 暗転
+    {
+        if (talks[enterCount].Equals("…"))
         {
-            SceneManager.LoadScene("Get100mlwater");
+            Back[0].SetActive(false);
+            Back[1].SetActive(true); // 暗転
+        }
+        else
+        {
+// <<<<<<< feature/manage
+//             SceneManager.LoadScene("Get100mlwater");
+// =======
+            Back[0].SetActive(true); // 暗転解除
+            Back[1].SetActive(false);
+// >>>>>>> develop
         }
     }
 }

@@ -156,7 +156,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NameLabel: {fileID: 1134893979}
   TextLabel: {fileID: 2065790595}
-  audioClip: {fileID: 8300000, guid: ba90ac5be489d864ca0de5538c96e14a, type: 3}
 --- !u!82 &125542367
 AudioSource:
   m_ObjectHideFlags: 0
@@ -553,7 +552,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 207d5927da23d874c95219caf24650e1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8d7968b39bf16ab45ad62c147eef7bc6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

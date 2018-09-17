@@ -16,8 +16,8 @@ public class Get100mlwater : MonoBehaviour
                      , "なるほど。こういうのを集めればいいのか。\n"
                      , "さて、どこに向かおうかな。\n"
     };
-    //public AudioClip audioClip; //セリフ用
-    //AudioSource audioSource;
+    public AudioClip audioClip; //セリフ用
+    AudioSource audioSource;
     private int enterCount = 0;
 
     // 持っている水の合計
@@ -29,7 +29,9 @@ public class Get100mlwater : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //TextLabel.text = "こんにちは。Unityちゃん監督です。ここでは高得点をとるヒントを紹介するよ。\n";
+        audioSource = gameObject.GetComponent<AudioSource>();
+        audioSource.clip = audioClip;
+        audioSource.Play();
     }
 
     void LateUpdate()

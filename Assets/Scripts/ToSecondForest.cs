@@ -11,7 +11,7 @@ public class ToSecondForest : MonoBehaviour {
     public GameObject[] Back; // 背景用
     string[] names = { "友鷹", "友鷹", "", "友鷹", "梨子", "友鷹"
                      , "", "友鷹"
-                     //, ""
+                     , ""
                      , "梨子", "友鷹"
                      , "梨子", "", "友鷹", "梨子", "友鷹", ""
                      , "友鷹", "", "友鷹"};
@@ -22,6 +22,7 @@ public class ToSecondForest : MonoBehaviour {
                      , "「島袋さん！おかえりなさい！」\n"
                      , "「水持ってきたよ。まずは俺が試しに飲んでみるね。」\n"
                      , "飲む量を選んでください。\n"
+                     , ""
                      , "「うん、飲んでみたけど体に支障はなさそうだ。西園寺さんにも今渡すね。」\n"
                      //, "渡す量を選んでください。\n"
                      , "「ありがとうございます。…んっ。おいしいです。」\n"
@@ -111,7 +112,8 @@ public class ToSecondForest : MonoBehaviour {
                 }
                 SceneManager.LoadScene("ChooseForests");
             }
-            else if(enterCount == selectNum){
+            else if (enterCount == selectNum)
+            {
                 enterCount++;
                 scene.SetActive(true);
             }
@@ -120,6 +122,10 @@ public class ToSecondForest : MonoBehaviour {
                 NameLabel.text = names[enterCount];
                 TextLabel.text = talks[enterCount];
                 DarkChange();
+                if ((enterCount >= 3 && enterCount <= 11) || (enterCount >= 13 && enterCount <= 15))
+                {
+                    BackChange(2);
+                }
                 enterCount++;
             }
         }
@@ -148,13 +154,19 @@ public class ToSecondForest : MonoBehaviour {
     {
         if (talks[enterCount].Equals("…"))
         {
-            Back[0].SetActive(false);
+            foreach (GameObject g in Back)
+            {
+                g.SetActive(false);
+            }
             Back[1].SetActive(true); // 暗転
         }
         else
         {
+            foreach (GameObject g in Back)
+            {
+                g.SetActive(false);
+            }
             Back[0].SetActive(true); // 暗転解除
-            Back[1].SetActive(false);
         }
     }
 
@@ -165,7 +177,6 @@ public class ToSecondForest : MonoBehaviour {
         HP += division;
         saionjiAmountScore += (amountScore - division);
         amountScore = 0;
-
         PlayerPrefs.SetInt(HPKey, HP);
         PlayerPrefs.SetInt(amountScoreKey, amountScore);
         PlayerPrefs.SetInt(saionjiAmountScoreKey, saionjiAmountScore);
@@ -180,5 +191,15 @@ public class ToSecondForest : MonoBehaviour {
         division = (int)slider.value * 10;
         minValue.text = division.ToString();
         maxValue.text = (amountScore - division).ToString();
+    }
+
+
+    public void BackChange(int i)
+    {
+        foreach (GameObject g in Back)
+        {
+            g.SetActive(false);
+        }
+        Back[i].SetActive(true);
     }
 }

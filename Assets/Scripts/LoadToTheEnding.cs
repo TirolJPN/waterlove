@@ -78,7 +78,29 @@ public class LoadToTheEnding : MonoBehaviour {
         {
             if (enterCount == talks.Length)
             {
-                //SceneManager.LoadScene("BitterEnd2");
+                //SceneManager.LoadScene("BitterEnd2")
+                HP = PlayerPrefs.GetInt(HPKey, 0);
+                saionjiAmountScore = PlayerPrefs.GetInt(saionjiAmountScoreKey, 0);
+                if (HP > 50 && saionjiAmountScore > 100)
+                {
+                    SceneManager.LoadScene("HappyEnd");
+                }
+                else if (HP > 50 && saionjiAmountScore < 100)
+                {
+                    SceneManager.LoadScene("BitterEnd1");
+                }
+                else if (HP < 50 && saionjiAmountScore > 100)
+                {
+                    SceneManager.LoadScene("BitterEnd2");
+                }
+                else if (HP < 50 && saionjiAmountScore < 100)
+                {
+                    SceneManager.LoadScene("BitterEnd3");
+                }
+                else if (HP == 0)
+                {
+                    SceneManager.LoadScene("BadEnd");
+                }
             }
             else if (enterCount == selectNum)
             {
@@ -122,32 +144,6 @@ public class LoadToTheEnding : MonoBehaviour {
                 }
             }
         }
-        //else if (enterCount == talks.Length)
-        //{
-            //SceneManager.LoadScene("BitterEnd2")
-            HP = PlayerPrefs.GetInt(HPKey, 0);
-            saionjiAmountScore = PlayerPrefs.GetInt(saionjiAmountScoreKey, 0);
-            if (HP > 50 && saionjiAmountScore > 100)
-            {
-                SceneManager.LoadScene("HappyEnd");
-            }
-            else if (HP > 50 && saionjiAmountScore < 100)
-            {
-                SceneManager.LoadScene("BitterEnd1");
-            }
-            else if (HP < 50 && saionjiAmountScore > 100)
-            {
-                SceneManager.LoadScene("BitterEnd2");
-            }
-            else if (HP < 50 && saionjiAmountScore < 100)
-            {
-                SceneManager.LoadScene("BitterEnd3");
-            }
-            else if (HP == 0)
-            {
-                SceneManager.LoadScene("BadEnd");
-            }
-        //}
     }
 
     public void DarkChange() // 暗転

@@ -27,31 +27,22 @@ public class BitterEnd2 : MonoBehaviour {
 
     void LateUpdate()
     {
-        if (Input.GetKeyUp(KeyCode.Return))
+        //タッチがあるかどうか？
+        for (int i = 0; i < Input.touchCount; i++)
         {
-            if (enterCount == talks.Length)
+
+            // タッチ情報を取得する
+            Touch touch = Input.GetTouch(i);
+
+            // ゲーム中ではなく、タッチ直後であればtrueを返す。
+            if (touch.phase == TouchPhase.Began)
             {
-                SceneManager.LoadScene("Title");
-            }
-            else
-            {
-                NameLabel.text = names[enterCount];
-                TextLabel.text = talks[enterCount];
-                enterCount++;
-            }
-        }
-        else if (Input.GetKeyUp(KeyCode.Backspace))
-        {
-            if (enterCount > 0)
-            {
-                enterCount--;
-                if (enterCount == 0)
+                if (enterCount == talks.Length)
                 {
-                    //SceneManager.LoadScene("BeforeOnBoard");
+                    SceneManager.LoadScene("Title");
                 }
                 else
                 {
-                    enterCount--;
                     NameLabel.text = names[enterCount];
                     TextLabel.text = talks[enterCount];
                     enterCount++;

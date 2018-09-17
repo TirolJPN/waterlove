@@ -34,42 +34,50 @@ public class Get100mlwater : MonoBehaviour
 
     void LateUpdate()
     {
-        if (Input.GetKeyUp(KeyCode.Return) && enterCount < talks.Length)
+        //タッチがあるかどうか？
+        for (int i = 0; i < Input.touchCount; i++)
         {
-            NameLabel.text = names[enterCount];
-            TextLabel.text = talks[enterCount];
-            enterCount++;
-        }
-        else if (Input.GetKeyUp(KeyCode.Backspace) && enterCount < talks.Length)
-        {
-            enterCount--;
-            enterCount--;
-            NameLabel.text = names[enterCount];
-            TextLabel.text = talks[enterCount];
-            enterCount++;
-        }
-        else if (Input.GetKeyUp(KeyCode.Return) && enterCount == talks.Length)
-        {
-            // もし合計がすでに保存されていたら100増やして上書き保存
-            if(PlayerPrefs.HasKey(amountScoreKey)){
-                amountScore = PlayerPrefs.GetInt(amountScoreKey, -1);
-                amountScore += 100;
-                PlayerPrefs.SetInt(amountScoreKey, amountScore);
-                PlayerPrefs.Save();
+
+            // タッチ情報を取得する
+            Touch touch = Input.GetTouch(i);
+
+            // ゲーム中ではなく、タッチ直後であればtrueを返す。
+            if (touch.phase == TouchPhase.Began)
+            {
+                if (enterCount < talks.Length)
+                {
+                    NameLabel.text = names[enterCount];
+                    TextLabel.text = talks[enterCount];
+                    enterCount++;
+                }
+                else if (enterCount < talks.Length)
+                {
+                    enterCount--;
+                    enterCount--;
+                    NameLabel.text = names[enterCount];
+                    TextLabel.text = talks[enterCount];
+                    enterCount++;
+                }
+                else if (enterCount == talks.Length)
+                {
+                    // もし合計がすでに保存されていたら100増やして上書き保存
+                    if (PlayerPrefs.HasKey(amountScoreKey))
+                    {
+                        amountScore = PlayerPrefs.GetInt(amountScoreKey, -1);
+                        amountScore += 100;
+                        PlayerPrefs.SetInt(amountScoreKey, amountScore);
+                        PlayerPrefs.Save();
+                    }
+                    // そうでなければ100を初期値で保存する
+                    else
+                    {
+                        amountScore = 100;
+                        PlayerPrefs.SetInt(amountScoreKey, amountScore);
+                        PlayerPrefs.Save();
+                    }
+                    SceneManager.LoadScene("ChooseForests");
+                }
             }
-            // そうでなければ100を初期値で保存する
-            else{
-                amountScore = 100;
-                PlayerPrefs.SetInt(amountScoreKey, amountScore);
-                PlayerPrefs.Save();
-            }
-            SceneManager.LoadScene("ChooseForests");
         }
-        /*else if (Input.GetKeyUp(KeyCode.Return) && enterCount == 0)
-        {  // エンターキーが押されている間
-            NameLabel.text = "友鷹\n";
-            TextLabel.text = "";
-            enterCount++;
-        }*/
     }
 }

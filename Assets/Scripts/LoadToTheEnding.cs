@@ -10,13 +10,13 @@ public class LoadToTheEnding : MonoBehaviour {
     public UnityEngine.UI.Text TextLabel; // セリフテキスト
     public GameObject[] Back; // 背景用
     string[] names = { "友鷹", ""
-        , ""
+        , "無視"
         ,  "友鷹"
         , "" , ""
                        };
     string[] talks = { "よし、西園寺さんのところに戻ろう。どれくらい飲もうかな。\n"
                      , "飲む量を選んでください。\n"
-                     , ""
+                     , "無視"
                      , "残りは西園寺さんにあげよう。"
                      , "…"
                      , "……"
@@ -55,6 +55,10 @@ public class LoadToTheEnding : MonoBehaviour {
     public Text minValue;
     public Text maxValue;
 
+
+
+    private bool sliderFlag;
+
     // Use this for initialization
     void Start()
     {
@@ -74,64 +78,53 @@ public class LoadToTheEnding : MonoBehaviour {
 
     void LateUpdate()
     {
-        if (Input.GetKeyUp(KeyCode.Return))
+        //タッチがあるかどうか？
+        for (int i = 0; i < Input.touchCount; i++)
         {
-            if (enterCount == talks.Length)
+            // タッチ情報を取得する
+            Touch touch = Input.GetTouch(i);
+            // ゲーム中ではなく、タッチ直後であればtrueを返す。
+            if (touch.phase == TouchPhase.Began)
             {
-                //SceneManager.LoadScene("BitterEnd2")
-                HP = PlayerPrefs.GetInt(HPKey, 0);
-                saionjiAmountScore = PlayerPrefs.GetInt(saionjiAmountScoreKey, 0);
-                if (HP > 50 && saionjiAmountScore > 100)
+                if (enterCount == talks.Length)
                 {
-                    SceneManager.LoadScene("HappyEnd");
+                    //SceneManager.LoadScene("BitterEnd2")
+                    HP = PlayerPrefs.GetInt(HPKey, 0);
+                    saionjiAmountScore = PlayerPrefs.GetInt(saionjiAmountScoreKey, 0);
+                    if (HP > 50 && saionjiAmountScore >= 2000)
+                    {
+                        SceneManager.LoadScene("HappyEnd");
+                    }
+                    else if (HP > 50 && saionjiAmountScore < 2000)
+                    {
+                        SceneManager.LoadScene("BitterEnd1");
+                    }
+                    else if (HP < 50 && saionjiAmountScore >= 2000)
+                    {
+                        SceneManager.LoadScene("BitterEnd2");
+                    }
+                    else if (HP < 50 && saionjiAmountScore < 2000)
+                    {
+                        SceneManager.LoadScene("BitterEnd3");
+                    }
+                    else if (HP == 0)
+                    {
+                        SceneManager.LoadScene("BadEnd");
+                    }
                 }
-                else if (HP > 50 && saionjiAmountScore < 100)
+                else if (enterCount == selectNum)
                 {
-                    SceneManager.LoadScene("BitterEnd1");
+                    enterCount++;
+                    scene.SetActive(true);
+                    sliderFlag = true;
                 }
-                else if (HP < 50 && saionjiAmountScore > 100)
+
+                else if (enterCount == (selectNum+1) && sliderFlag == true)
                 {
-                    SceneManager.LoadScene("BitterEnd2");
-                }
-                else if (HP < 50 && saionjiAmountScore < 100)
-                {
-                    SceneManager.LoadScene("BitterEnd3");
-                }
-                else if (HP == 0)
-                {
-                    SceneManager.LoadScene("BadEnd");
-                }
-            }
-            else if (enterCount == selectNum)
-            {
-                enterCount++;
-                scene.SetActive(true);
-            }
-            else
-            {
-                NameLabel.text = names[enterCount];
-                TextLabel.text = talks[enterCount];
-                //DarkChange();
-                if (talks[enterCount].Equals("…"))
-                {
-                    Back[0].SetActive(false);
-                    Back[1].SetActive(true); // 暗転
-                }
-                enterCount++;
-            }
-        }
-        else if (Input.GetKeyUp(KeyCode.Backspace))
-        {
-            if (enterCount > 0)
-            {
-                enterCount--;
-                if (enterCount == 0)
-                {
-                    //SceneManager.LoadScene("BeforeOnBoard");
+                    continue;
                 }
                 else
                 {
-                    enterCount--;
                     NameLabel.text = names[enterCount];
                     TextLabel.text = talks[enterCount];
                     //DarkChange();
@@ -173,6 +166,7 @@ public class LoadToTheEnding : MonoBehaviour {
         PlayerPrefs.SetInt(saionjiAmountScoreKey, saionjiAmountScore);
         // Get100mlwaterの直前を呼び出す
         scene.SetActive(false);
+        sliderFlag = false;
     }
 
     // sliderの値が更新されるたびに表示を変える関数

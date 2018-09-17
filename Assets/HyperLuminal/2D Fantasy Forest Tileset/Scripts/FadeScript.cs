@@ -126,7 +126,6 @@ public class FadeScript : MonoBehaviour
         if (playTimes == 0)
         {
             playTimes++;
-
             SceneManager.LoadScene("ToSecondForest");
         }
         //2回目のゲーム
@@ -134,6 +133,7 @@ public class FadeScript : MonoBehaviour
         {
             amountScore = PlayerPrefs.GetInt(amountScoreKey, 1);
             //閾値を超えていればhappy end
+            playTimes = 0;
             SceneManager.LoadScene("LoadToTheEnding");
         }
     }

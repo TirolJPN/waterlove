@@ -25,6 +25,7 @@ public class Title : MonoBehaviour {
     private string saionjiAmountScoreKey = "saionjiAmountScore";
 
 
+
     void LateUpdate()
     {
         // 各値初期化
@@ -34,15 +35,20 @@ public class Title : MonoBehaviour {
         PlayerPrefs.SetInt(HPKey, HP);
         saionjiAmountScore = 0;
         PlayerPrefs.SetInt(saionjiAmountScoreKey, saionjiAmountScore);
-
         PlayerPrefs.Save();
-        if (Input.GetKeyUp(KeyCode.Return))
+
+        //タッチがあるかどうか？
+        for (int i = 0; i < Input.touchCount; i++)
         {
-            SceneManager.LoadScene("Opening");
-        }
-        if (Input.GetKeyUp(KeyCode.Backspace))
-        {
-            SceneManager.LoadScene("LoadToTheEnding"); // デバッグ用
+
+            // タッチ情報を取得する
+            Touch touch = Input.GetTouch(i);
+
+            // ゲーム中ではなく、タッチ直後であればtrueを返す。
+            if (touch.phase == TouchPhase.Began)
+            {
+                SceneManager.LoadScene("Opening");
+            }
         }
     }
 }

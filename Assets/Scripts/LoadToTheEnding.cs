@@ -161,7 +161,17 @@ public class LoadToTheEnding : MonoBehaviour {
     public void goScene()
     {
         division = ((int)slider.value * 10);
-        HP += division;
+
+        if ((HP + division / 10) > 100)
+        {
+            division = (100 - HP) * 10;
+            HP = 100;
+        }
+        else
+        {
+            HP += division / 10;
+        }
+
         saionjiAmountScore += (amountScore - division);
         amountScore = 0;
 

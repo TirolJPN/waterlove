@@ -34,36 +34,23 @@ public class OnBoard : MonoBehaviour {
 
     void LateUpdate()
     {
-        if (Input.GetKeyUp(KeyCode.Return))
+
+        //タッチがあるかどうか？
+        for (int i = 0; i < Input.touchCount; i++)
         {
-            if (enterCount == talks.Length)
+
+            // タッチ情報を取得する
+            Touch touch = Input.GetTouch(i);
+
+            // ゲーム中ではなく、タッチ直後であればtrueを返す。
+            if (touch.phase == TouchPhase.Began)
             {
-                SceneManager.LoadScene("LeaveTheShip");
-            }
-            else
-            {
-                NameLabel.text = names[enterCount];
-                TextLabel.text = talks[enterCount];
-                DarkChange();
-                enterCount++;
-            }
-        }
-        else if (Input.GetKeyUp(KeyCode.Backspace))
-        {
-            if (enterCount == 0)
-            {
-                SceneManager.LoadScene("BeforeOnBoard");
-            }
-            else
-            {
-                enterCount--;
-                if (enterCount == 0)
+                if (enterCount == talks.Length)
                 {
-                    SceneManager.LoadScene("BeforeOnBoard");
+                    SceneManager.LoadScene("LeaveTheShip");
                 }
                 else
                 {
-                    enterCount--;
                     NameLabel.text = names[enterCount];
                     TextLabel.text = talks[enterCount];
                     DarkChange();
@@ -71,6 +58,7 @@ public class OnBoard : MonoBehaviour {
                 }
             }
         }
+
     }
 
     public void DarkChange() // 暗転

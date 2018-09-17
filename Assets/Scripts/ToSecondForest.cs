@@ -10,8 +10,7 @@ public class ToSecondForest : MonoBehaviour {
     public UnityEngine.UI.Text TextLabel; // セリフテキスト
     public GameObject[] Back; // 背景用
     string[] names = { "友鷹", "友鷹", "", "友鷹", "梨子", "友鷹"
-                     , "", "友鷹"
-                     , ""
+                     , "", "無視", "" , "友鷹"
                      , "梨子", "友鷹"
                      , "梨子", "", "友鷹", "梨子", "友鷹", ""
                      , "友鷹", "", "友鷹"};
@@ -22,7 +21,8 @@ public class ToSecondForest : MonoBehaviour {
                      , "「島袋さん！おかえりなさい！」\n"
                      , "「水持ってきたよ。まずは俺が試しに飲んでみるね。」\n"
                      , "飲む量を選んでください。\n"
-                     , ""
+                     , "無視"
+                     , "recovery"
                      , "「うん、飲んでみたけど体に支障はなさそうだ。西園寺さんにも今渡すね。」\n"
                      //, "渡す量を選んでください。\n"
                      , "「ありがとうございます。…んっ。おいしいです。」\n"
@@ -72,6 +72,8 @@ public class ToSecondForest : MonoBehaviour {
     public Text minValue;
     public Text maxValue;
 
+    private bool sliderFlag;
+
     // Use this for initialization
     void Start()
     {
@@ -94,60 +96,59 @@ public class ToSecondForest : MonoBehaviour {
 
     void LateUpdate()
     {
-        if (Input.GetKeyUp(KeyCode.Return))
+        //タッチがあるかどうか？
+        for (int i = 0; i < Input.touchCount; i++)
         {
-            if (enterCount == talks.Length)
+            // タッチ情報を取得する
+            Touch touch = Input.GetTouch(i);
+            // ゲーム中ではなく、タッチ直後であればtrueを返す。
+            if (touch.phase == TouchPhase.Began)
             {
+                if (enterCount == talks.Length)
+                {
 
-                // もし合計がすでに保存されていたら100増やして上書き保存
-                if (PlayerPrefs.HasKey(amountScoreKey))
-                {
-                    amountScore = PlayerPrefs.GetInt(amountScoreKey, -1);
-                    amountScore += 100;
-                    PlayerPrefs.SetInt(amountScoreKey, amountScore);
-                    PlayerPrefs.Save();
+                    // もし合計がすでに保存されていたら100増やして上書き保存
+                    if (PlayerPrefs.HasKey(amountScoreKey))
+                    {
+                        amountScore = PlayerPrefs.GetInt(amountScoreKey, -1);
+                        amountScore += 100;
+                        PlayerPrefs.SetInt(amountScoreKey, amountScore);
+                        PlayerPrefs.Save();
+                    }
+                    // そうでなければ100を初期値で保存する
+                    else
+                    {
+                        amountScore = 100;
+                        PlayerPrefs.SetInt(amountScoreKey, amountScore);
+                        PlayerPrefs.Save();
+                    }
+                    SceneManager.LoadScene("ChooseForests");
                 }
-                // そうでなければ100を初期値で保存する
-                else
+                else if (enterCount == selectNum)
                 {
-                    amountScore = 100;
-                    PlayerPrefs.SetInt(amountScoreKey, amountScore);
-                    PlayerPrefs.Save();
+                    enterCount++;
+                    scene.SetActive(true);
+                    sliderFlag = true;
                 }
-                SceneManager.LoadScene("ChooseForests");
-            }
-            else if (enterCount == selectNum)
-            {
-                enterCount++;
-                scene.SetActive(true);
-            }
-            else
-            {
-                NameLabel.text = names[enterCount];
-                TextLabel.text = talks[enterCount];
-                DarkChange();
-                if ((enterCount >= 3 && enterCount <= 11) || (enterCount >= 13 && enterCount <= 15))
+                else if (enterCount == (selectNum + 1) && sliderFlag == true)
                 {
-                    BackChange(2);
-                }
-                enterCount++;
-            }
-        }
-        else if (Input.GetKeyUp(KeyCode.Backspace))
-        {
-            if (enterCount > 0)
-            {
-                enterCount--;
-                if (enterCount == 0)
-                {
-                    SceneManager.LoadScene("BeforeOnBoard");
+                    continue;
                 }
                 else
                 {
-                    enterCount--;
                     NameLabel.text = names[enterCount];
                     TextLabel.text = talks[enterCount];
                     DarkChange();
+                    if ((enterCount >= 3 && enterCount <= 11) || (enterCount >= 14 && enterCount <= 16))
+                    {
+                        BackChange(2);
+                    }
+                    if (talks[enterCount].Equals("recovery"))
+                    {
+                        int tmphp = HP ;
+                        NameLabel.text = names[enterCount];
+                        TextLabel.text = "HPが" + (division / 10) + "回復した！";
+                    }
                     enterCount++;
                 }
             }
@@ -178,7 +179,13 @@ public class ToSecondForest : MonoBehaviour {
     public void goScene()
     {
         division = ((int)slider.value * 10);
-        HP += division;
+        if ((HP + division / 10) > 100)
+        {
+            division =(100 - HP) * 10;
+            HP = 100;
+        }else{
+            HP += division / 10;
+        }
         saionjiAmountScore += (amountScore - division);
         amountScore = 0;
         PlayerPrefs.SetInt(HPKey, HP);
@@ -186,6 +193,7 @@ public class ToSecondForest : MonoBehaviour {
         PlayerPrefs.SetInt(saionjiAmountScoreKey, saionjiAmountScore);
         // Get100mlwaterの直前を呼び出す
         scene.SetActive(false);
+        sliderFlag = false;
     }
 
     // sliderの値が更新されるたびに表示を変える関数

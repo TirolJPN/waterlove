@@ -25,6 +25,7 @@ public class Title : MonoBehaviour {
     public AudioClip audioClip; //セリフ用
     AudioSource audioSource;
 
+
     private void Start()
     {
         audioSource = gameObject.GetComponent<AudioSource>();
@@ -38,20 +39,24 @@ public class Title : MonoBehaviour {
         PlayerPrefs.SetInt(HPKey, HP);
         saionjiAmountScore = 0;
         PlayerPrefs.SetInt(saionjiAmountScoreKey, saionjiAmountScore);
-
         PlayerPrefs.Save();
     }
 
 
     void LateUpdate()
     {
-        if (Input.GetKeyUp(KeyCode.Return))
         {
-            SceneManager.LoadScene("Opening");
-        }
-        if (Input.GetKeyUp(KeyCode.Backspace))
-        {
-            SceneManager.LoadScene("LoadToTheEnding"); // デバッグ用
+                  //タッチがあるかどうか？
+            for (int i = 0; i < Input.touchCount; i++)
+
+            // タッチ情報を取得する
+            Touch touch = Input.GetTouch(i);
+
+            // ゲーム中ではなく、タッチ直後であればtrueを返す。
+            if (touch.phase == TouchPhase.Began)
+            {
+                SceneManager.LoadScene("Opening");
+            }
         }
     }
 }

@@ -51,47 +51,34 @@ public class OntheIsland : MonoBehaviour {
 
     void LateUpdate()
     {
-        if (Input.GetKeyUp(KeyCode.Return))
+        //タッチがあるかどうか？
+        for (int i = 0; i < Input.touchCount; i++)
         {
-            if (enterCount == talks.Length)
+
+            // タッチ情報を取得する
+            Touch touch = Input.GetTouch(i);
+
+            // ゲーム中ではなく、タッチ直後であればtrueを返す。
+            if (touch.phase == TouchPhase.Began)
             {
-                SceneManager.LoadScene("Get100mlwater");
-            }
-            else
-            {
-                NameLabel.text = names[enterCount];
-                TextLabel.text = talks[enterCount];
-                DarkChange();
-                if (enterCount == 4 || enterCount == 5)
+                if (enterCount == talks.Length)
                 {
-                    BackChange(2);
-                }
-                enterCount++;
-            }
-        }
-        else if (Input.GetKeyUp(KeyCode.Backspace))
-        {
-            if (enterCount == 0)
-            {
-                SceneManager.LoadScene("LeaveTheShip");
-            }
-            else
-            {
-                enterCount--;
-                if (enterCount == 0)
-                {
-                    SceneManager.LoadScene("BeforeOnBoard");
+                    SceneManager.LoadScene("Get100mlwater");
                 }
                 else
                 {
-                    enterCount--;
                     NameLabel.text = names[enterCount];
                     TextLabel.text = talks[enterCount];
                     DarkChange();
+                    if (enterCount == 4 || enterCount == 5)
+                    {
+                        BackChange(2);
+                    }
                     enterCount++;
                 }
             }
         }
+
     }
 
     public void DarkChange() // 暗転

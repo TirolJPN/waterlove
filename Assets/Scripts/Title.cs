@@ -47,15 +47,15 @@ public class Title : MonoBehaviour {
     {
         {
                   //タッチがあるかどうか？
-            for (int i = 0; i < Input.touchCount; i++)
+            for (int i = 0; i < Input.touchCount; i++){
+                // タッチ情報を取得する
+                Touch touch = Input.GetTouch(i);
 
-            // タッチ情報を取得する
-            Touch touch = Input.GetTouch(i);
-
-            // ゲーム中ではなく、タッチ直後であればtrueを返す。
-            if (touch.phase == TouchPhase.Began)
-            {
-                SceneManager.LoadScene("Opening");
+                // ゲーム中ではなく、タッチ直後であればtrueを返す。
+                if (touch.phase == TouchPhase.Began)
+                {
+                    SceneManager.LoadScene("Opening");
+                }
             }
         }
     }

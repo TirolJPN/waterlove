@@ -7,12 +7,21 @@ public class OntheIsland : MonoBehaviour {
 
     public UnityEngine.UI.Text NameLabel; // 名前テキスト
     public UnityEngine.UI.Text TextLabel; // セリフテキスト
-    string[] names = { "友鷹", "", "友鷹", "友鷹", "女の子", "友鷹"
-                      ,"女の子", "友鷹", "友鷹", "女の子", "友鷹", "梨子"
-                      , "友鷹", "友鷹", "友鷹", "梨子", "友鷹" };
-    string[] talks = { "うーむ。案内所どころか、人気もない。\n一旦船の方に戻ってみよう。\n"
-                     , "歩行音\n"
-                     , "ああ。もう船は出てしまっている。\nでも同じ船から降りたと思われる女の子が一人いるからあの子に聞いてみよう。\n"
+    public GameObject[] Back; // 背景用
+    string[] names = { "友鷹", "友鷹", "友鷹", "", "友鷹"
+                     ,"友鷹", "", "友鷹", "友鷹", "友鷹", "女の子", "友鷹"
+                     , "女の子", "友鷹", "友鷹", "女の子", "友鷹", "梨子"
+                     , "友鷹", "友鷹", "友鷹", "梨子", "友鷹", ""
+                     , "友鷹", "", "友鷹", "友鷹" };
+    string[] talks = { "外は真上から照り付ける太陽がきついな。\n"
+                     , "船を降りた場所のすぐ近くに案内所があるってパンフレットには書いてあるけど、見つからないな。\nどこだろう。\n"
+                     , "とりあえず歩いてみよう。\n"
+                     , "…"
+                     , "うーむ。案内所どころか、人気もない。\n"
+                     , "一旦船の方に戻ってみよう。\n"
+                     , "…"
+                     , "ああ。もう船は出てしまっている。\n"
+                     , "でも同じ船から降りたと思われる女の子が一人いるからあの子に聞いてみよう。\n"
                      , "「すみません。案内所ってどこか分かりますか？」\n"
                      , "「あっ、えーっと、私も分からなくて…。どうしようって思ってました。」\n"
                      , "「そうですよねー。事前に見ていた島の景色と違うような気がしますし。」\n"
@@ -26,31 +35,83 @@ public class OntheIsland : MonoBehaviour {
                      , "「助けが来るまでどれぐらいかかるか分からないから、まずは飲み水を確保することを考えよう。」\n"
                      , "「長旅で疲れてるだろうから、俺が調達してくるよ。西園寺さんは陰で休んでて。」\n"
                      , "「ありがとうございます。回復したら、私も手伝いますね。」\n"
-                     , "「ありがとう。さて、どこに向かおうかな。」\n"
+                     , "「ありがとう。島の奥の方に行ってみるよ。」\n"
+                     , "…"
     };
-    //public AudioClip audioClip; //セリフ用
-    //AudioSource audioSource;
+    public AudioClip audioClip; //セリフ用
+    AudioSource audioSource;
     private int enterCount = 0;
+
+    void Start()
+    {
+        audioSource = gameObject.GetComponent<AudioSource>();
+        audioSource.clip = audioClip;
+        audioSource.Play();
+    }
 
     void LateUpdate()
     {
-        if (Input.GetKeyUp(KeyCode.Return) && enterCount < talks.Length)
+        //タッチがあるかどうか？
+        for (int i = 0; i < Input.touchCount; i++)
         {
-            NameLabel.text = names[enterCount];
-            TextLabel.text = talks[enterCount];
-            enterCount++;
+
+            // タッチ情報を取得する
+            Touch touch = Input.GetTouch(i);
+
+            // ゲーム中ではなく、タッチ直後であればtrueを返す。
+            if (touch.phase == TouchPhase.Began)
+            {
+                if (enterCount == talks.Length)
+                {
+                    SceneManager.LoadScene("Get100mlwater");
+                }
+                else
+                {
+                    NameLabel.text = names[enterCount];
+                    TextLabel.text = talks[enterCount];
+                    DarkChange();
+                    if (enterCount == 4 || enterCount == 5)
+                    {
+                        BackChange(2);
+                    }
+                    enterCount++;
+                }
+            }
         }
-        else if (Input.GetKeyUp(KeyCode.Backspace) && enterCount < talks.Length)
+
+    }
+
+    public void DarkChange() // 暗転
+    {
+        if (talks[enterCount].Equals("…"))
         {
-            enterCount--;
-            enterCount--;
-            NameLabel.text = names[enterCount];
-            TextLabel.text = talks[enterCount];
-            enterCount++;
+            foreach (GameObject g in Back)
+            {
+                g.SetActive(false);
+            }
+            Back[1].SetActive(true); // 暗転
         }
-        else if (Input.GetKeyUp(KeyCode.Return) && enterCount == talks.Length)
+        else
         {
-            SceneManager.LoadScene("ChooseForests");
+            // <<<<<<< feature/manage
+            //             SceneManager.LoadScene("Get100mlwater");
+            // =======
+            foreach (GameObject g in Back)
+            {
+                g.SetActive(false);
+            }
+            Back[0].SetActive(true); // 暗転解除
+            //Back[1].SetActive(false);
+// >>>>>>> develop
         }
+    }
+
+    public void BackChange(int i)
+    {
+        foreach (GameObject g in Back)
+        {
+            g.SetActive(false);
+        }
+        Back[i].SetActive(true);
     }
 }

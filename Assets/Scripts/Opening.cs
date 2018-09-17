@@ -6,26 +6,46 @@ using UnityEngine.SceneManagement;
 public class Opening : MonoBehaviour {
     public UnityEngine.UI.Text NameLabel; // 名前テキスト
     public UnityEngine.UI.Text TextLabel; // セリフテキスト
-    //public AudioClip audioClip; //セリフ用
-    //AudioSource audioSource;
+    string[] names = { "友鷹"};
+    string[] talks = { "――大学2年の夏。それは、予想外の波乱に満ちた夏だった。\n" };
+    public AudioClip audioClip; //セリフ用
+    AudioSource audioSource;
     private int enterCount = 0;
+    //public static int score = 0;
+    //public static int HP = 100;
+
+
 
     // Use this for initialization
     void Start () {
-        //TextLabel.text = "こんにちは。Unityちゃん監督です。ここでは高得点をとるヒントを紹介するよ。\n";
+        audioSource = gameObject.GetComponent<AudioSource>();
+        audioSource.clip = audioClip;
+        audioSource.Play();
     }
 
     void LateUpdate()
     {
-        if (Input.GetKeyUp(KeyCode.Return) && enterCount == 1)
+        //タッチがあるかどうか？
+        for (int i = 0; i < Input.touchCount; i++)
         {
-            SceneManager.LoadScene("BeforeOnBoard");
-        }
-        else if (Input.GetKeyUp(KeyCode.Return) && enterCount == 0)
-        {  // エンターキーが押されている間
-            NameLabel.text = "友鷹\n";
-            TextLabel.text = "――大学2年の夏。それは、予想外の波乱に満ちた夏だった。\n";
-            enterCount++;
+
+            // タッチ情報を取得する
+            Touch touch = Input.GetTouch(i);
+
+            // ゲーム中ではなく、タッチ直後であればtrueを返す。
+            if (touch.phase == TouchPhase.Began)
+            {
+                if (enterCount == talks.Length)
+                {
+                    SceneManager.LoadScene("BeforeOnBoard");
+                }
+                else
+                {
+                    NameLabel.text = names[enterCount];
+                    TextLabel.text = talks[enterCount];
+                    enterCount++;
+                }
+            }
         }
     }
 }

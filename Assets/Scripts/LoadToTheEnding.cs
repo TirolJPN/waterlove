@@ -95,11 +95,11 @@ public class LoadToTheEnding : MonoBehaviour {
                     //SceneManager.LoadScene("BitterEnd2")
                     HP = PlayerPrefs.GetInt(HPKey, 0);
                     saionjiAmountScore = PlayerPrefs.GetInt(saionjiAmountScoreKey, 0);
-                    if (HP > 50 && saionjiAmountScore >= 2000)
+                    if (HP >= 50 && saionjiAmountScore >= 2000)
                     {
                         SceneManager.LoadScene("HappyEnd");
                     }
-                    else if (HP > 50 && saionjiAmountScore < 2000)
+                    else if (HP >= 50 && saionjiAmountScore < 2000)
                     {
                         SceneManager.LoadScene("BitterEnd1");
                     }

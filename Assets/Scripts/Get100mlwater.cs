@@ -62,6 +62,7 @@ public class Get100mlwater : MonoBehaviour
                 }
                 else if (enterCount == talks.Length)
                 {
+                    enterCount++;
                     // もし合計がすでに保存されていたら100増やして上書き保存
                     if (PlayerPrefs.HasKey(amountScoreKey))
                     {

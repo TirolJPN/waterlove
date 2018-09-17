@@ -37,10 +37,6 @@ public class OntheIsland : MonoBehaviour {
                      , "「ありがとうございます。回復したら、私も手伝いますね。」\n"
                      , "「ありがとう。島の奥の方に行ってみるよ。」\n"
                      , "…"
-                     , "ん？何か光ってるものがあるぞ。これは…水？\n"
-                     , "水100mlを入手した。\n"
-                     , "なるほど。こういうのを集めればいいのか。\n"
-                     , "さて、どこに向かおうかな。\n"
     };
     //public AudioClip audioClip; //セリフ用
     //AudioSource audioSource;
@@ -52,7 +48,7 @@ public class OntheIsland : MonoBehaviour {
         {
             if (enterCount == talks.Length)
             {
-                SceneManager.LoadScene("ChooseForests");
+                SceneManager.LoadScene("Get100mlwater");
             }
             else
             {

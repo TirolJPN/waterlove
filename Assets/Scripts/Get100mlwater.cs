@@ -9,9 +9,12 @@ public class Get100mlwater : MonoBehaviour
 
     public UnityEngine.UI.Text NameLabel; // 名前テキスト
     public UnityEngine.UI.Text TextLabel; // セリフテキスト
-    string[] names = { "友鷹", " " };
-    string[] talks = { "これは・・・\n"
-                     , "水100mlを拾った！\n"
+    string[] names = { "友鷹", " ", "友鷹", "友鷹" };
+    string[] talks = {
+                     "ん？何か光ってるものがあるぞ。これは…水？\n"
+                     , "水100mlを入手した。\n"
+                     , "なるほど。こういうのを集めればいいのか。\n"
+                     , "さて、どこに向かおうかな。\n"
     };
     //public AudioClip audioClip; //セリフ用
     //AudioSource audioSource;

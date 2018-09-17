@@ -17,7 +17,7 @@ public class LoadToTheEnding : MonoBehaviour {
     string[] talks = { "よし、西園寺さんのところに戻ろう。どれくらい飲もうかな。\n"
                      , "飲む量を選んでください。\n"
                      , ""
-                     , "「残りは西園寺さんにあげるね。」"
+                     , "残りは西園寺さんにあげよう。"
                      , "…"
                      , "……"
     };

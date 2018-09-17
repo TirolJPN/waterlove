@@ -15,12 +15,19 @@ public class ChooseForests : MonoBehaviour
     string[] talks = { "森を選んでね"
     };
     string Forest;
-    //public AudioClip audioClip; //セリフ用
-    //AudioSource audioSource;
+    public AudioClip audioClip; //セリフ用
+    AudioSource audioSource;
     private int enterCount = 0;
 
     static bool isNorthSelected = false;
     static bool isSouthSelected = false;
+
+    void Start()
+    {
+        audioSource = gameObject.GetComponent<AudioSource>();
+        audioSource.clip = audioClip;
+        audioSource.Play();
+    }
 
     void LateUpdate()
     {

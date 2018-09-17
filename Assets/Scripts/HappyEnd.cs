@@ -22,9 +22,17 @@ public class HappyEnd : MonoBehaviour {
                      , "――大学2年の夏。それは、予想外の波乱に満ちた夏だった。\n俺の中で忘れられない大切な思い出が、そこにはあった。\n"
                      , "HAPPY END\n希望の「小紋島」\n"
     };
-    //public AudioClip audioClip; //セリフ用
-    //AudioSource audioSource;
+    public AudioClip audioClip; //セリフ用
+    AudioSource audioSource;
+
     private int enterCount = 0;
+
+    void Start()
+    {
+        audioSource = gameObject.GetComponent<AudioSource>();
+        audioSource.clip = audioClip;
+        audioSource.Play();
+    }
 
     void LateUpdate()
     {

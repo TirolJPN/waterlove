@@ -16,9 +16,16 @@ public class LeaveTheShip : MonoBehaviour
                      //, "船を降りた場所のすぐ近くに案内所があるってパンフレットには書いてあるけど、見つからないな。\nどこだろう。\n"
                      //, "とりあえず歩いてみよう。\n"
     };
-    //public AudioClip audioClip; //セリフ用
-    //AudioSource audioSource;
+    public AudioClip audioClip; //セリフ用
+    AudioSource audioSource;
     private int enterCount = 0;
+
+    void Start()
+    {
+        audioSource = gameObject.GetComponent<AudioSource>();
+        audioSource.clip = audioClip;
+        audioSource.Play();
+    }
 
     void LateUpdate()
     {

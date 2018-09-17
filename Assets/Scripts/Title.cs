@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Title : MonoBehaviour {
@@ -24,10 +22,16 @@ public class Title : MonoBehaviour {
     // 手持ちの水合計
     private string saionjiAmountScoreKey = "saionjiAmountScore";
 
+    public AudioClip audioClip; //セリフ用
+    AudioSource audioSource;
 
 
-    void LateUpdate()
+    private void Start()
     {
+        audioSource = gameObject.GetComponent<AudioSource>();
+        audioSource.clip = audioClip;
+        audioSource.Play();
+
         // 各値初期化
         amountScore = 0;
         PlayerPrefs.SetInt(amountScoreKey, amountScore);
@@ -36,10 +40,14 @@ public class Title : MonoBehaviour {
         saionjiAmountScore = 0;
         PlayerPrefs.SetInt(saionjiAmountScoreKey, saionjiAmountScore);
         PlayerPrefs.Save();
+    }
 
-        //タッチがあるかどうか？
-        for (int i = 0; i < Input.touchCount; i++)
+
+    void LateUpdate()
+    {
         {
+                  //タッチがあるかどうか？
+            for (int i = 0; i < Input.touchCount; i++)
 
             // タッチ情報を取得する
             Touch touch = Input.GetTouch(i);

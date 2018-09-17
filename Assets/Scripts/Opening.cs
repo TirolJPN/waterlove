@@ -8,8 +8,8 @@ public class Opening : MonoBehaviour {
     public UnityEngine.UI.Text TextLabel; // セリフテキスト
     string[] names = { "友鷹"};
     string[] talks = { "――大学2年の夏。それは、予想外の波乱に満ちた夏だった。\n" };
-    //public AudioClip audioClip; //セリフ用
-    //AudioSource audioSource;
+    public AudioClip audioClip; //セリフ用
+    AudioSource audioSource;
     private int enterCount = 0;
     //public static int score = 0;
     //public static int HP = 100;
@@ -18,9 +18,9 @@ public class Opening : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        //audioSource = gameObject.GetComponent<AudioSource>();
-        //audioSource.clip = audioClip;
-        //audioSource.Play();
+        audioSource = gameObject.GetComponent<AudioSource>();
+        audioSource.clip = audioClip;
+        audioSource.Play();
     }
 
     void LateUpdate()

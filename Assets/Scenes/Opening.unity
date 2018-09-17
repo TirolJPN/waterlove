@@ -156,6 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NameLabel: {fileID: 1134893979}
   TextLabel: {fileID: 2065790595}
+  audioClip: {fileID: 8300000, guid: 9c284a16601926144b1f5ae9181780b6, type: 3}
 --- !u!82 &125542367
 AudioSource:
   m_ObjectHideFlags: 0

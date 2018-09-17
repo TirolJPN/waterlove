@@ -10,14 +10,16 @@ public class BeforeOnBoard : MonoBehaviour {
     string[] talks = { "俺の名前は島袋友鷹(しまぶくろともたか)。大学2年生。\n"
                      , "今日から沖縄に船で旅行に行くつもりだ。\n"
                      , "お、来た来た。あれが今回俺の乗る「シーエス号」だな。\n"};
-    //public AudioClip audioClip; //セリフ用
-    //AudioSource audioSource;
+    public AudioClip audioClip; //セリフ用
+    AudioSource audioSource;
     private int enterCount = 0;
 
     // Use this for initialization
     void Start()
     {
-        
+        audioSource = gameObject.GetComponent<AudioSource>();
+        audioSource.clip = audioClip;
+        audioSource.Play();
     }
 
     void LateUpdate()

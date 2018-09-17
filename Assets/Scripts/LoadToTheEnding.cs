@@ -21,8 +21,9 @@ public class LoadToTheEnding : MonoBehaviour {
                      , "…"
                      , "……"
     };
-    //public AudioClip audioClip; //セリフ用
-    //AudioSource audioSource;
+    public AudioClip audioClip; //セリフ用
+    AudioSource audioSource;
+
     private int enterCount = 0;
 
     private const int selectNum = 2;
@@ -62,7 +63,10 @@ public class LoadToTheEnding : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        //TextLabel.text = "こんにちは。Unityちゃん監督です。ここでは高得点をとるヒントを紹介するよ。\n";
+        audioSource = gameObject.GetComponent<AudioSource>();
+        audioSource.clip = audioClip;
+        audioSource.Play();
+
         // 飲む量は最小値の10
         // 西園寺にあげれる量は、その差分
         // slider値は10分の1

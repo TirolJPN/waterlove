@@ -20,14 +20,16 @@ public class OnBoard : MonoBehaviour {
                      , "「長らくの乗船お待たせいたしました。まもなく『小紋島』に到着いたします。」\n"
                      , "む。いつの間にか寝てしまっていたな。準備して降りなければ。\n"
     };
-    //public AudioClip audioClip; //セリフ用
-    //AudioSource audioSource;
+    public AudioClip audioClip; //セリフ用
+    AudioSource audioSource;
     private int enterCount = 0;
 
     // Use this for initialization
     void Start()
     {
-        
+        audioSource = gameObject.GetComponent<AudioSource>();
+        audioSource.clip = audioClip;
+        audioSource.Play();
     }
 
     void LateUpdate()

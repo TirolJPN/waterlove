@@ -18,9 +18,17 @@ public class BitterEnd1 : MonoBehaviour {
                      , "――大学2年の夏。それは、予想外の波乱に満ちた夏だった。\n俺の中で忘れられない苦い思い出が、そこにはあった。\n"
                      , "BITTER END1\n足りなかった思いやり\n"
     };
-    //public AudioClip audioClip; //セリフ用
-    //AudioSource audioSource;
+    public AudioClip audioClip; //セリフ用
+    AudioSource audioSource;
+
     private int enterCount = 0;
+
+    void Start()
+    {
+        audioSource = gameObject.GetComponent<AudioSource>();
+        audioSource.clip = audioClip;
+        audioSource.Play();
+    }
 
     void LateUpdate()
     {

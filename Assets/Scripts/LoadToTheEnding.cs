@@ -122,11 +122,9 @@ public class LoadToTheEnding : MonoBehaviour {
                 }
             }
         }
-
-        if (enterCount == talks.Length)
-        {
-            //SceneManager.LoadScene("BitterEnd2");
-
+        //else if (enterCount == talks.Length)
+        //{
+            //SceneManager.LoadScene("BitterEnd2")
             HP = PlayerPrefs.GetInt(HPKey, 0);
             saionjiAmountScore = PlayerPrefs.GetInt(saionjiAmountScoreKey, 0);
             if (HP > 50 && saionjiAmountScore > 100)
@@ -149,7 +147,7 @@ public class LoadToTheEnding : MonoBehaviour {
             {
                 SceneManager.LoadScene("BadEnd");
             }
-        }
+        //}
     }
 
     public void DarkChange() // 暗転

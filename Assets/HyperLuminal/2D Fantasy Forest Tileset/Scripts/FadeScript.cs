@@ -126,6 +126,7 @@ public class FadeScript : MonoBehaviour
         if (playTimes == 0)
         {
             playTimes++;
+
             SceneManager.LoadScene("ToSecondForest");
         }
         //2回目のゲーム

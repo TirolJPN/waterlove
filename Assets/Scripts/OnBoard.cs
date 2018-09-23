@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class OnBoard : MonoBehaviour {
+public class OnBoard : MonoBehaviour
+{
 
     public UnityEngine.UI.Text NameLabel; // 名前テキスト
     public UnityEngine.UI.Text TextLabel; // セリフテキスト
@@ -47,7 +48,7 @@ public class OnBoard : MonoBehaviour {
             {
                 if (enterCount == talks.Length)
                 {
-                    SceneManager.LoadScene("LeaveTheShip");
+                    StartCoroutine(LoadYourAsyncScene());
                 }
                 else
                 {
@@ -59,6 +60,22 @@ public class OnBoard : MonoBehaviour {
             }
         }
 
+    }
+
+    IEnumerator LoadYourAsyncScene()
+    {
+        // The Application loads the Scene in the background as the current Scene runs.
+        // This is particularly good for creating loading screens.
+        // You could also load the Scene by using sceneBuildIndex. In this case Scene2 has
+        // a sceneBuildIndex of 1 as shown in Build Settings.
+
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("LeaveTheShip");
+
+        // Wait until the asynchronous scene fully loads
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
     }
 
     public void DarkChange() // 暗転

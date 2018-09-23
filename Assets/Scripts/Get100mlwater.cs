@@ -44,7 +44,7 @@ public class Get100mlwater : MonoBehaviour
             Touch touch = Input.GetTouch(i);
 
             // ゲーム中ではなく、タッチ直後であればtrueを返す。
-            if (touch.phase == TouchPhase.Began)
+            if (touch.phase == TouchPhase.Ended)
             {
                 if (enterCount < talks.Length)
                 {

@@ -54,7 +54,7 @@ public class Title : MonoBehaviour {
                 Touch touch = Input.GetTouch(i);
 
                 // ゲーム中ではなく、タッチ直後であればtrueを返す。
-                if (touch.phase == TouchPhase.Began)
+                if (touch.phase == TouchPhase.Ended)
                 {
                     SceneManager.LoadScene("Opening");
                 }

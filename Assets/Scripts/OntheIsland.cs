@@ -37,7 +37,7 @@ public class OntheIsland : MonoBehaviour
                      , "「ありがとう。島の奥の方に行ってみるよ。」\n"
                      , "…"
     };
-    string NextScene = "BeforeOnBoard";
+    string NextScene = "Get100mlwater";
     int[] backSelectNumber = { 2, 0 };
     int[] backEnterCount = { 4, 7 };
     TouchWindow touchWindow;

@@ -14,9 +14,9 @@ public class ChooseForests : MonoBehaviour
     string[] names = { "" };
     string[] talks = { "森を選んでね"
     };
-    string[] Forest = { "北の森", "南の森", "西の森" };
+    string[] Forest = { "北の森", "南の森", "東の森" };
     int forestNumber; // 今選んでいる森の番号
-    string[] ForestScenes = {"NorthForest", "SouthForest", "WestForest" };
+    string[] ForestScenes = {"NorthForest", "SouthForest", "EastForest" };
     public AudioClip audioClip; //セリフ用
     AudioSource audioSource;
     private int enterCount = 0;
@@ -24,8 +24,8 @@ public class ChooseForests : MonoBehaviour
     /*static bool isNorthSelected = false;
     static bool isSouthSelected = false;*/
 
-    // 森選択フラグ 0:北の森 1:南の森
-    static bool[] isForestsSelected = {false, false};
+    // 森選択フラグ 0:北の森 1:南の森 2:東の森
+    static bool[] isForestsSelected = {false, false, false};
 
     void Start()
     {
@@ -49,7 +49,7 @@ public class ChooseForests : MonoBehaviour
     public void SelectButton(int forestNumber)
     {
         // forestNumber
-        // 0:北の森 1:南の森
+        // 0:北の森 1:南の森 2:東の森
 
         this.forestNumber = forestNumber; // 森番号の登録
 

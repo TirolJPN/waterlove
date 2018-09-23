@@ -162,6 +162,8 @@ public class LoadToTheEnding : MonoBehaviour {
     {
         division = ((int)slider.value * 10);
 
+        saionjiAmountScore += (amountScore - division);
+
         if ((HP + division / 10) > 100)
         {
             division = (100 - HP) * 10;
@@ -171,8 +173,6 @@ public class LoadToTheEnding : MonoBehaviour {
         {
             HP += division / 10;
         }
-
-        saionjiAmountScore += (amountScore - division);
         amountScore = 0;
 
         PlayerPrefs.SetInt(HPKey, HP);

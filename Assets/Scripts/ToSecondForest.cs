@@ -178,6 +178,7 @@ public class ToSecondForest : MonoBehaviour {
     // モーダルのOKボタンを押すと値を更新してシーン遷移する関数
     public void goScene()
     {
+        saionjiAmountScore += (amountScore - division);
         division = ((int)slider.value * 10);
         if ((HP + division / 10) > 100)
         {
@@ -186,7 +187,6 @@ public class ToSecondForest : MonoBehaviour {
         }else{
             HP += division / 10;
         }
-        saionjiAmountScore += (amountScore - division);
         amountScore = 0;
         PlayerPrefs.SetInt(HPKey, HP);
         PlayerPrefs.SetInt(amountScoreKey, amountScore);

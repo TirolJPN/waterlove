@@ -37,7 +37,7 @@ public class Opening : MonoBehaviour {
             {
                 if (enterCount == talks.Length)
                 {
-                    StartCoroutine(LoadYourAsyncScene());
+                    StartCoroutine("LoadYourAsyncScene");
                 }
                 else
                 {
@@ -47,6 +47,7 @@ public class Opening : MonoBehaviour {
                 }
             }
         }
+        StartCoroutine(WaitShortTime());
     }
 
     IEnumerator LoadYourAsyncScene()
@@ -63,5 +64,11 @@ public class Opening : MonoBehaviour {
         {
             yield return null;
         }
+    }
+
+    IEnumerator WaitShortTime()
+    {
+        // 0.5秒待つ
+        yield return new WaitForSeconds(0.5f);
     }
 }

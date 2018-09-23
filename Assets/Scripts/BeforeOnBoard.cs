@@ -46,6 +46,7 @@ public class BeforeOnBoard : MonoBehaviour {
                 }
             }
         }
+        StartCoroutine(WaitShortTime());
     }
 
     IEnumerator LoadYourAsyncScene()
@@ -62,5 +63,11 @@ public class BeforeOnBoard : MonoBehaviour {
         {
             yield return null;
         }
+    }
+
+    IEnumerator WaitShortTime()
+    {
+        // 0.5秒待つ
+        yield return new WaitForSeconds(0.5f);
     }
 }

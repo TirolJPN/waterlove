@@ -59,6 +59,7 @@ public class OnBoard : MonoBehaviour
                 }
             }
         }
+        StartCoroutine(WaitShortTime());
 
     }
 
@@ -90,5 +91,11 @@ public class OnBoard : MonoBehaviour
             Back[0].SetActive(true); // 暗転解除
             Back[1].SetActive(false);
         }
+    }
+
+    IEnumerator WaitShortTime()
+    {
+        // 0.5秒待つ
+        yield return new WaitForSeconds(0.5f);
     }
 }

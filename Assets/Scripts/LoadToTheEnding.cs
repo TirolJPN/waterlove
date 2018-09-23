@@ -161,7 +161,6 @@ public class LoadToTheEnding : MonoBehaviour {
     public void goScene()
     {
         division = ((int)slider.value * 10);
-
         if ((HP + division / 10) > 100)
         {
             division = (100 - HP) * 10;

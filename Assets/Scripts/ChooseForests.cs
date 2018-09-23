@@ -38,56 +38,6 @@ public class ChooseForests : MonoBehaviour
             TextLabel.text = talks[enterCount];
             enterCount++;
         }
-
-        //else if (Input.GetKeyUp(KeyCode.Return) && enterCount == talks.Length)
-        //{
-        //    SceneManager.LoadScene("Game");
-        //}
-
-
-        /*else if (Input.GetKeyUp(KeyCode.N))
-        {
-            if (isNorthSelected == false)
-            {
-                if (isSouthSelected == true) // 2回目のときはリセット
-                {
-                    isSouthSelected = false;
-                }
-                else
-                {
-                    isNorthSelected = true;
-                }
-                SceneManager.LoadScene("NorthForest");
-            }
-            else
-            {
-                TextLabel.text = "既に行ってます。\n";
-            }
-        }
-        else if (Input.GetKeyUp(KeyCode.S))
-        {
-
-            if (isSouthSelected == false)
-            {
-                if (isNorthSelected == true) // 2回目のときはリセット
-                {
-                    isNorthSelected = false;
-                }
-                else
-                {
-                    isSouthSelected = true;
-                }
-                SceneManager.LoadScene("NorthForest");
-            }
-            else
-            {
-                TextLabel.text = "既に行ってます。\n";
-            }
-// <<<<<<< feature/manage
-//         }
-// =======
-        }*/
-// >>>>>>> develop
     }
 
     public void NorthButton() // 北の森を選んだ時にパネルを出す
@@ -133,11 +83,8 @@ public class ChooseForests : MonoBehaviour
 
     public void GoForest()
     {
-// <<<<<<< feature/manage
-//         if (Forest.Equals("北の森"))
-// =======
+
         if(Forest.Equals("北の森"))
-// >>>>>>> develop
         {
             if (isSouthSelected == true) // 2回目の森のときはフラグをリセット
             {
@@ -174,8 +121,10 @@ public class ChooseForests : MonoBehaviour
             flag1 = true;
         }
     }
-// <<<<<<< feature/manage
-// }
-// =======
+
+    public static void FlagReset()
+    {
+        isNorthSelected = false;
+        isSouthSelected = false;
+    }
 }
-// >>>>>>> develop

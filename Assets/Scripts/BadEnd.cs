@@ -24,6 +24,8 @@ public class BadEnd : MonoBehaviour {
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.clip = audioClip;
         audioSource.Play();
+
+        //ChooseForests.FlagReset(); // バッドエンドに行ったときにフラグリセット
     }
 
     void LateUpdate()

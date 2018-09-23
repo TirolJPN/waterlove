@@ -31,6 +31,8 @@ public class BitterEnd2 : MonoBehaviour {
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.clip = audioClip;
         audioSource.Play();
+
+        //ChooseForests.FlagReset(); // エンディングに行ったときにフラグリセット
     }
 
     void LateUpdate()

@@ -55,25 +55,9 @@ public class Title : MonoBehaviour {
                 // ゲーム中ではなく、タッチ直後であればtrueを返す。
                 if (touch.phase == TouchPhase.Began)
                 {
-                    StartCoroutine(LoadYourAsyncScene());
+                    SceneManager.LoadScene("Opening");
                 }
             }
-        }
-    }
-
-    IEnumerator LoadYourAsyncScene()
-    {
-        // The Application loads the Scene in the background as the current Scene runs.
-        // This is particularly good for creating loading screens.
-        // You could also load the Scene by using sceneBuildIndex. In this case Scene2 has
-        // a sceneBuildIndex of 1 as shown in Build Settings.
-
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Opening");
-
-        // Wait until the asynchronous scene fully loads
-        while (!asyncLoad.isDone)
-        {
-            yield return null;
         }
     }
 }

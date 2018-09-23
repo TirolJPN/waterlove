@@ -24,31 +24,34 @@ public class OnBoard : MonoBehaviour
     public AudioClip audioClip; //セリフ用
     AudioSource audioSource;
     private int enterCount = 0;
+    private float timeleft;
 
     // Use this for initialization
-    void Start()
+    IEnumerator Start()
     {
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.clip = audioClip;
         audioSource.Play();
+        enabled = false;
+        yield return new WaitForSeconds(5);
+        enabled = true;
     }
 
     void LateUpdate()
     {
-
+        timeleft -= Time.deltaTime;
         //タッチがあるかどうか？
         for (int i = 0; i < Input.touchCount; i++)
         {
-
             // タッチ情報を取得する
             Touch touch = Input.GetTouch(i);
-
             // ゲーム中ではなく、タッチ直後であればtrueを返す。
-            if (touch.phase == TouchPhase.Began)
+            if (touch.phase == TouchPhase.Began && timeleft <= 0.0)
             {
+                timeleft = 1.0f;
                 if (enterCount == talks.Length)
                 {
-                    StartCoroutine(LoadYourAsyncScene());
+                    SceneManager.LoadScene("LeaveTheShip");
                 }
                 else
                 {
@@ -59,25 +62,9 @@ public class OnBoard : MonoBehaviour
                 }
             }
         }
-        StartCoroutine(WaitShortTime());
 
     }
 
-    IEnumerator LoadYourAsyncScene()
-    {
-        // The Application loads the Scene in the background as the current Scene runs.
-        // This is particularly good for creating loading screens.
-        // You could also load the Scene by using sceneBuildIndex. In this case Scene2 has
-        // a sceneBuildIndex of 1 as shown in Build Settings.
-
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("LeaveTheShip");
-
-        // Wait until the asynchronous scene fully loads
-        while (!asyncLoad.isDone)
-        {
-            yield return null;
-        }
-    }
 
     public void DarkChange() // 暗転
     {
@@ -93,9 +80,9 @@ public class OnBoard : MonoBehaviour
         }
     }
 
-    IEnumerator WaitShortTime()
-    {
-        // 0.5秒待つ
-        yield return new WaitForSeconds(0.5f);
-    }
+    //IEnumerator WaitShortTime()
+    //{
+    //    // 0.5秒待つ
+    //    yield return new WaitForSeconds(10);
+    //}
 }

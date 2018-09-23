@@ -9,7 +9,6 @@ public class BeforeOnBoard : MonoBehaviour {
                      , "今日から沖縄に船で旅行に行くつもりだ。\n"
                      , "お、来た来た。あれが今回俺の乗る「シーエス号」だな。\n"};
     string NextScene = "OnBoard";
-
     TouchWindow touchWindow;
 
     public AudioClip audioClip; //セリフ用
@@ -23,7 +22,7 @@ public class BeforeOnBoard : MonoBehaviour {
         audioSource.Play();
 
         touchWindow = GetComponent<TouchWindow>();
-        touchWindow.Setting(names, talks, NextScene); // タッチ時のテキスト情報を専用ファイルに渡す
+        touchWindow.SetText(names, talks, NextScene, false); // タッチ時のテキスト情報を専用ファイルに渡す
     }
 
     void LateUpdate()

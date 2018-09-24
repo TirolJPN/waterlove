@@ -122,6 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 125542365}
   - component: {fileID: 125542366}
+  - component: {fileID: 125542368}
   - component: {fileID: 125542367}
   m_Layer: 0
   m_Name: BitterEnd2Controller
@@ -154,8 +155,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2c4ad4e04e32ee4a89417ab7837830c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NameLabel: {fileID: 1134893979}
-  TextLabel: {fileID: 2065790595}
   audioClip: {fileID: 8300000, guid: 399119d414ba6554f8b1ab1379de5993, type: 3}
 --- !u!82 &125542367
 AudioSource:
@@ -252,6 +251,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &125542368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 125542364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 652537bc59b7eaf4287ed42b4fe07c70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NameLabel: {fileID: 1134893979}
+  TextLabel: {fileID: 2065790595}
 --- !u!1 &313768229
 GameObject:
   m_ObjectHideFlags: 0

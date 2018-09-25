@@ -41,6 +41,8 @@ public class Title : MonoBehaviour {
         saionjiAmountScore = 0;
         PlayerPrefs.SetInt(saionjiAmountScoreKey, saionjiAmountScore);
         PlayerPrefs.Save();
+
+        ChooseForests.FlagReset(); // エンディングに行ったときにフラグリセット
     }
 
 
@@ -53,7 +55,7 @@ public class Title : MonoBehaviour {
                 Touch touch = Input.GetTouch(i);
 
                 // ゲーム中ではなく、タッチ直後であればtrueを返す。
-                if (touch.phase == TouchPhase.Began)
+                if (touch.phase == TouchPhase.Ended)
                 {
                     SceneManager.LoadScene("Opening");
                 }

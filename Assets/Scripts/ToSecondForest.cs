@@ -105,7 +105,7 @@ public class ToSecondForest : MonoBehaviour {
             // タッチ情報を取得する
             Touch touch = Input.GetTouch(i);
             // ゲーム中ではなく、タッチ直後であればtrueを返す。
-            if (touch.phase == TouchPhase.Began)
+            if (touch.phase == TouchPhase.Ended)
             {
                 if (enterCount == talks.Length)
                 {

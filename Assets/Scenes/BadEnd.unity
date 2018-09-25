@@ -428,6 +428,7 @@ GameObject:
   m_Component:
   - component: {fileID: 539872047}
   - component: {fileID: 539872048}
+  - component: {fileID: 539872050}
   - component: {fileID: 539872049}
   m_Layer: 0
   m_Name: BadEndController
@@ -460,8 +461,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 077fb5dcbc084a047acc46fdcf1ced07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NameLabel: {fileID: 1424979321}
-  TextLabel: {fileID: 450210234}
   audioClip: {fileID: 8300000, guid: 0bff44eb1855b19418430c12dfe21a27, type: 3}
 --- !u!82 &539872049
 AudioSource:
@@ -558,6 +557,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &539872050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 539872046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 652537bc59b7eaf4287ed42b4fe07c70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NameLabel: {fileID: 1424979321}
+  TextLabel: {fileID: 450210234}
 --- !u!1 &885125302
 GameObject:
   m_ObjectHideFlags: 0

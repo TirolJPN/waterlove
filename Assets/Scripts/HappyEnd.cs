@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class HappyEnd : MonoBehaviour {
-
-    public UnityEngine.UI.Text NameLabel; // 名前テキスト
-    public UnityEngine.UI.Text TextLabel; // セリフテキスト
+public class HappyEnd : MonoBehaviour
+{
     string[] names = { "友鷹", "梨子", "梨子", "友鷹", "梨子", "梨子"
                      , "友鷹", "友鷹", "梨子", "", ""
                        };
@@ -22,40 +20,24 @@ public class HappyEnd : MonoBehaviour {
                      , "――大学2年の夏。それは、予想外の波乱に満ちた夏だった。\n俺の中で忘れられない大切な思い出が、そこにはあった。\n"
                      , "HAPPY END\n希望の「小紋島」\n"
     };
+    string NextScene = "Title";
+    TouchWindow touchWindow;
+
     public AudioClip audioClip; //セリフ用
     AudioSource audioSource;
-
-    private int enterCount = 0;
 
     void Start()
     {
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.clip = audioClip;
         audioSource.Play();
+
+        touchWindow = GetComponent<TouchWindow>();
+        touchWindow.SetText(names, talks, NextScene, false); // タッチ時のテキスト情報を専用ファイルに渡す
     }
 
     void LateUpdate()
     {
-        for(int i = 0; i < Input.touchCount; i++)
-        {
-
-            // タッチ情報を取得する
-            Touch touch = Input.GetTouch(i);
-
-            // ゲーム中ではなく、タッチ直後であればtrueを返す。
-            if (touch.phase == TouchPhase.Began)
-            {
-                if (enterCount == talks.Length)
-                {
-                    SceneManager.LoadScene("Title");
-                }
-                else
-                {
-                    NameLabel.text = names[enterCount];
-                    TextLabel.text = talks[enterCount];
-                    enterCount++;
-                }
-            }
-        }
+        touchWindow.Touching();
     }
 }

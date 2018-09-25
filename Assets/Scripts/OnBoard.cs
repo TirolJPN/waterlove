@@ -33,7 +33,7 @@ public class OnBoard : MonoBehaviour
         audioSource.clip = audioClip;
         audioSource.Play();
         enabled = false;
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(2);
         enabled = true;
     }
 
@@ -48,7 +48,7 @@ public class OnBoard : MonoBehaviour
             // ゲーム中ではなく、タッチ直後であればtrueを返す。
             if (touch.phase == TouchPhase.Began && timeleft <= 0.0)
             {
-                timeleft = 1.0f;
+                timeleft = 0.2f;
                 if (enterCount == talks.Length)
                 {
                     SceneManager.LoadScene("LeaveTheShip");

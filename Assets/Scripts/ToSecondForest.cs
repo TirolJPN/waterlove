@@ -146,6 +146,7 @@ public class ToSecondForest : MonoBehaviour {
                     sliderFlag = true;
                 }
                 else if (enterCount == (selectNum + 1) && sliderFlag == true)
+                //else if (sliderFlag == true)
                 {
                     continue;
                 }
@@ -221,6 +222,7 @@ public class ToSecondForest : MonoBehaviour {
         // Get100mlwaterの直前を呼び出す
         scene.SetActive(false);
         sliderFlag = false;
+        //enterCount++;
     }
 
     // sliderの値が更新されるたびに表示を変える関数

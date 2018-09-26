@@ -33,9 +33,9 @@ public class OnBoard : MonoBehaviour
         audioSource.clip = audioClip;
         audioSource.Play();
 // <<<<<<< feature/kosuke_debug
-//         enabled = false;
-//         yield return new WaitForSeconds(2);
-//         enabled = true;
+        enabled = false;
+        yield return new WaitForSeconds(2);
+        enabled = true;
 //     }
 
 //     void LateUpdate()
@@ -74,11 +74,11 @@ public class OnBoard : MonoBehaviour
 
 //     public void DarkChange() // 暗転
 // =======
-    void LateUpdate()
+    //void LateUpdate()
 // >>>>>>> develop
-    {
-        touchWindow.Touching();
-    }
+    //{
+        //touchWindow.Touching();
+    //}
 
     //IEnumerator WaitShortTime()
     //{

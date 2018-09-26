@@ -20,17 +20,17 @@ public class BeforeOnBoard : MonoBehaviour {
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.clip = audioClip;
         audioSource.Play();
-//         enabled = false;
-//         yield return new WaitForSeconds(2);
-//         enabled = true;
+        enabled = false;
+        yield return new WaitForSeconds(2);
+        enabled = true;
 
 
         touchWindow = GetComponent<TouchWindow>();
         touchWindow.SetText(names, talks, NextScene, false); // タッチ時のテキスト情報を専用ファイルに渡す
     }
 
-    void LateUpdate()
-    {
+    //void LateUpdate()
+    //{
 // <<<<<<< feature/kosuke_debug
 //         timeleft -= Time.deltaTime;
 //         //タッチがあるかどうか？
@@ -56,9 +56,9 @@ public class BeforeOnBoard : MonoBehaviour {
 //             }
 //         }
 // =======
-        touchWindow.Touching();
+        //touchWindow.Touching();
 // >>>>>>> develop
-    }
+    //}
 
     //IEnumerator WaitShortTime()
     //{

@@ -42,6 +42,8 @@ public class ToSecondForest : MonoBehaviour {
 
     private int enterCount = 0;
 
+    private float timeleft;
+
     private const int selectNum = 7;
 
     // 持っている水の合計
@@ -78,11 +80,14 @@ public class ToSecondForest : MonoBehaviour {
     private bool sliderFlag;
 
     // Use this for initialization
-    void Start()
+    IEnumerator Start()
     {
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.clip = audioClip;
         audioSource.Play();
+        enabled = false;
+        yield return new WaitForSeconds(2);
+        enabled = true;
 
         // 飲む量は最小値の10
         // 西園寺にあげれる量は、その差分
@@ -99,14 +104,18 @@ public class ToSecondForest : MonoBehaviour {
 
     void LateUpdate()
     {
+        timeleft -= Time.deltaTime;
+
         //タッチがあるかどうか？
         for (int i = 0; i < Input.touchCount; i++)
         {
             // タッチ情報を取得する
             Touch touch = Input.GetTouch(i);
+
             // ゲーム中ではなく、タッチ直後であればtrueを返す。
-            if (touch.phase == TouchPhase.Ended)
+            if (touch.phase == TouchPhase.Ended && timeleft <= 0.0)
             {
+                timeleft = 0.2f;
                 if (enterCount == talks.Length)
                 {
                     enterCount++;

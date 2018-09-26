@@ -27,11 +27,14 @@ public class ChooseForests : MonoBehaviour
     // 森選択フラグ 0:北の森 1:南の森 2:東の森
     static bool[] isForestsSelected = {false, false, false};
 
-    void Start()
+    IEnumerator Start()
     {
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.clip = audioClip;
         audioSource.Play();
+        enabled = false;
+        yield return new WaitForSeconds(2);
+        enabled = true;
     }
 
     void LateUpdate()

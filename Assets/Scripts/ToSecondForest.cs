@@ -13,7 +13,7 @@ public class ToSecondForest : MonoBehaviour {
                      , "", "無視", "" , "友鷹"
                      , "梨子", "友鷹"
                      , "梨子", "", "友鷹", "梨子", "友鷹", ""
-                     , "友鷹", "", "友鷹"};
+                     , "友鷹", "友鷹", "", "友鷹"};
     string[] talks = { "ふう。とりあえずはこんなものかな。\n"
                      , "西園寺さんも待っているだろうし、早く持って行ってあげよう。\n"
                      , "…"
@@ -33,14 +33,19 @@ public class ToSecondForest : MonoBehaviour {
                      , "「はい。お気をつけて。私も何か役に立ちそうなものを探してみます。」\n"
                      , "「西園寺さんも、無理はしないでね。」\n"
                      , "…"
-                     , "お、また水がある。これも回収しとこう。\n"
+                     , "お、また水がある。\n"
+                     , "これも回収しとこう。\n"
                      , "水100mlを入手した。\n"
                      , "さて、どこに向かおうかな。\n"
     };
     public AudioClip audioClip; //セリフ用
     AudioSource audioSource;
 
+    public GameObject Water;
+
     private int enterCount = 0;
+
+    private float timeleft;
 
     private const int selectNum = 7;
 
@@ -78,11 +83,14 @@ public class ToSecondForest : MonoBehaviour {
     private bool sliderFlag;
 
     // Use this for initialization
-    void Start()
+    IEnumerator Start()
     {
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.clip = audioClip;
         audioSource.Play();
+        enabled = false;
+        yield return new WaitForSeconds(2);
+        enabled = true;
 
         // 飲む量は最小値の10
         // 西園寺にあげれる量は、その差分
@@ -99,14 +107,18 @@ public class ToSecondForest : MonoBehaviour {
 
     void LateUpdate()
     {
+        timeleft -= Time.deltaTime;
+
         //タッチがあるかどうか？
         for (int i = 0; i < Input.touchCount; i++)
         {
             // タッチ情報を取得する
             Touch touch = Input.GetTouch(i);
+
             // ゲーム中ではなく、タッチ直後であればtrueを返す。
-            if (touch.phase == TouchPhase.Ended)
+            if (touch.phase == TouchPhase.Ended && timeleft <= 0.0)
             {
+                timeleft = 0.2f;
                 if (enterCount == talks.Length)
                 {
                     enterCount++;
@@ -134,6 +146,7 @@ public class ToSecondForest : MonoBehaviour {
                     sliderFlag = true;
                 }
                 else if (enterCount == (selectNum + 1) && sliderFlag == true)
+                //else if (sliderFlag == true)
                 {
                     continue;
                 }
@@ -145,6 +158,15 @@ public class ToSecondForest : MonoBehaviour {
                     if ((enterCount >= 3 && enterCount <= 11) || (enterCount >= 14 && enterCount <= 16))
                     {
                         BackChange(2);
+                    }
+
+                    if(enterCount == 18)
+                    {
+                        Water.SetActive(true);
+                    }
+                    else if(enterCount == 20) // 水を拾うことで画面から消す
+                    {
+                        Water.SetActive(false);
                     }
                     if (talks[enterCount].Equals("recovery"))
                     {
@@ -200,6 +222,7 @@ public class ToSecondForest : MonoBehaviour {
         // Get100mlwaterの直前を呼び出す
         scene.SetActive(false);
         sliderFlag = false;
+        //enterCount++;
     }
 
     // sliderの値が更新されるたびに表示を変える関数

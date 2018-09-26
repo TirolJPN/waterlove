@@ -32,9 +32,4 @@ public class BitterEnd3 : MonoBehaviour {
         touchWindow = GetComponent<TouchWindow>();
         touchWindow.SetText(names, talks, NextScene, false); // タッチ時のテキスト情報を専用ファイルに渡す
     }
-
-    void LateUpdate()
-    {
-        touchWindow.Touching();
-    }
 }

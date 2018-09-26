@@ -56,11 +56,6 @@ public class TouchWindow : MonoBehaviour {
         }
     }
 
-    public void Touching()
-    {
-
-    }
-
     public void SetText(string[] names, string[] talks, string NextScene, bool isBackChange)
     {
         this.names = names;

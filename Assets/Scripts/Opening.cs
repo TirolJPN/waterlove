@@ -40,39 +40,6 @@ public class Opening : MonoBehaviour {
 
         touchWindow = GetComponent<TouchWindow>();
         touchWindow.SetText(names, talks, NextScene, false); // タッチ時のテキスト情報を専用ファイルに渡す
-// >>>>>>> develop
-    }
-
-    void LateUpdate()
-    {
-// <<<<<<< feature/kosuke_debug
-//         timeleft -= Time.deltaTime;
-//         //タッチがあるかどうか？
-//         for (int i = 0; i < Input.touchCount; i++)
-//         {
-
-//             // タッチ情報を取得する
-//             Touch touch = Input.GetTouch(i);
-//             // ゲーム中ではなく、タッチ直後であればtrueを返す。
-//             if (touch.phase == TouchPhase.Began && timeleft <= 0.0)
-
-//             {
-//                 timeleft = 0.2f;
-//                 if (enterCount == talks.Length)
-//                 {
-//                     SceneManager.LoadScene("BeforeOnBoard");
-//                 }
-//                 else
-//                 {
-//                     NameLabel.text = names[enterCount];
-//                     TextLabel.text = talks[enterCount];
-//                     enterCount++;
-//                 }
-//             }
-//         }
-// =======
-        touchWindow.Touching();
-// >>>>>>> develop
     }
 
 

@@ -58,9 +58,4 @@ public class OntheIsland : MonoBehaviour
         touchWindow.SetText(names, talks, NextScene, true); // タッチ時のテキスト情報を専用ファイルに渡す
         touchWindow.SetBack(Back, backSelectNumber, backEnterCount); // 背景切り替え時情報を専用ファイルに渡す
     }
-
-    void LateUpdate()
-    {
-        touchWindow.Touching();
-    }
 }

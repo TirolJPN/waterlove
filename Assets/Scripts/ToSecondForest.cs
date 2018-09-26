@@ -13,7 +13,7 @@ public class ToSecondForest : MonoBehaviour {
                      , "", "無視", "" , "友鷹"
                      , "梨子", "友鷹"
                      , "梨子", "", "友鷹", "梨子", "友鷹", ""
-                     , "友鷹", "", "友鷹"};
+                     , "友鷹", "友鷹", "", "友鷹"};
     string[] talks = { "ふう。とりあえずはこんなものかな。\n"
                      , "西園寺さんも待っているだろうし、早く持って行ってあげよう。\n"
                      , "…"
@@ -33,12 +33,15 @@ public class ToSecondForest : MonoBehaviour {
                      , "「はい。お気をつけて。私も何か役に立ちそうなものを探してみます。」\n"
                      , "「西園寺さんも、無理はしないでね。」\n"
                      , "…"
-                     , "お、また水がある。これも回収しとこう。\n"
+                     , "お、また水がある。\n"
+                     , "これも回収しとこう。\n"
                      , "水100mlを入手した。\n"
                      , "さて、どこに向かおうかな。\n"
     };
     public AudioClip audioClip; //セリフ用
     AudioSource audioSource;
+
+    public GameObject Water;
 
     private int enterCount = 0;
 
@@ -154,6 +157,15 @@ public class ToSecondForest : MonoBehaviour {
                     if ((enterCount >= 3 && enterCount <= 11) || (enterCount >= 14 && enterCount <= 16))
                     {
                         BackChange(2);
+                    }
+
+                    if(enterCount == 18)
+                    {
+                        Water.SetActive(true);
+                    }
+                    else if(enterCount == 20) // 水を拾うことで画面から消す
+                    {
+                        Water.SetActive(false);
                     }
                     if (talks[enterCount].Equals("recovery"))
                     {

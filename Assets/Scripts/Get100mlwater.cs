@@ -6,18 +6,21 @@ using UnityEngine.SceneManagement;
 
 public class Get100mlwater : MonoBehaviour
 {
-
+   
     public UnityEngine.UI.Text NameLabel; // 名前テキスト
     public UnityEngine.UI.Text TextLabel; // セリフテキスト
-    string[] names = { "友鷹", " ", "友鷹", "友鷹" };
+    string[] names = { "友鷹", "友鷹", "", "友鷹", "友鷹" };
     string[] talks = {
-                     "ん？何か光ってるものがあるぞ。これは…水？\n"
+                     "ん？何か光ってるものがあるぞ。\n"
+                     , "これは…水？\n"
                      , "水100mlを入手した。\n"
                      , "なるほど。こういうのを集めればいいのか。\n"
                      , "さて、どこに向かおうかな。\n"
     };
     public AudioClip audioClip; //セリフ用
     AudioSource audioSource;
+    public GameObject water;
+
     private int enterCount = 0;
     private float timeleft;
 
@@ -55,14 +58,10 @@ public class Get100mlwater : MonoBehaviour
                 
                 if (enterCount < talks.Length)
                 {
-                    NameLabel.text = names[enterCount];
-                    TextLabel.text = talks[enterCount];
-                    enterCount++;
-                }
-                else if (enterCount < talks.Length)
-                {
-                    enterCount--;
-                    enterCount--;
+                    if(enterCount == 2) // 水を拾うことで画面から消す
+                    {
+                        water.SetActive(false);
+                    }
                     NameLabel.text = names[enterCount];
                     TextLabel.text = talks[enterCount];
                     enterCount++;

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Back : MonoBehaviour {
-    int enterCount = 0;
 
     public void DarkChange(GameObject[] BackScenes, string talk) // 暗転
     {

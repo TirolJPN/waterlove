@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class TouchWindow : MonoBehaviour {
     private int enterCount = 0;
+    private float timeleft;
+
     string[] names;
     string[] talks;
     GameObject[] BackPictures;
@@ -16,18 +18,21 @@ public class TouchWindow : MonoBehaviour {
     public UnityEngine.UI.Text NameLabel; // 名前テキスト
     public UnityEngine.UI.Text TextLabel; // セリフテキスト
 
-    public void Touching()
+    public void Update()
     {
+        timeleft -= Time.deltaTime;
+
         //タッチがあるかどうか？
         for (int i = 0; i < Input.touchCount; i++)
         {
-
             // タッチ情報を取得する
             Touch touch = Input.GetTouch(i);
 
             // ゲーム中ではなく、タッチ直後であればtrueを返す。
-            if (touch.phase == TouchPhase.Ended)
+            if (touch.phase == TouchPhase.Ended && timeleft <= 0.0)
             {
+                timeleft = 0.2f;
+
                 if (enterCount == talks.Length)
                 {
                     SceneManager.LoadScene(NextScene);

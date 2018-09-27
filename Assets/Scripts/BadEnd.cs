@@ -18,7 +18,7 @@ public class BadEnd : MonoBehaviour {
     public AudioClip audioClip; //セリフ用
     AudioSource audioSource;
 
-    void Start()
+    IEnumerator Start()
     {
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.clip = audioClip;
@@ -30,13 +30,11 @@ public class BadEnd : MonoBehaviour {
         {
             NextScene = "Gallery";
         }
+        enabled = false;
+        yield return new WaitForSeconds(2);
+        enabled = true;
 
         touchWindow = GetComponent<TouchWindow>();
         touchWindow.SetText(names, talks, NextScene, false); // タッチ時のテキスト情報を専用ファイルに渡す
-    }
-
-    void LateUpdate()
-    {
-        touchWindow.Touching();
     }
 }

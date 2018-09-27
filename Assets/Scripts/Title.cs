@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class Title : MonoBehaviour {
@@ -29,11 +30,14 @@ public class Title : MonoBehaviour {
     AudioSource audioSourceButton;
 
 
-    private void Start()
+    IEnumerator Start()
     {
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.clip = audioClip;
         audioSource.Play();
+        enabled = false;
+        yield return new WaitForSeconds(2);
+        enabled = true;
 
         // 各値初期化
         amountScore = 0;

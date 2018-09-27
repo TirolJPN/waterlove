@@ -232,6 +232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 914791e4ae5a2bf4784efa9a095ef188, type: 3}
   buttonClip: {fileID: 8300000, guid: d7da3d4497ffc476381f2b6224f02b55, type: 3}
+
 --- !u!82 &125542367
 AudioSource:
   m_ObjectHideFlags: 0

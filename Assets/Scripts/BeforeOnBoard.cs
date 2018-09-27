@@ -15,18 +15,24 @@ public class BeforeOnBoard : MonoBehaviour {
     AudioSource audioSource;
 
     // Use this for initialization
-    void Start()
+    IEnumerator Start()
     {
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.clip = audioClip;
         audioSource.Play();
+      
+        enabled = false;
+        yield return new WaitForSeconds(2);
+        enabled = true;
+
 
         touchWindow = GetComponent<TouchWindow>();
         touchWindow.SetText(names, talks, NextScene, false); // タッチ時のテキスト情報を専用ファイルに渡す
     }
 
-    void LateUpdate()
-    {
-        touchWindow.Touching();
-    }
+    //IEnumerator WaitShortTime()
+    //{
+    //    // 0.5秒待つ
+    //    yield return new WaitForSeconds(10);
+    //}
 }

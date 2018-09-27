@@ -45,19 +45,18 @@ public class OntheIsland : MonoBehaviour
     public AudioClip audioClip; //セリフ用
     AudioSource audioSource;
 
-    void Start()
+    IEnumerator Start()
     {
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.clip = audioClip;
         audioSource.Play();
 
+        enabled = false;
+        yield return new WaitForSeconds(2);
+        enabled = true;
+
         touchWindow = GetComponent<TouchWindow>();
         touchWindow.SetText(names, talks, NextScene, true); // タッチ時のテキスト情報を専用ファイルに渡す
         touchWindow.SetBack(Back, backSelectNumber, backEnterCount); // 背景切り替え時情報を専用ファイルに渡す
-    }
-
-    void LateUpdate()
-    {
-        touchWindow.Touching();
     }
 }

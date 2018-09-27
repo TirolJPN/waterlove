@@ -49,6 +49,7 @@ public class Title : MonoBehaviour {
         PlayerPrefs.Save();
 
         ChooseForests.FlagReset(); // タイトルに戻ったときにフラグリセット
+        Gallery.galleryFlag = false;
     }
 
     public void Button(int i)

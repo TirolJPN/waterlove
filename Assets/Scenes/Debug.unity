@@ -352,9 +352,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4ae9c95390a21a45af394b70c7a11f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HappyButtonText: []
-  BitterButtonText: []
-  BadButtonText: []
+  HappyButtonText:
+  - {fileID: 324973234}
+  BitterButtonText:
+  - {fileID: 612419944}
+  - {fileID: 1863051936}
+  - {fileID: 1002351018}
+  BadButtonText:
+  - {fileID: 1874295555}
   audioClip: {fileID: 8300000, guid: d210b61d7822528409cdf4c263cf5fb9, type: 3}
   buttonClip: {fileID: 8300000, guid: b48dc932da9aa3f4fb83d2cc0d705a10, type: 3}
 --- !u!82 &125542367

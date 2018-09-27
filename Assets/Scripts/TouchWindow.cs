@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class TouchWindow : MonoBehaviour {
     private int enterCount = 0;
     private float timeleft;
+
     string[] names;
     string[] talks;
     GameObject[] BackPictures;

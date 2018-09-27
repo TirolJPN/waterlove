@@ -24,6 +24,7 @@ public class LeaveTheShip : MonoBehaviour
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.clip = audioClip;
         audioSource.Play();
+
         enabled = false;
         yield return new WaitForSeconds(2);
         enabled = true;

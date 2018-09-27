@@ -30,6 +30,14 @@ public class BitterEnd2 : MonoBehaviour {
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.clip = audioClip;
         audioSource.Play();
+
+        Gallery gallery = GameObject.Find("GalleryController").GetComponent<Gallery>();
+        gallery.BitterFlagSet(1);
+        if (Gallery.galleryFlag == true)
+        {
+            NextScene = "Gallery";
+        }
+      
         enabled = false;
         yield return new WaitForSeconds(2);
         enabled = true;

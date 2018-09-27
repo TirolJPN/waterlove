@@ -26,13 +26,14 @@ public class OnBoard : MonoBehaviour
 
     public AudioClip audioClip; //セリフ用
     AudioSource audioSource;
+
     // Use this for initialization
     IEnumerator Start()
     {
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.clip = audioClip;
         audioSource.Play();
-// <<<<<<< feature/kosuke_debug
+
         enabled = false;
         yield return new WaitForSeconds(2);
         enabled = true;

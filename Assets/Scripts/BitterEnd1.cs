@@ -22,11 +22,20 @@ public class BitterEnd1 : MonoBehaviour {
     public AudioClip audioClip; //セリフ用
     AudioSource audioSource;
 
+
     IEnumerator Start()
     {
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.clip = audioClip;
         audioSource.Play();
+
+        Gallery gallery = GameObject.Find("GalleryController").GetComponent<Gallery>();
+        gallery.BitterFlagSet(0);
+        if (Gallery.galleryFlag == true)
+        {
+            NextScene = "Gallery";
+        }
+
         enabled = false;
         yield return new WaitForSeconds(2);
         enabled = true;

@@ -23,8 +23,11 @@ public class Title : MonoBehaviour {
     // 手持ちの水合計
     private string saionjiAmountScoreKey = "saionjiAmountScore";
 
-    public AudioClip audioClip; //セリフ用
+    public AudioClip audioClip; // BGM用
     AudioSource audioSource;
+
+    public AudioClip buttonClip; // ボタン用
+    AudioSource audioSourceButton;
 
 
     IEnumerator Start()
@@ -48,21 +51,33 @@ public class Title : MonoBehaviour {
         ChooseForests.FlagReset(); // エンディングに行ったときにフラグリセット
     }
 
-
-    void LateUpdate()
+    public void Button(int i)
     {
-        {
-                  //タッチがあるかどうか？
-            for (int i = 0; i < Input.touchCount; i++){
-                // タッチ情報を取得する
-                Touch touch = Input.GetTouch(i);
+        audioSourceButton = gameObject.GetComponent<AudioSource>();
+        audioSourceButton.clip = buttonClip;
+        audioSourceButton.Play();
 
-                // ゲーム中ではなく、タッチ直後であればtrueを返す。
-                if (touch.phase == TouchPhase.Ended)
-                {
-                    SceneManager.LoadScene("Opening");
-                }
-            }
+        if(i == 0)
+        {
+            StoryButton();
         }
+        else if (i == 1)
+        {
+            GalleryButton();
+        }
+    }
+
+    public void StoryButton() // 物語を始めるボタン
+    {
+        
+        SceneManager.LoadScene("Opening");
+    }
+
+    public void GalleryButton() // ギャラリーを見るボタン
+    {
+        /*audioSourceButton = gameObject.GetComponent<AudioSource>();
+        audioSourceButton.clip = buttonClip;
+        audioSourceButton.Play();*/
+        SceneManager.LoadScene("Gallery");
     }
 }

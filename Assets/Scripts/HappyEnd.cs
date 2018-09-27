@@ -32,8 +32,8 @@ public class HappyEnd : MonoBehaviour
         audioSource.clip = audioClip;
         audioSource.Play();
 
-        Gallery gallery = GetComponent<Gallery>();
-        gallery.HappyFlagSet(0);
+        //Gallery gallery = GetComponent<Gallery>();
+        Gallery.HappyFlagSet(0);
         if (Gallery.galleryFlag == true)
         {
             NextScene = "Gallery";

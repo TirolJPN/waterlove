@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class Gallery : MonoBehaviour {
 
-    public UnityEngine.UI.Text[] HappyButtonText; // ボタンテキスト
-    public UnityEngine.UI.Text[] BitterButtonText; // ボタンテキスト
-    public UnityEngine.UI.Text[] BadButtonText; // ボタンテキスト
+    public static UnityEngine.UI.Text[] HappyButtonText; // ボタンテキスト
+    public static UnityEngine.UI.Text[] BitterButtonText; // ボタンテキスト
+    public static UnityEngine.UI.Text[] BadButtonText; // ボタンテキスト
 
     public AudioClip audioClip; // BGM用
     AudioSource audioSource;
@@ -19,10 +19,12 @@ public class Gallery : MonoBehaviour {
     public static bool[] isHappyEndCleard = { false };
     public static bool[] isBitterEndCleard = { false, false, false };
     public static bool[] isBadEndCleard = { false };
+    public static bool[][] Flags = { isHappyEndCleard, isBitterEndCleard, isBadEndCleard };
 
-    string[] HappyName = { "希望の「小紋島」" };
-    string[] BitterName = { "足りなかった思いやり", "優しさ故の過ち", "詰め切れない距離" };
-    string[] BadName = { "果てない暗闇の中で" };
+    public static string[] HappyName = { "希望の「小紋島」" };
+    public static string[] BitterName = { "足りなかった思いやり", "優しさ故の過ち", "詰め切れない距離" };
+    public static string[] BadName = { "果てない暗闇の中で" };
+    static string[][] endNames = { HappyName, BitterName, BadName };
 
     public static bool galleryFlag = false; // ギャラリーから読み込んでいるかどうか
 
@@ -78,27 +80,27 @@ public class Gallery : MonoBehaviour {
         SceneManager.LoadScene(scene);
     }
 
-    public void FlagSet(int end, int i) // クリア時にそのエンディングフラグを真にする
+    public static void FlagSet(int end, int i) // クリア時にそのエンディングフラグを真にする
     {
-        bool[][] Flags = { isHappyEndCleard, isBitterEndCleard, isBadEndCleard };
+        
         Flags[end][i] = true;
 
-        string[][] endNames = { HappyName, BitterName, BadName };
+        
         UnityEngine.UI.Text[][] texts = { HappyButtonText, BitterButtonText, BadButtonText };
         texts[end][i].text = endNames[end][i];
     }
 
-    public void HappyFlagSet(int i)
+    public static void HappyFlagSet(int i)
     {
         FlagSet(0, i);
     }
 
-    public void BitterFlagSet(int i)
+    public static void BitterFlagSet(int i)
     {
         FlagSet(1, i);
     }
 
-    public void BadFlagSet(int i)
+    public static void BadFlagSet(int i)
     {
         FlagSet(2, i);
     }

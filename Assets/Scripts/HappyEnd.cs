@@ -32,7 +32,7 @@ public class HappyEnd : MonoBehaviour
         audioSource.clip = audioClip;
         audioSource.Play();
 
-        Gallery gallery = GameObject.Find("GalleryController").GetComponent<Gallery>();
+        Gallery gallery = GetComponent<Gallery>();
         gallery.HappyFlagSet(0);
         if (Gallery.galleryFlag == true)
         {

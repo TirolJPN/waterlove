@@ -48,7 +48,7 @@ public class Title : MonoBehaviour {
         PlayerPrefs.SetInt(saionjiAmountScoreKey, saionjiAmountScore);
         PlayerPrefs.Save();
 
-        ChooseForests.FlagReset(); // エンディングに行ったときにフラグリセット
+        ChooseForests.FlagReset(); // タイトルに戻ったときにフラグリセット
     }
 
     public void Button(int i)
@@ -65,6 +65,10 @@ public class Title : MonoBehaviour {
         {
             GalleryButton();
         }
+        else if (i == 2)
+        {
+            DebugButton();
+        }
     }
 
     public void StoryButton() // 物語を始めるボタン
@@ -79,5 +83,11 @@ public class Title : MonoBehaviour {
         audioSourceButton.clip = buttonClip;
         audioSourceButton.Play();*/
         SceneManager.LoadScene("Gallery");
+    }
+
+    public void DebugButton() // 物語を始めるボタン
+    {
+
+        SceneManager.LoadScene("Debug");
     }
 }

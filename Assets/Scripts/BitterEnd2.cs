@@ -31,7 +31,7 @@ public class BitterEnd2 : MonoBehaviour {
         audioSource.clip = audioClip;
         audioSource.Play();
 
-        Gallery gallery = GameObject.Find("GalleryController").GetComponent<Gallery>();
+        Gallery gallery = GetComponent<Gallery>();
         gallery.BitterFlagSet(1);
         if (Gallery.galleryFlag == true)
         {

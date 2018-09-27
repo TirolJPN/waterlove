@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class Gallery : MonoBehaviour {
 
-    public static UnityEngine.UI.Text[] HappyButtonText; // ボタンテキスト
-    public static UnityEngine.UI.Text[] BitterButtonText; // ボタンテキスト
-    public static UnityEngine.UI.Text[] BadButtonText; // ボタンテキスト
+    public UnityEngine.UI.Text[] HappyButtonText; // ボタンテキスト
+    public UnityEngine.UI.Text[] BitterButtonText; // ボタンテキスト
+    public UnityEngine.UI.Text[] BadButtonText; // ボタンテキスト
 
     public AudioClip audioClip; // BGM用
     AudioSource audioSource;
@@ -86,8 +86,8 @@ public class Gallery : MonoBehaviour {
         Flags[end][i] = true;
 
         
-        UnityEngine.UI.Text[][] texts = { HappyButtonText, BitterButtonText, BadButtonText };
-        texts[end][i].text = endNames[end][i];
+        //UnityEngine.UI.Text[][] texts = { HappyButtonText, BitterButtonText, BadButtonText };
+        //texts[end][i].text = endNames[end][i];
     }
 
     public static void HappyFlagSet(int i)

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class Gallery : MonoBehaviour {
+public class Debug : MonoBehaviour {
 
     public UnityEngine.UI.Text[] HappyButtonText; // ボタンテキスト
     public UnityEngine.UI.Text[] BitterButtonText; // ボタンテキスト
@@ -19,26 +19,26 @@ public class Gallery : MonoBehaviour {
     public static bool[] isHappyEndCleard = { false };
     public static bool[] isBitterEndCleard = { false, false, false };
     public static bool[] isBadEndCleard = { false };
-    public static bool[][] Flags = { isHappyEndCleard, isBitterEndCleard, isBadEndCleard };
 
-    public static string[] HappyName = { "希望の「小紋島」" };
-    public static string[] BitterName = { "足りなかった思いやり", "優しさ故の過ち", "詰め切れない距離" };
-    public static string[] BadName = { "果てない暗闇の中で" };
-    static string[][] endNames = { HappyName, BitterName, BadName };
+    string[] HappyName = { "希望の「小紋島」" };
+    string[] BitterName = { "足りなかった思いやり", "優しさ故の過ち", "詰め切れない距離" };
+    string[] BadName = { "果てない暗闇の中で" };
 
     public static bool galleryFlag = false; // ギャラリーから読み込んでいるかどうか
 
-    void Start () {
+    void Start()
+    {
         galleryFlag = false;
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.clip = audioClip;
         audioSource.Play();
 
     }
-	
-	void Update () {
-		
-	}
+
+    void Update()
+    {
+
+    }
 
     public void HappyButton(int i)
     {
@@ -54,7 +54,7 @@ public class Gallery : MonoBehaviour {
         galleryFlag = true;
         if (isBitterEndCleard[i] == true)
         {
-            Button("BitterEnd" + (i+1) );
+            Button("BitterEnd" + (i + 1));
         }
     }
 
@@ -72,6 +72,11 @@ public class Gallery : MonoBehaviour {
         Button("Title");
     }
 
+    public void ChooseButton()
+    {
+        Button("ChooseForests");
+    }
+
     public void Button(string scene) // ボタン押したとき
     {
         audioSourceButton = gameObject.GetComponent<AudioSource>();
@@ -80,27 +85,27 @@ public class Gallery : MonoBehaviour {
         SceneManager.LoadScene(scene);
     }
 
-    public static void FlagSet(int end, int i) // クリア時にそのエンディングフラグを真にする
+    public void FlagSet(int end, int i) // クリア時にそのエンディングフラグを真にする
     {
-        
+        bool[][] Flags = { isHappyEndCleard, isBitterEndCleard, isBadEndCleard };
         Flags[end][i] = true;
 
-        
-        //UnityEngine.UI.Text[][] texts = { HappyButtonText, BitterButtonText, BadButtonText };
-        //texts[end][i].text = endNames[end][i];
+        string[][] endNames = { HappyName, BitterName, BadName };
+        UnityEngine.UI.Text[][] texts = { HappyButtonText, BitterButtonText, BadButtonText };
+        texts[end][i].text = endNames[end][i];
     }
 
-    public static void HappyFlagSet(int i)
+    public void HappyFlagSet(int i)
     {
         FlagSet(0, i);
     }
 
-    public static void BitterFlagSet(int i)
+    public void BitterFlagSet(int i)
     {
         FlagSet(1, i);
     }
 
-    public static void BadFlagSet(int i)
+    public void BadFlagSet(int i)
     {
         FlagSet(2, i);
     }
@@ -108,9 +113,9 @@ public class Gallery : MonoBehaviour {
     public void FlagReset() // 全てのフラグをfalseにする
     {
         bool[][] Flags = { isHappyEndCleard, isBitterEndCleard, isBadEndCleard };
-        for(int i = 0; i < Flags.Length; i++)
+        for (int i = 0; i < Flags.Length; i++)
         {
-            for(int j = 0; j < Flags[i].Length; j++)
+            for (int j = 0; j < Flags[i].Length; j++)
             {
                 Flags[i][j] = false;
             }

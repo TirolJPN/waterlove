@@ -24,8 +24,8 @@ public class BadEnd : MonoBehaviour {
         audioSource.clip = audioClip;
         audioSource.Play();
 
-        Gallery gallery = GameObject.Find("GalleryController").GetComponent<Gallery>();
-        gallery.BadFlagSet(0);
+        //Gallery gallery = GetComponent<Gallery>();
+        Gallery.BadFlagSet(0);
         if (Gallery.galleryFlag == true)
         {
             NextScene = "Gallery";

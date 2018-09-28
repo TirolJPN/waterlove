@@ -50,6 +50,7 @@ public class Title : MonoBehaviour {
 
         ChooseForests.FlagReset(); // タイトルに戻ったときにフラグリセット
         Gallery.galleryFlag = false;
+        Debug.debugFlag = false;
     }
 
     public void Button(int i)

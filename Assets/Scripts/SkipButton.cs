@@ -20,6 +20,7 @@ public class SkipButton : MonoBehaviour {
             }
         }
 
+        // 初回エンディング時にボタン出てくるのはシーンの最初でフラグが立つから
         if(clearFlag == false && Debug.debugFlag == false)
         {
             gameObject.SetActive(false);

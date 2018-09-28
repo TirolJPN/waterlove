@@ -26,11 +26,15 @@ public class Debug : MonoBehaviour {
     static string[] BadName = { "果てない暗闇の中で" };
     string[][] endNames = { HappyName, BitterName, BadName };
 
+    public static bool debugFlag;
+
     void Start()
     {
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.clip = audioClip;
         audioSource.Play();
+
+        debugFlag = true;
 
         UnityEngine.UI.Text[][] texts = { HappyButtonText, BitterButtonText, BadButtonText };
         for (int end = 0; end < Flags.Length; end++) // ボタンに名前が出る

@@ -104,26 +104,7 @@ public class LoadToTheEnding : MonoBehaviour {
                     //SceneManager.LoadScene("BitterEnd2")
                     HP = PlayerPrefs.GetInt(HPKey, 0);
                     saionjiAmountScore = PlayerPrefs.GetInt(saionjiAmountScoreKey, 0);
-                    if (HP >= 50 && saionjiAmountScore >= 2000)
-                    {
-                        SceneManager.LoadScene("HappyEnd");
-                    }
-                    else if (HP >= 50 && saionjiAmountScore < 2000)
-                    {
-                        SceneManager.LoadScene("BitterEnd1");
-                    }
-                    else if (HP < 50 && saionjiAmountScore >= 2000)
-                    {
-                        SceneManager.LoadScene("BitterEnd2");
-                    }
-                    else if (HP < 50 && saionjiAmountScore < 2000)
-                    {
-                        SceneManager.LoadScene("BitterEnd3");
-                    }
-                    else if (HP == 0)
-                    {
-                        SceneManager.LoadScene("BadEnd");
-                    }
+                    GoEnding(); // エンディングに行く
                 }
                 else if (enterCount == selectNum)
                 {
@@ -149,6 +130,30 @@ public class LoadToTheEnding : MonoBehaviour {
                     enterCount++;
                 }
             }
+        }
+    }
+
+    public void GoEnding() // エンディングに行く
+    {
+        if (HP >= 50 && saionjiAmountScore >= 2000)
+        {
+            SceneManager.LoadScene("HappyEnd");
+        }
+        else if (HP >= 50 && saionjiAmountScore < 2000)
+        {
+            SceneManager.LoadScene("BitterEnd1");
+        }
+        else if (HP < 50 && saionjiAmountScore >= 2000)
+        {
+            SceneManager.LoadScene("BitterEnd2");
+        }
+        else if (HP < 50 && saionjiAmountScore < 2000)
+        {
+            SceneManager.LoadScene("BitterEnd3");
+        }
+        else if (HP == 0)
+        {
+            SceneManager.LoadScene("BadEnd");
         }
     }
 

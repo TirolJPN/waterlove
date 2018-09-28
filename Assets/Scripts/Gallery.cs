@@ -113,7 +113,6 @@ public class Gallery : MonoBehaviour {
 
     public void FlagReset() // 全てのフラグをfalseにする
     {
-        bool[][] Flags = { isHappyEndCleard, isBitterEndCleard, isBadEndCleard };
         for(int i = 0; i < Flags.Length; i++)
         {
             for(int j = 0; j < Flags[i].Length; j++)

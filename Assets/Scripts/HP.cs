@@ -19,8 +19,8 @@ public class HP : MonoBehaviour {
     // Use this for initialization
     void Start () {
         // HPを初期値に戻す
-        start_hp = PlayerPrefs.GetInt(HPKey, 0);
-        hp = PlayerPrefs.GetInt(HPKey, 0);
+        start_hp = PlayerPrefs.GetInt(HPKey, 100);
+        hp = PlayerPrefs.GetInt(HPKey, 100);
     }
 	
 	// Update is called once per frame

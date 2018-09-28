@@ -34,35 +34,46 @@ public class Gallery : MonoBehaviour {
         audioSource.clip = audioClip;
         audioSource.Play();
 
+        UnityEngine.UI.Text[][] texts = { HappyButtonText, BitterButtonText, BadButtonText };
+        for(int end = 0; end < Flags.Length; end++) // 1度見たエンディングはギャラリーに名前が出る
+        {
+            for(int i = 0; i < Flags[end].Length; i++)
+            {
+                if (Flags[end][i] == true)
+                {
+                    texts[end][i].text = endNames[end][i];
+                }
+            }
+        }
     }
-	
-	void Update () {
+
+    void Update () {
 		
 	}
 
     public void HappyButton(int i)
     {
-        galleryFlag = true;
         if (isHappyEndCleard[i] == true)
         {
+            galleryFlag = true;
             Button("HappyEnd");
         }
     }
 
     public void BitterButton(int i)
     {
-        galleryFlag = true;
         if (isBitterEndCleard[i] == true)
         {
+            galleryFlag = true;
             Button("BitterEnd" + (i+1) );
         }
     }
 
     public void BadButton(int i)
     {
-        galleryFlag = true;
         if (isBadEndCleard[i] == true)
         {
+            galleryFlag = true;
             Button("BadEnd");
         }
     }
@@ -82,12 +93,7 @@ public class Gallery : MonoBehaviour {
 
     public static void FlagSet(int end, int i) // クリア時にそのエンディングフラグを真にする
     {
-        
         Flags[end][i] = true;
-
-        
-        //UnityEngine.UI.Text[][] texts = { HappyButtonText, BitterButtonText, BadButtonText };
-        //texts[end][i].text = endNames[end][i];
     }
 
     public static void HappyFlagSet(int i)
@@ -107,7 +113,6 @@ public class Gallery : MonoBehaviour {
 
     public void FlagReset() // 全てのフラグをfalseにする
     {
-        bool[][] Flags = { isHappyEndCleard, isBitterEndCleard, isBadEndCleard };
         for(int i = 0; i < Flags.Length; i++)
         {
             for(int j = 0; j < Flags[i].Length; j++)

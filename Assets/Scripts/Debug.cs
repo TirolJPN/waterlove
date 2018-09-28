@@ -19,20 +19,32 @@ public class Debug : MonoBehaviour {
     public static bool[] isHappyEndCleard = { false };
     public static bool[] isBitterEndCleard = { false, false, false };
     public static bool[] isBadEndCleard = { false };
+    public static bool[][] Flags = { isHappyEndCleard, isBitterEndCleard, isBadEndCleard };
 
-    string[] HappyName = { "希望の「小紋島」" };
-    string[] BitterName = { "足りなかった思いやり", "優しさ故の過ち", "詰め切れない距離" };
-    string[] BadName = { "果てない暗闇の中で" };
+    static string[] HappyName = { "希望の「小紋島」" };
+    static string[] BitterName = { "足りなかった思いやり", "優しさ故の過ち", "詰め切れない距離" };
+    static string[] BadName = { "果てない暗闇の中で" };
+    string[][] endNames = { HappyName, BitterName, BadName };
 
-    public static bool galleryFlag = false; // ギャラリーから読み込んでいるかどうか
+    public static bool debugFlag;
 
     void Start()
     {
-        galleryFlag = false;
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.clip = audioClip;
         audioSource.Play();
 
+        debugFlag = true;
+
+        UnityEngine.UI.Text[][] texts = { HappyButtonText, BitterButtonText, BadButtonText };
+        for (int end = 0; end < Flags.Length; end++) // ボタンに名前が出る
+        {
+            for (int i = 0; i < Flags[end].Length; i++)
+            {
+                texts[end][i].text = endNames[end][i];
+                
+            }
+        }
     }
 
     void Update()
@@ -42,7 +54,7 @@ public class Debug : MonoBehaviour {
 
     public void HappyButton(int i)
     {
-        galleryFlag = true;
+
         if (isHappyEndCleard[i] == true)
         {
             Button("HappyEnd");
@@ -51,7 +63,7 @@ public class Debug : MonoBehaviour {
 
     public void BitterButton(int i)
     {
-        galleryFlag = true;
+
         if (isBitterEndCleard[i] == true)
         {
             Button("BitterEnd" + (i + 1));
@@ -60,7 +72,7 @@ public class Debug : MonoBehaviour {
 
     public void BadButton(int i)
     {
-        galleryFlag = true;
+
         if (isBadEndCleard[i] == true)
         {
             Button("BadEnd");
@@ -85,7 +97,7 @@ public class Debug : MonoBehaviour {
         SceneManager.LoadScene(scene);
     }
 
-    public void FlagSet(int end, int i) // クリア時にそのエンディングフラグを真にする
+    /*public void FlagSet(int end, int i) // クリア時にそのエンディングフラグを真にする
     {
         bool[][] Flags = { isHappyEndCleard, isBitterEndCleard, isBadEndCleard };
         Flags[end][i] = true;
@@ -108,7 +120,7 @@ public class Debug : MonoBehaviour {
     public void BadFlagSet(int i)
     {
         FlagSet(2, i);
-    }
+    }*/
 
     public void FlagReset() // 全てのフラグをfalseにする
     {

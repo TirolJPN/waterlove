@@ -71,4 +71,9 @@ public class TouchWindow : MonoBehaviour {
         this.backSelectNumber = backSelectNumber;
         this.backEnterCount = backEnterCount;
     }
+
+    public void Skip() // 次のシーンに行く
+    {
+        SceneManager.LoadScene(NextScene);
+    }
 }

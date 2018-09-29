@@ -36,6 +36,16 @@ public class LoadToTheEnding : MonoBehaviour {
     // PlayerPrefsで保存するためのキー
     private string amountScoreKey = "amountScore";
 
+    // 友鷹のハイスコア
+    private int amountHighscore;
+
+    private string amountHighscoreKey = "amountHighscore";
+
+    //1回目のスコア
+    private int firstscore;
+
+    private string firstscoreKey = "firstscore";
+
     // 友鷹のHP
     private int HP;
 
@@ -47,6 +57,11 @@ public class LoadToTheEnding : MonoBehaviour {
     // PlayerPrefsで保存するためのキー
     // 手持ちの水合計
     private string saionjiAmountScoreKey = "saionjiAmountScore";
+
+    // 西園寺のハイスコア
+    private int saionjiAmountHighscore;
+
+    private string saionjiAmountHighscoreKey = "saionjiAmountHighscore";
 
     private int division = 0;
 
@@ -102,8 +117,8 @@ public class LoadToTheEnding : MonoBehaviour {
                 if (enterCount == talks.Length)
                 {
                     //SceneManager.LoadScene("BitterEnd2")
-                    HP = PlayerPrefs.GetInt(HPKey, 0);
-                    saionjiAmountScore = PlayerPrefs.GetInt(saionjiAmountScoreKey, 0);
+                    //HP = PlayerPrefs.GetInt(HPKey, 0);
+                    //saionjiAmountScore = PlayerPrefs.GetInt(saionjiAmountScoreKey, 0);
                     GoEnding(); // エンディングに行く
                 }
                 else if (enterCount == selectNum)
@@ -178,6 +193,20 @@ public class LoadToTheEnding : MonoBehaviour {
 
         saionjiAmountScore += (amountScore - division);
 
+        // ハイスコアの更新
+        firstscore = PlayerPrefs.GetInt(firstscoreKey, 0);
+        amountHighscore = PlayerPrefs.GetInt(amountHighscoreKey, 0);
+        saionjiAmountHighscore = PlayerPrefs.GetInt(saionjiAmountHighscoreKey, 0);
+        if (firstscore + amountScore > amountHighscore)
+        {
+            PlayerPrefs.SetInt(amountHighscoreKey, firstscore + amountScore);
+        }
+
+        if(saionjiAmountScore > saionjiAmountHighscore)
+        {
+            PlayerPrefs.SetInt(saionjiAmountHighscoreKey, saionjiAmountScore);
+        }
+
         if ((HP + division / 10) > 100)
         {
             division = (100 - HP) * 10;
@@ -189,9 +218,15 @@ public class LoadToTheEnding : MonoBehaviour {
         }
         amountScore = 0;
 
-        PlayerPrefs.SetInt(HPKey, HP);
+        /*PlayerPrefs.SetInt(HPKey, HP);
         PlayerPrefs.SetInt(amountScoreKey, amountScore);
-        PlayerPrefs.SetInt(saionjiAmountScoreKey, saionjiAmountScore);
+        PlayerPrefs.SetInt(saionjiAmountScoreKey, saionjiAmountScore);*/
+
+        //一応初期化(タイトルでできてない可能性あり？)
+        PlayerPrefs.SetInt(HPKey, 100);
+        PlayerPrefs.SetInt(amountScoreKey, 0);
+        PlayerPrefs.SetInt(saionjiAmountScoreKey, 0);
+
         // Get100mlwaterの直前を呼び出す
         scene.SetActive(false);
         sliderFlag = false;

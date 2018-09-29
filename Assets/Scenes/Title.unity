@@ -669,7 +669,7 @@ GameObject:
   - component: {fileID: 809803850}
   - component: {fileID: 809803851}
   m_Layer: 5
-  m_Name: SroryButton
+  m_Name: StoryButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -51,9 +51,5 @@ public class Title : MonoBehaviour {
         ChooseForests.FlagReset(); // タイトルに戻ったときにフラグリセット
         Gallery.galleryFlag = false;
         Debug.debugFlag = false;
-
-        //Gallery.Flags[0][0] = SaveFlag.GetBool(Gallery.endNames[0][0], false);
-        //Gallery.Flags[1][1] = SaveFlag.GetBool(Gallery.endNames[1][1], false);
-        //Gallery.Flags[1][1] = true;
     }
 }

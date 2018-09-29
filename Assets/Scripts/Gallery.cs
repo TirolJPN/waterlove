@@ -10,6 +10,12 @@ public class Gallery : MonoBehaviour {
     public UnityEngine.UI.Text[] BitterButtonText; // ボタンテキスト
     public UnityEngine.UI.Text[] BadButtonText; // ボタンテキスト
 
+    public UnityEngine.UI.Text GetWaterText; // 集めた水量のテキスト
+    public UnityEngine.UI.Text GiveWaterText; // あげた水量のテキスト
+
+    public GameObject[] Scenes; // 画面遷移するオブジェクト
+    public GameObject ResetBlockPanel; // リセットするときに出すパネル
+
     public AudioClip audioClip; // BGM用
     AudioSource audioSource;
 
@@ -28,11 +34,17 @@ public class Gallery : MonoBehaviour {
 
     public static bool galleryFlag = false; // ギャラリーから読み込んでいるかどうか
 
+    private int highscore;
+    private int saionjiHighscore;
+
     void Start () {
         galleryFlag = false;
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.clip = audioClip;
         audioSource.Play();
+
+        highscore = PlayerPrefs.GetInt("amountHighscore", 0);
+        saionjiHighscore = PlayerPrefs.GetInt("saionjiAmountHighscore", 0);
 
         UnityEngine.UI.Text[][] texts = { HappyButtonText, BitterButtonText, BadButtonText };
         for(int end = 0; end < Flags.Length; end++)
@@ -48,18 +60,36 @@ public class Gallery : MonoBehaviour {
                 }
             }
         }
+
+        GetWaterText.text += "\n" + highscore.ToString() + " ml";
+        GiveWaterText.text += "\n" + saionjiHighscore.ToString() + " ml";
     }
 
     void Update () {
-		
-	}
+        UnityEngine.UI.Text[][] texts = { HappyButtonText, BitterButtonText, BadButtonText };
+        for (int end = 0; end < Flags.Length; end++)
+        {
+            for (int i = 0; i < Flags[end].Length; i++)
+            {
+                if (Flags[end][i] == true)
+                {
+                    // 1度見たエンディングはギャラリーに名前が出る
+                    texts[end][i].text = endNames[end][i];
+                }
+                else
+                {
+                    texts[end][i].text = "????";
+                }
+            }
+        }
+    }
 
     public void HappyButton(int i)
     {
         if (isHappyEndCleard[i] == true)
         {
             galleryFlag = true;
-            Button("HappyEnd");
+            GoSceneButton("HappyEnd");
         }
     }
 
@@ -68,7 +98,7 @@ public class Gallery : MonoBehaviour {
         if (isBitterEndCleard[i] == true)
         {
             galleryFlag = true;
-            Button("BitterEnd" + (i+1) );
+            GoSceneButton("BitterEnd" + (i+1) );
         }
     }
 
@@ -77,20 +107,17 @@ public class Gallery : MonoBehaviour {
         if (isBadEndCleard[i] == true)
         {
             galleryFlag = true;
-            Button("BadEnd");
+            GoSceneButton("BadEnd");
         }
     }
 
     public void ReturnButton()
     {
-        Button("Title");
+        GoSceneButton("Title");
     }
 
-    public void Button(string scene) // ボタン押したとき
+    public void GoSceneButton(string scene) // エンディング集のボタンを押したとき
     {
-        audioSourceButton = gameObject.GetComponent<AudioSource>();
-        audioSourceButton.clip = buttonClip;
-        audioSourceButton.PlayOneShot(buttonClip);
         SceneManager.LoadScene(scene);
     }
 
@@ -126,5 +153,36 @@ public class Gallery : MonoBehaviour {
                 SaveFlag.SetBool(endNames[end][i], false);
             }
         }
+    }
+
+    public void ScoreReset() // ハイスコアのリセット
+    {
+        PlayerPrefs.SetInt("amountHighscore", 0);
+        PlayerPrefs.SetInt("saionjiAmountHighscore", 0);
+        GetWaterText.text += "\n0 ml";
+        GiveWaterText.text += "\n0 ml";
+    }
+
+    public void DeleteButton() // データ消去ボタンを押したとき
+    {
+        ResetBlockPanel.SetActive(true); // ブロックパネルを出す
+    }
+
+    public void YesOrNoButton(int i) // リセットパネルで「はい」か「いいえ」を押したとき
+    {
+        if (i == 0) // はいのときは全部初期化
+        {
+            FlagReset();
+        }
+        ResetBlockPanel.SetActive(false); // ブロックパネルを消す
+    }
+
+    public void GoWindow(int i) // 画面遷移
+    {
+        foreach (GameObject g in Scenes)
+        {
+            g.SetActive(false);
+        }
+        Scenes[i].SetActive(true);
     }
 }

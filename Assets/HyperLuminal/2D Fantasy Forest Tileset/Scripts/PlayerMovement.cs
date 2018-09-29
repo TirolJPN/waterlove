@@ -35,8 +35,13 @@ public class PlayerMovement : MonoBehaviour
     bool isRight = false;
     bool isLeft = false;
 
-	// Use this for initialization
-	void Start ()
+    public AudioClip getClipBlue; // 取得時のSE用
+    public AudioClip getClipYellow; // 取得時のSE用
+    public AudioClip getClipPurple; // 取得時のSE用
+    AudioSource audioSourceGet;
+
+    // Use this for initialization
+    void Start ()
 	{
 		// get the local reference
 		animator = GetComponent<Animator>();
@@ -44,7 +49,9 @@ public class PlayerMovement : MonoBehaviour
 		// set initial position
 		lastPosition = transform.position;
 		CheckPointPosition = transform.position;
-	}
+
+        audioSourceGet = gameObject.GetComponent<AudioSource>();
+    }
 	
 	// Update is called once per frame
 	void Update () 
@@ -188,7 +195,25 @@ public class PlayerMovement : MonoBehaviour
 			GameObject.Find("FadePanel").GetComponent<FadeScript>().FadeOut();
 			isDead = true;
 		}
-	}
+        else if(collider.gameObject.name.Contains("blue"))
+        {
+            //音を鳴らす
+            audioSourceGet.clip = getClipBlue;
+            audioSourceGet.PlayOneShot(getClipBlue);
+        }
+        else if (collider.gameObject.name.Contains("yellow"))
+        {
+            //音を鳴らす
+            audioSourceGet.clip = getClipYellow;
+            audioSourceGet.PlayOneShot(getClipYellow);
+        }
+        else if (collider.gameObject.name.Contains("purple"))
+        {
+            //音を鳴らす
+            audioSourceGet.clip = getClipPurple;
+            audioSourceGet.PlayOneShot(getClipPurple);
+        }
+    }
 
 	/// <summary>
 	/// Respawns the player at checkpoint.

@@ -90,7 +90,7 @@ public class Gallery : MonoBehaviour {
     {
         audioSourceButton = gameObject.GetComponent<AudioSource>();
         audioSourceButton.clip = buttonClip;
-        audioSourceButton.Play();
+        audioSourceButton.PlayOneShot(buttonClip);
         SceneManager.LoadScene(scene);
     }
 

@@ -52,56 +52,8 @@ public class Title : MonoBehaviour {
         Gallery.galleryFlag = false;
         Debug.debugFlag = false;
 
-        // クリアフラグのロード
-        for (int end = 0; end < Gallery.Flags.Length; end++)
-        {
-            for (int i = 0; i < Gallery.Flags[end].Length; i++)
-            {
-                Gallery.FlagSet(end, i, (SaveFlag.GetBool(Gallery.endNames[end][i], false)));
-            }
-        }
         //Gallery.Flags[0][0] = SaveFlag.GetBool(Gallery.endNames[0][0], false);
         //Gallery.Flags[1][1] = SaveFlag.GetBool(Gallery.endNames[1][1], false);
         //Gallery.Flags[1][1] = true;
-    }
-
-    public void Button(int i)
-    {
-        audioSourceButton = gameObject.GetComponent<AudioSource>();
-        audioSourceButton.clip = buttonClip;
-        audioSourceButton.Play();
-
-        if(i == 0)
-        {
-            StoryButton();
-        }
-        else if (i == 1)
-        {
-            GalleryButton();
-        }
-        else if (i == 2)
-        {
-            DebugButton();
-        }
-    }
-
-    public void StoryButton() // 物語を始めるボタン
-    {
-        
-        SceneManager.LoadScene("Opening");
-    }
-
-    public void GalleryButton() // ギャラリーを見るボタン
-    {
-        /*audioSourceButton = gameObject.GetComponent<AudioSource>();
-        audioSourceButton.clip = buttonClip;
-        audioSourceButton.Play();*/
-        SceneManager.LoadScene("Gallery");
-    }
-
-    public void DebugButton() // 物語を始めるボタン
-    {
-
-        SceneManager.LoadScene("Debug");
     }
 }

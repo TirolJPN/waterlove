@@ -155,7 +155,7 @@ public class ToSecondForest : MonoBehaviour {
                     NameLabel.text = names[enterCount];
                     TextLabel.text = talks[enterCount];
                     DarkChange();
-                    if ((enterCount >= 3 && enterCount <= 11) || (enterCount >= 14 && enterCount <= 16))
+                    if ((enterCount >= 3 && enterCount <= 12) || (enterCount >= 14 && enterCount <= 16))
                     {
                         BackChange(2);
                     }

@@ -16,10 +16,10 @@ public class Debug : MonoBehaviour {
     public AudioClip buttonClip; // ボタン用
     AudioSource audioSourceButton;
 
-    public static bool[] isHappyEndCleard = { false };
-    public static bool[] isBitterEndCleard = { false, false, false };
-    public static bool[] isBadEndCleard = { false };
-    public static bool[][] Flags = { isHappyEndCleard, isBitterEndCleard, isBadEndCleard };
+    public bool[] isHappyEndCleard = { false };
+    public bool[] isBitterEndCleard = { false, false, false };
+    public bool[] isBadEndCleard = { false };
+    //public bool[][] Flags = { isHappyEndCleard, isBitterEndCleard, isBadEndCleard };
 
     static string[] HappyName = { "希望の「小紋島」" };
     static string[] BitterName = { "足りなかった思いやり", "優しさ故の過ち", "詰め切れない距離" };
@@ -37,9 +37,9 @@ public class Debug : MonoBehaviour {
         debugFlag = true;
 
         UnityEngine.UI.Text[][] texts = { HappyButtonText, BitterButtonText, BadButtonText };
-        for (int end = 0; end < Flags.Length; end++) // ボタンに名前が出る
+        for (int end = 0; end < Gallery.Flags.Length; end++) // ボタンに名前が出る
         {
-            for (int i = 0; i < Flags[end].Length; i++)
+            for (int i = 0; i < Gallery.Flags[end].Length; i++)
             {
                 texts[end][i].text = endNames[end][i];
                 
@@ -124,13 +124,6 @@ public class Debug : MonoBehaviour {
 
     public void FlagReset() // 全てのフラグをfalseにする
     {
-        bool[][] Flags = { isHappyEndCleard, isBitterEndCleard, isBadEndCleard };
-        for (int i = 0; i < Flags.Length; i++)
-        {
-            for (int j = 0; j < Flags[i].Length; j++)
-            {
-                Flags[i][j] = false;
-            }
-        }
+        Gallery.FlagReset();
     }
 }

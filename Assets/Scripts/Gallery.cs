@@ -24,7 +24,7 @@ public class Gallery : MonoBehaviour {
     public static string[] HappyName = { "希望の「小紋島」" };
     public static string[] BitterName = { "足りなかった思いやり", "優しさ故の過ち", "詰め切れない距離" };
     public static string[] BadName = { "果てない暗闇の中で" };
-    static string[][] endNames = { HappyName, BitterName, BadName };
+    public static string[][] endNames = { HappyName, BitterName, BadName };
 
     public static bool galleryFlag = false; // ギャラリーから読み込んでいるかどうか
 
@@ -35,12 +35,15 @@ public class Gallery : MonoBehaviour {
         audioSource.Play();
 
         UnityEngine.UI.Text[][] texts = { HappyButtonText, BitterButtonText, BadButtonText };
-        for(int end = 0; end < Flags.Length; end++) // 1度見たエンディングはギャラリーに名前が出る
+        for(int end = 0; end < Flags.Length; end++)
         {
             for(int i = 0; i < Flags[end].Length; i++)
             {
+                // クリアフラグのロード
+                FlagSet(end, i, (SaveFlag.GetBool(endNames[end][i], false)));
                 if (Flags[end][i] == true)
                 {
+                    // 1度見たエンディングはギャラリーに名前が出る
                     texts[end][i].text = endNames[end][i];
                 }
             }
@@ -91,33 +94,36 @@ public class Gallery : MonoBehaviour {
         SceneManager.LoadScene(scene);
     }
 
-    public static void FlagSet(int end, int i) // クリア時にそのエンディングフラグを真にする
+    // エンディングクリアフラグをセットする
+    public static void FlagSet(int end, int i, bool flag) 
     {
-        Flags[end][i] = true;
+        Flags[end][i] = flag;
     }
 
+    // クリア時にそのエンディングフラグを真にする
     public static void HappyFlagSet(int i)
     {
-        FlagSet(0, i);
+        FlagSet(0, i, true);
     }
 
     public static void BitterFlagSet(int i)
     {
-        FlagSet(1, i);
+        FlagSet(1, i, true);
     }
 
     public static void BadFlagSet(int i)
     {
-        FlagSet(2, i);
+        FlagSet(2, i, true);
     }
 
-    public void FlagReset() // 全てのフラグをfalseにする
+    public static void FlagReset() // 全てのフラグをfalseにする
     {
-        for(int i = 0; i < Flags.Length; i++)
+        for(int end = 0; end < Flags.Length; end++)
         {
-            for(int j = 0; j < Flags[i].Length; j++)
+            for(int i = 0; i < Flags[end].Length; i++)
             {
-                Flags[i][j] = false;
+                Flags[end][i] = false;
+                SaveFlag.SetBool(endNames[end][i], false);
             }
         }
     }

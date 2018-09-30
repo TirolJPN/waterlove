@@ -159,8 +159,8 @@ public class Gallery : MonoBehaviour {
     {
         PlayerPrefs.SetInt("amountHighscore", 0);
         PlayerPrefs.SetInt("saionjiAmountHighscore", 0);
-        GetWaterText.text += "\n0 ml";
-        GiveWaterText.text += "\n0 ml";
+        GetWaterText.text = "集めた水量\n0 ml";
+        GiveWaterText.text = "あげた水量\n0 ml";
     }
 
     public void DeleteButton() // データ消去ボタンを押したとき
@@ -173,6 +173,7 @@ public class Gallery : MonoBehaviour {
         if (i == 0) // はいのときは全部初期化
         {
             FlagReset();
+            ScoreReset();
         }
         ResetBlockPanel.SetActive(false); // ブロックパネルを消す
     }

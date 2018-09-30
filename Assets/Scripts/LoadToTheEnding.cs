@@ -150,19 +150,19 @@ public class LoadToTheEnding : MonoBehaviour {
 
     public void GoEnding() // エンディングに行く
     {
-        if (HP >= 50 && saionjiAmountScore >= 2000)
+        if (HP >= 80 && saionjiAmountScore >= 3000)
         {
             SceneManager.LoadScene("HappyEnd");
         }
-        else if (HP >= 50 && saionjiAmountScore < 2000)
+        else if (HP >= 80 && saionjiAmountScore < 3000)
         {
             SceneManager.LoadScene("BitterEnd1");
         }
-        else if (HP < 50 && saionjiAmountScore >= 2000)
+        else if (HP < 80 && saionjiAmountScore >= 3000)
         {
             SceneManager.LoadScene("BitterEnd2");
         }
-        else if (HP < 50 && saionjiAmountScore < 2000)
+        else if (HP < 80 && saionjiAmountScore < 3000)
         {
             SceneManager.LoadScene("BitterEnd3");
         }

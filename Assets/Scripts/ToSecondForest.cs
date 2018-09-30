@@ -237,7 +237,8 @@ public class ToSecondForest : MonoBehaviour {
         division = ((int)slider.value * 10);
         if ((HP + division / 10) > 100)
         {
-            recovery = (100 - HP) * 10;
+            //recovery = (100 - HP) * 10;
+            recovery = 100 - HP;
             HP = 100;
         }else{
             recovery = division / 10;

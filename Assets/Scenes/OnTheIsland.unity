@@ -157,9 +157,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Back:
-  - {fileID: 1099068179}
-  - {fileID: 1123171308}
   - {fileID: 1106576751}
+  - {fileID: 1123171308}
+  - {fileID: 1099068179}
   audioClip: {fileID: 8300000, guid: 9c284a16601926144b1f5ae9181780b6, type: 3}
 --- !u!82 &125542367
 AudioSource:
@@ -657,7 +657,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4d777cc5e4634a849a7d346b079d1a06, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2a7caec4757fe4ac9aea2b1b22327e0d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -676,7 +676,7 @@ Transform:
   m_GameObject: {fileID: 1106576751}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.041, y: 0.882, z: 0}
-  m_LocalScale: {x: 2.14269, y: 1.8834586, z: 1.4918}
+  m_LocalScale: {x: 1.4918, y: 1.4918, z: 1.4918}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5

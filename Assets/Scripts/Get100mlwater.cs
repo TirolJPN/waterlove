@@ -72,7 +72,7 @@ public class Get100mlwater : MonoBehaviour
                     // もし合計がすでに保存されていたら100増やして上書き保存
                     if (PlayerPrefs.HasKey(amountScoreKey))
                     {
-                        amountScore = PlayerPrefs.GetInt(amountScoreKey, -1);
+                        amountScore = PlayerPrefs.GetInt(amountScoreKey, 0);
                         amountScore += 100;
                         PlayerPrefs.SetInt(amountScoreKey, amountScore);
                         PlayerPrefs.Save();

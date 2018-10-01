@@ -29,8 +29,9 @@ public class BitterEnd1 : MonoBehaviour {
         audioSource.clip = audioClip;
         audioSource.Play();
 
-        //Gallery gallery = GetComponent<Gallery>();
         Gallery.BitterFlagSet(0);
+        SaveFlag.SetBool(Gallery.endNames[1][0], true);
+        //PlayerPrefs.Save();
         if (Gallery.galleryFlag == true)
         {
             NextScene = "Gallery";

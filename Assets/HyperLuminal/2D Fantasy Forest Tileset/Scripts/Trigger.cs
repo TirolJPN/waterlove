@@ -27,10 +27,12 @@ public class Trigger : MonoBehaviour
 		OFF = 1,
 	}
 	public TOGGLE Toggle;
-	#endregion
+    #endregion
 
+    public AudioClip audioClip; // 取得時のSE用
+    AudioSource audioSource;
 
-	void Start () 
+    void Start () 
 	{
 		// use the initial inspector setting to determine the starting phase of this object
 		spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -43,7 +45,10 @@ public class Trigger : MonoBehaviour
 		{
 			spriteRenderer.sprite = OnSprite;
 		}
-	}
+
+        audioSource = gameObject.GetComponent<AudioSource>();
+        audioSource.clip = audioClip;
+    }
 
 	/// <summary>
 	/// Used to toggle between object states 
@@ -72,8 +77,11 @@ public class Trigger : MonoBehaviour
 	{
 		if(collider.gameObject.name == "PlayerCharacter")
 		{
-			// toggle this object
-			ToggleObject();
+            //音を鳴らす
+            audioSource.PlayOneShot(audioClip);
+
+            // toggle this object
+            ToggleObject();
 
 			// toggle each of the objects in the list
 			foreach(GameObject obj in TriggeredObjects)

@@ -52,44 +52,4 @@ public class Title : MonoBehaviour {
         Gallery.galleryFlag = false;
         Debug.debugFlag = false;
     }
-
-    public void Button(int i)
-    {
-        audioSourceButton = gameObject.GetComponent<AudioSource>();
-        audioSourceButton.clip = buttonClip;
-        audioSourceButton.Play();
-
-        if(i == 0)
-        {
-            StoryButton();
-        }
-        else if (i == 1)
-        {
-            GalleryButton();
-        }
-        else if (i == 2)
-        {
-            DebugButton();
-        }
-    }
-
-    public void StoryButton() // 物語を始めるボタン
-    {
-        
-        SceneManager.LoadScene("Opening");
-    }
-
-    public void GalleryButton() // ギャラリーを見るボタン
-    {
-        /*audioSourceButton = gameObject.GetComponent<AudioSource>();
-        audioSourceButton.clip = buttonClip;
-        audioSourceButton.Play();*/
-        SceneManager.LoadScene("Gallery");
-    }
-
-    public void DebugButton() // 物語を始めるボタン
-    {
-
-        SceneManager.LoadScene("Debug");
-    }
 }

@@ -3,6 +3,7 @@ using System.Collections;
 
 public class CollectableBounce : MonoBehaviour 
 {
+
 	#region Member Variables
 	/// <summary>
 	/// Scaling states to make the object bounce/pulse
@@ -23,12 +24,12 @@ public class CollectableBounce : MonoBehaviour
 	/// The objects initial scale value 
 	/// </summary>
 	private float StartingScale = 0.0f;
-	#endregion
+    #endregion
 
-	void Start ()
+    void Start ()
 	{
 		StartingScale = transform.localScale.x;
-	}
+    }
 
 	// Update is called once per frame
 	void Update ()
@@ -63,7 +64,7 @@ public class CollectableBounce : MonoBehaviour
 	void OnTriggerEnter2D(Collider2D collider)
 	{
 		if(collider.gameObject.name == "PlayerCharacter")
-		{
+        { 
             //スコア処理を追加
             FindObjectOfType<Score>().AddPoint(100);
 

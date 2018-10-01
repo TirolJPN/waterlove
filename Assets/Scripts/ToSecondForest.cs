@@ -60,12 +60,25 @@ public class ToSecondForest : MonoBehaviour {
 
     private string HPKey = "HP";
 
+    // 友鷹のハイスコア
+    private int amountHighscore;
+
+    private string amountHighscoreKey = "amountHighscore";
+
+    //1回目のスコアの保存用キー
+    private string firstscoreKey = "firstscore";
+
     // 西園寺に上げた水の合計
     private int saionjiAmountScore;
 
     // PlayerPrefsで保存するためのキー
     // 手持ちの水合計
     private string saionjiAmountScoreKey = "saionjiAmountScore";
+
+    // 西園寺のハイスコア
+    private int saionjiAmountHighscore;
+
+    private string saionjiAmountHighscoreKey = "saionjiAmountHighscore";
 
     private int division = 0;
 
@@ -155,7 +168,7 @@ public class ToSecondForest : MonoBehaviour {
                     NameLabel.text = names[enterCount];
                     TextLabel.text = talks[enterCount];
                     DarkChange();
-                    if ((enterCount >= 3 && enterCount <= 11) || (enterCount >= 14 && enterCount <= 16))
+                    if ((enterCount >= 3 && enterCount <= 12) || (enterCount >= 14 && enterCount <= 16))
                     {
                         BackChange(2);
                     }
@@ -204,11 +217,28 @@ public class ToSecondForest : MonoBehaviour {
     public void goScene()
     {
         saionjiAmountScore += (amountScore - division);
-        
+
+        // 1回目の記録の保存
+        PlayerPrefs.SetInt(firstscoreKey, amountScore);
+
+        // ハイスコアの更新
+        amountHighscore = PlayerPrefs.GetInt(amountHighscoreKey, 0);
+        saionjiAmountHighscore = PlayerPrefs.GetInt(saionjiAmountHighscoreKey, 0);
+        if (amountScore > amountHighscore)
+        {
+            PlayerPrefs.SetInt(amountHighscoreKey, amountScore);
+        }
+
+        if (saionjiAmountScore > saionjiAmountHighscore)
+        {
+            PlayerPrefs.SetInt(saionjiAmountHighscoreKey, saionjiAmountScore);
+        }
+
         division = ((int)slider.value * 10);
         if ((HP + division / 10) > 100)
         {
-            recovery = (100 - HP) * 10;
+            //recovery = (100 - HP) * 10;
+            recovery = 100 - HP;
             HP = 100;
         }else{
             recovery = division / 10;

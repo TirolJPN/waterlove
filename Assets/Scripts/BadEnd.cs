@@ -5,10 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class BadEnd : MonoBehaviour {
 
-    string[] names = { "友鷹", "友鷹", "", ""
+    string[] names = { "友鷹", "友鷹", "友鷹", "友鷹", "友鷹", "", ""
                        };
-    string[] talks = { "はあはあ。もうだめだ。からだが、うごかない。\n"
-                     , "西園寺さん、ごめん。がんばってくれ。\n"
+    string[] talks = { "はあ…はあ…。\n"
+                     , "もうだめだ…。\n"
+                     , "からだが…うごかない。\n"
+                     , "西園寺さんごめん…。\n"
+                     , "あとはがんばってくれ…。\n"
                      , "――大学2年の夏。それは、予想外の波乱に満ちた夏だった。\n"
                      , "BAD END\n果てない暗闇の中で\n"
     };

@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class HappyEnd : MonoBehaviour
 {
+    public GameObject[] Back; // 背景用
     string[] names = { "友鷹", "友鷹", "梨子", "梨子", "梨子", "友鷹"
                      , "友鷹", "梨子", "梨子", "梨子", "友鷹", "友鷹"
                      , "梨子", "友鷹", "友鷹", "梨子", "梨子", "", "", ""
@@ -31,6 +32,8 @@ public class HappyEnd : MonoBehaviour
                      , "HAPPY END\n希望の「小紋島」\n"
     };
     string NextScene = "Title";
+    int[] backSelectNumber = { 2, 0, 2, 0, 2 };
+    int[] backEnterCount = { 2, 7, 12, 15, 16 };
     TouchWindow touchWindow;
 
     public AudioClip audioClip; //セリフ用
@@ -55,6 +58,7 @@ public class HappyEnd : MonoBehaviour
         enabled = true;
 
         touchWindow = GetComponent<TouchWindow>();
-        touchWindow.SetText(names, talks, NextScene, false); // タッチ時のテキスト情報を専用ファイルに渡す
+        touchWindow.SetText(names, talks, NextScene, true); // タッチ時のテキスト情報を専用ファイルに渡す
+        touchWindow.SetBack(Back, backSelectNumber, backEnterCount); // 背景切り替え時情報を専用ファイルに渡す
     }
 }

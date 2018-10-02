@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class BitterEnd1 : MonoBehaviour {
+public class BitterEnd1 : MonoBehaviour
+{
+    public GameObject[] Back; // 背景用
     string[] names = { "友鷹", "友鷹", "梨子", "梨子", "友鷹", "友鷹", "友鷹", "梨子", "梨子", "友鷹", "友鷹", "梨子", "梨子", "友鷹", "", "", ""
                        };
     string[] talks = { "「西園寺さん！水持ってきたよ。」\n"
@@ -25,6 +27,8 @@ public class BitterEnd1 : MonoBehaviour {
                      , "BITTER END1\n足りなかった思いやり\n"
     };
     string NextScene = "Title";
+    int[] backSelectNumber = { 2, 0, 2, 0, 2 };
+    int[] backEnterCount = { 2, 3, 7, 8, 11 };
     TouchWindow touchWindow;
 
     public AudioClip audioClip; //セリフ用
@@ -50,6 +54,7 @@ public class BitterEnd1 : MonoBehaviour {
         enabled = true;
 
         touchWindow = GetComponent<TouchWindow>();
-        touchWindow.SetText(names, talks, NextScene, false); // タッチ時のテキスト情報を専用ファイルに渡す
+        touchWindow.SetText(names, talks, NextScene, true); // タッチ時のテキスト情報を専用ファイルに渡す
+        touchWindow.SetBack(Back, backSelectNumber, backEnterCount); // 背景切り替え時情報を専用ファイルに渡す
     }
 }

@@ -14,14 +14,10 @@ public class Back : MonoBehaviour {
             }
             BackScenes[1].SetActive(true); // 暗転
         }
-        /*else
+        else
         {
-            foreach (GameObject g in BackScenes)
-            {
-                g.SetActive(false);
-            }
-            BackScenes[0].SetActive(true); // 暗転解除
-        }*/
+            return;
+        }
     }
 
     public void BackChange(GameObject[] BackScenes, int i)

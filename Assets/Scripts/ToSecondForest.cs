@@ -13,7 +13,7 @@ public class ToSecondForest : MonoBehaviour {
                      , "", "無視", "" , "友鷹"
                      , "梨子", "友鷹"
                      , "梨子", "", "友鷹", "梨子", "友鷹", ""
-                     , "友鷹", "", "友鷹"};
+                     , "友鷹", "友鷹", "", "友鷹"};
     string[] talks = { "ふう。とりあえずはこんなものかな。\n"
                      , "西園寺さんも待っているだろうし、早く持って行ってあげよう。\n"
                      , "…"
@@ -33,14 +33,19 @@ public class ToSecondForest : MonoBehaviour {
                      , "「はい。お気をつけて。私も何か役に立ちそうなものを探してみます。」\n"
                      , "「西園寺さんも、無理はしないでね。」\n"
                      , "…"
-                     , "お、また水がある。これも回収しとこう。\n"
+                     , "お、また水がある。\n"
+                     , "これも回収しとこう。\n"
                      , "水100mlを入手した。\n"
                      , "さて、どこに向かおうかな。\n"
     };
     public AudioClip audioClip; //セリフ用
     AudioSource audioSource;
 
+    public GameObject Water;
+
     private int enterCount = 0;
+
+    private float timeleft;
 
     private const int selectNum = 7;
 
@@ -55,12 +60,25 @@ public class ToSecondForest : MonoBehaviour {
 
     private string HPKey = "HP";
 
+    // 友鷹のハイスコア
+    private int amountHighscore;
+
+    private string amountHighscoreKey = "amountHighscore";
+
+    //1回目のスコアの保存用キー
+    private string firstscoreKey = "firstscore";
+
     // 西園寺に上げた水の合計
     private int saionjiAmountScore;
 
     // PlayerPrefsで保存するためのキー
     // 手持ちの水合計
     private string saionjiAmountScoreKey = "saionjiAmountScore";
+
+    // 西園寺のハイスコア
+    private int saionjiAmountHighscore;
+
+    private string saionjiAmountHighscoreKey = "saionjiAmountHighscore";
 
     private int division = 0;
 
@@ -72,14 +90,20 @@ public class ToSecondForest : MonoBehaviour {
     public Text minValue;
     public Text maxValue;
 
+    // 表示する回復量
+    public int recovery = 0;
+
     private bool sliderFlag;
 
     // Use this for initialization
-    void Start()
+    IEnumerator Start()
     {
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.clip = audioClip;
         audioSource.Play();
+        enabled = false;
+        yield return new WaitForSeconds(2);
+        enabled = true;
 
         // 飲む量は最小値の10
         // 西園寺にあげれる量は、その差分
@@ -96,14 +120,18 @@ public class ToSecondForest : MonoBehaviour {
 
     void LateUpdate()
     {
+        timeleft -= Time.deltaTime;
+
         //タッチがあるかどうか？
         for (int i = 0; i < Input.touchCount; i++)
         {
             // タッチ情報を取得する
             Touch touch = Input.GetTouch(i);
+
             // ゲーム中ではなく、タッチ直後であればtrueを返す。
-            if (touch.phase == TouchPhase.Began)
+            if (touch.phase == TouchPhase.Ended && timeleft <= 0.0)
             {
+                timeleft = 0.2f;
                 if (enterCount == talks.Length)
                 {
                     enterCount++;
@@ -131,6 +159,7 @@ public class ToSecondForest : MonoBehaviour {
                     sliderFlag = true;
                 }
                 else if (enterCount == (selectNum + 1) && sliderFlag == true)
+                //else if (sliderFlag == true)
                 {
                     continue;
                 }
@@ -139,15 +168,28 @@ public class ToSecondForest : MonoBehaviour {
                     NameLabel.text = names[enterCount];
                     TextLabel.text = talks[enterCount];
                     DarkChange();
-                    if ((enterCount >= 3 && enterCount <= 11) || (enterCount >= 14 && enterCount <= 16))
+                    if ((enterCount >= 3 && enterCount <= 9) || enterCount == 12 || (enterCount >= 14 && enterCount <= 16))
                     {
                         BackChange(2);
+                    }
+                    else if(enterCount >= 10 && enterCount <= 11)
+                    {
+                        BackChange(3);
+                    }
+
+                    if(enterCount == 18)
+                    {
+                        Water.SetActive(true);
+                    }
+                    else if(enterCount == 20) // 水を拾うことで画面から消す
+                    {
+                        Water.SetActive(false);
                     }
                     if (talks[enterCount].Equals("recovery"))
                     {
                         int tmphp = HP ;
                         NameLabel.text = names[enterCount];
-                        TextLabel.text = "HPが" + (division / 10) + "回復した！";
+                        TextLabel.text = "HPが" + recovery + "回復した！";
                     }
                     enterCount++;
                 }
@@ -178,15 +220,35 @@ public class ToSecondForest : MonoBehaviour {
     // モーダルのOKボタンを押すと値を更新してシーン遷移する関数
     public void goScene()
     {
+        saionjiAmountScore += (amountScore - division);
+
+        // 1回目の記録の保存
+        PlayerPrefs.SetInt(firstscoreKey, amountScore);
+
+        // ハイスコアの更新
+        amountHighscore = PlayerPrefs.GetInt(amountHighscoreKey, 0);
+        saionjiAmountHighscore = PlayerPrefs.GetInt(saionjiAmountHighscoreKey, 0);
+        if (amountScore > amountHighscore)
+        {
+            PlayerPrefs.SetInt(amountHighscoreKey, amountScore);
+        }
+
+        if (saionjiAmountScore > saionjiAmountHighscore)
+        {
+            PlayerPrefs.SetInt(saionjiAmountHighscoreKey, saionjiAmountScore);
+        }
+
         division = ((int)slider.value * 10);
         if ((HP + division / 10) > 100)
         {
-            division =(100 - HP) * 10;
+            //recovery = (100 - HP) * 10;
+            recovery = 100 - HP;
             HP = 100;
         }else{
+            recovery = division / 10;
             HP += division / 10;
         }
-        saionjiAmountScore += (amountScore - division);
+
         amountScore = 0;
         PlayerPrefs.SetInt(HPKey, HP);
         PlayerPrefs.SetInt(amountScoreKey, amountScore);
@@ -194,6 +256,7 @@ public class ToSecondForest : MonoBehaviour {
         // Get100mlwaterの直前を呼び出す
         scene.SetActive(false);
         sliderFlag = false;
+        //enterCount++;
     }
 
     // sliderの値が更新されるたびに表示を変える関数

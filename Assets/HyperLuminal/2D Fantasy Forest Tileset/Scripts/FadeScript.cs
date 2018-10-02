@@ -131,7 +131,6 @@ public class FadeScript : MonoBehaviour
         //2回目のゲーム
         else
         {
-            amountScore = PlayerPrefs.GetInt(amountScoreKey, 1);
             //閾値を超えていればhappy end
             playTimes = 0;
             SceneManager.LoadScene("LoadToTheEnding");

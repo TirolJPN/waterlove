@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class OntheIsland : MonoBehaviour {
+public class OntheIsland : MonoBehaviour
+{
 
-    public UnityEngine.UI.Text NameLabel; // 名前テキスト
-    public UnityEngine.UI.Text TextLabel; // セリフテキスト
     public GameObject[] Back; // 背景用
     string[] names = { "友鷹", "友鷹", "友鷹", "", "友鷹"
                      ,"友鷹", "", "友鷹", "友鷹", "友鷹", "女の子", "友鷹"
@@ -38,80 +37,26 @@ public class OntheIsland : MonoBehaviour {
                      , "「ありがとう。島の奥の方に行ってみるよ。」\n"
                      , "…"
     };
+    string NextScene = "Get100mlwater";
+    int[] backSelectNumber = { 2, 0, 3, 4, 3, 5 };
+    int[] backEnterCount = { 4, 7, 8, 10, 15, 21 };
+    TouchWindow touchWindow;
+
     public AudioClip audioClip; //セリフ用
     AudioSource audioSource;
-    private int enterCount = 0;
 
-    void Start()
+    IEnumerator Start()
     {
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.clip = audioClip;
         audioSource.Play();
-    }
 
-    void LateUpdate()
-    {
-        //タッチがあるかどうか？
-        for (int i = 0; i < Input.touchCount; i++)
-        {
+        enabled = false;
+        yield return new WaitForSeconds(2);
+        enabled = true;
 
-            // タッチ情報を取得する
-            Touch touch = Input.GetTouch(i);
-
-            // ゲーム中ではなく、タッチ直後であればtrueを返す。
-            if (touch.phase == TouchPhase.Began)
-            {
-                if (enterCount == talks.Length)
-                {
-                    SceneManager.LoadScene("Get100mlwater");
-                }
-                else
-                {
-                    NameLabel.text = names[enterCount];
-                    TextLabel.text = talks[enterCount];
-                    DarkChange();
-                    if (enterCount == 4 || enterCount == 5)
-                    {
-                        BackChange(2);
-                    }
-                    enterCount++;
-                }
-            }
-        }
-
-    }
-
-    public void DarkChange() // 暗転
-    {
-        if (talks[enterCount].Equals("…"))
-        {
-            foreach (GameObject g in Back)
-            {
-                g.SetActive(false);
-            }
-            Back[1].SetActive(true); // 暗転
-        }
-        else
-        {
-            // <<<<<<< feature/manage
-            //             SceneManager.LoadScene("Get100mlwater");
-            // =======
-            foreach (GameObject g in Back)
-            {
-                g.SetActive(false);
-            }
-            Back[0].SetActive(true); // 暗転解除
-            //Back[1].SetActive(false);
-// >>>>>>> develop
-        }
-    }
-
-    public void BackChange(int i)
-    {
-        foreach (GameObject g in Back)
-        {
-            g.SetActive(false);
-        }
-        Back[i].SetActive(true);
+        touchWindow = GetComponent<TouchWindow>();
+        touchWindow.SetText(names, talks, NextScene, true); // タッチ時のテキスト情報を専用ファイルに渡す
+        touchWindow.SetBack(Back, backSelectNumber, backEnterCount); // 背景切り替え時情報を専用ファイルに渡す
     }
 }

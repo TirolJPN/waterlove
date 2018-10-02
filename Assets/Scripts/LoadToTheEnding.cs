@@ -26,6 +26,8 @@ public class LoadToTheEnding : MonoBehaviour {
 
     private int enterCount = 0;
 
+    private float timeleft;
+
     private const int selectNum = 2;
 
     // 持っている水の合計
@@ -33,6 +35,16 @@ public class LoadToTheEnding : MonoBehaviour {
 
     // PlayerPrefsで保存するためのキー
     private string amountScoreKey = "amountScore";
+
+    // 友鷹のハイスコア
+    private int amountHighscore;
+
+    private string amountHighscoreKey = "amountHighscore";
+
+    //1回目のスコア
+    private int firstscore;
+
+    private string firstscoreKey = "firstscore";
 
     // 友鷹のHP
     private int HP;
@@ -45,6 +57,11 @@ public class LoadToTheEnding : MonoBehaviour {
     // PlayerPrefsで保存するためのキー
     // 手持ちの水合計
     private string saionjiAmountScoreKey = "saionjiAmountScore";
+
+    // 西園寺のハイスコア
+    private int saionjiAmountHighscore;
+
+    private string saionjiAmountHighscoreKey = "saionjiAmountHighscore";
 
     private int division = 0;
 
@@ -61,11 +78,14 @@ public class LoadToTheEnding : MonoBehaviour {
     private bool sliderFlag;
 
     // Use this for initialization
-    void Start()
+    IEnumerator Start()
     {
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.clip = audioClip;
         audioSource.Play();
+        enabled = false;
+        yield return new WaitForSeconds(2);
+        enabled = true;
 
         // 飲む量は最小値の10
         // 西園寺にあげれる量は、その差分
@@ -82,39 +102,24 @@ public class LoadToTheEnding : MonoBehaviour {
 
     void LateUpdate()
     {
+        timeleft -= Time.deltaTime;
+
         //タッチがあるかどうか？
         for (int i = 0; i < Input.touchCount; i++)
         {
             // タッチ情報を取得する
             Touch touch = Input.GetTouch(i);
+
             // ゲーム中ではなく、タッチ直後であればtrueを返す。
-            if (touch.phase == TouchPhase.Began)
+            if (touch.phase == TouchPhase.Ended && timeleft <= 0.0)
             {
+                timeleft = 0.2f;
                 if (enterCount == talks.Length)
                 {
                     //SceneManager.LoadScene("BitterEnd2")
-                    HP = PlayerPrefs.GetInt(HPKey, 0);
-                    saionjiAmountScore = PlayerPrefs.GetInt(saionjiAmountScoreKey, 0);
-                    if (HP >= 50 && saionjiAmountScore >= 2000)
-                    {
-                        SceneManager.LoadScene("HappyEnd");
-                    }
-                    else if (HP >= 50 && saionjiAmountScore < 2000)
-                    {
-                        SceneManager.LoadScene("BitterEnd1");
-                    }
-                    else if (HP < 50 && saionjiAmountScore >= 2000)
-                    {
-                        SceneManager.LoadScene("BitterEnd2");
-                    }
-                    else if (HP < 50 && saionjiAmountScore < 2000)
-                    {
-                        SceneManager.LoadScene("BitterEnd3");
-                    }
-                    else if (HP == 0)
-                    {
-                        SceneManager.LoadScene("BadEnd");
-                    }
+                    //HP = PlayerPrefs.GetInt(HPKey, 0);
+                    //saionjiAmountScore = PlayerPrefs.GetInt(saionjiAmountScoreKey, 0);
+                    GoEnding(); // エンディングに行く
                 }
                 else if (enterCount == selectNum)
                 {
@@ -143,6 +148,30 @@ public class LoadToTheEnding : MonoBehaviour {
         }
     }
 
+    public void GoEnding() // エンディングに行く
+    {
+        if (HP >= 80 && saionjiAmountScore >= 3000)
+        {
+            SceneManager.LoadScene("HappyEnd");
+        }
+        else if (HP >= 80 && saionjiAmountScore < 3000)
+        {
+            SceneManager.LoadScene("BitterEnd1");
+        }
+        else if (HP < 80 && saionjiAmountScore >= 3000)
+        {
+            SceneManager.LoadScene("BitterEnd2");
+        }
+        else if (HP < 80 && saionjiAmountScore < 3000)
+        {
+            SceneManager.LoadScene("BitterEnd3");
+        }
+        else if (HP == 0)
+        {
+            SceneManager.LoadScene("BadEnd");
+        }
+    }
+
     public void DarkChange() // 暗転
     {
         if (talks[enterCount].Equals("…"))
@@ -162,6 +191,22 @@ public class LoadToTheEnding : MonoBehaviour {
     {
         division = ((int)slider.value * 10);
 
+        saionjiAmountScore += (amountScore - division);
+
+        // ハイスコアの更新
+        firstscore = PlayerPrefs.GetInt(firstscoreKey, 0);
+        amountHighscore = PlayerPrefs.GetInt(amountHighscoreKey, 0);
+        saionjiAmountHighscore = PlayerPrefs.GetInt(saionjiAmountHighscoreKey, 0);
+        if (firstscore + amountScore > amountHighscore)
+        {
+            PlayerPrefs.SetInt(amountHighscoreKey, firstscore + amountScore);
+        }
+
+        if(saionjiAmountScore > saionjiAmountHighscore)
+        {
+            PlayerPrefs.SetInt(saionjiAmountHighscoreKey, saionjiAmountScore);
+        }
+
         if ((HP + division / 10) > 100)
         {
             division = (100 - HP) * 10;
@@ -171,13 +216,17 @@ public class LoadToTheEnding : MonoBehaviour {
         {
             HP += division / 10;
         }
-
-        saionjiAmountScore += (amountScore - division);
         amountScore = 0;
 
-        PlayerPrefs.SetInt(HPKey, HP);
+        /*PlayerPrefs.SetInt(HPKey, HP);
         PlayerPrefs.SetInt(amountScoreKey, amountScore);
-        PlayerPrefs.SetInt(saionjiAmountScoreKey, saionjiAmountScore);
+        PlayerPrefs.SetInt(saionjiAmountScoreKey, saionjiAmountScore);*/
+
+        //一応初期化(タイトルでできてない可能性あり？)
+        PlayerPrefs.SetInt(HPKey, 100);
+        PlayerPrefs.SetInt(amountScoreKey, 0);
+        PlayerPrefs.SetInt(saionjiAmountScoreKey, 0);
+
         // Get100mlwaterの直前を呼び出す
         scene.SetActive(false);
         sliderFlag = false;

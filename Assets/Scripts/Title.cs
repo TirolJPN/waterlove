@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class Title : MonoBehaviour {
@@ -22,15 +23,21 @@ public class Title : MonoBehaviour {
     // 手持ちの水合計
     private string saionjiAmountScoreKey = "saionjiAmountScore";
 
-    public AudioClip audioClip; //セリフ用
+    public AudioClip audioClip; // BGM用
     AudioSource audioSource;
 
+    public AudioClip buttonClip; // ボタン用
+    AudioSource audioSourceButton;
 
-    private void Start()
+
+    IEnumerator Start()
     {
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.clip = audioClip;
         audioSource.Play();
+        enabled = false;
+        yield return new WaitForSeconds(2);
+        enabled = true;
 
         // 各値初期化
         amountScore = 0;
@@ -40,23 +47,9 @@ public class Title : MonoBehaviour {
         saionjiAmountScore = 0;
         PlayerPrefs.SetInt(saionjiAmountScoreKey, saionjiAmountScore);
         PlayerPrefs.Save();
-    }
 
-
-    void LateUpdate()
-    {
-        {
-                  //タッチがあるかどうか？
-            for (int i = 0; i < Input.touchCount; i++){
-                // タッチ情報を取得する
-                Touch touch = Input.GetTouch(i);
-
-                // ゲーム中ではなく、タッチ直後であればtrueを返す。
-                if (touch.phase == TouchPhase.Began)
-                {
-                    SceneManager.LoadScene("Opening");
-                }
-            }
-        }
+        ChooseForests.FlagReset(); // タイトルに戻ったときにフラグリセット
+        Gallery.galleryFlag = false;
+        Debug.debugFlag = false;
     }
 }

@@ -38,8 +38,8 @@ public class OntheIsland : MonoBehaviour
                      , "…"
     };
     string NextScene = "Get100mlwater";
-    int[] backSelectNumber = { 2, 0 };
-    int[] backEnterCount = { 4, 7 };
+    int[] backSelectNumber = { 2, 0, 3, 4, 3, 5 };
+    int[] backEnterCount = { 4, 7, 8, 10, 15, 21 };
     TouchWindow touchWindow;
 
     public AudioClip audioClip; //セリフ用
